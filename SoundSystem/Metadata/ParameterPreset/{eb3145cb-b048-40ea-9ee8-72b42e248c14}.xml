@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="ParameterPreset" id="{eb3145cb-b048-40ea-9ee8-72b42e248c14}">
+		<property name="name">
+			<value>HighRegion</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5be4864b-38ab-457d-b6be-37d189e4875f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{0ad3f926-5404-4a25-9b5f-158c395dcbf3}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{0ad3f926-5404-4a25-9b5f-158c395dcbf3}">
+		<property name="maximum">
+			<value>7</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Mira Scene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/Tomer Scene.unity
+    guid: 55d4f5538a1ec7b44a4450f856b2dc5f
+  - enabled: 0
+    path: Assets/Scenes/StartScrean.unity
+    guid: f27cd3612054a304b915692e97b7dc4b
+  - enabled: 0
+    path: Assets/Scenes/Rami Levels/Level 1.unity
+    guid: 5f7263ba4eefe4448913d73acb29bbf7
+  - enabled: 0
+    path: Assets/Scenes/Rami Levels/Level 2.unity
+    guid: 91b1f8db72414484285447ef8a109461
+  - enabled: 0
+    path: Assets/Scenes/Rami Levels/Level 3.unity
+    guid: 31761311ec785f24f8be32e2418e5c78
+  - enabled: 0
+    path: Assets/Scenes/Rami Levels/Level 4.unity
+    guid: af0c8997cf68e4142b732f0e01615eda
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/Rami Levels/Level 5.unity
+    guid: 9a3c30666952f8448b4bdeccc49e9443
+  - enabled: 0
+    path: Assets/Scenes/Rami Levels/SandBox.unity
+    guid: 9e4d1a2a0ecc78f4dba5d4a2cde8d704
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/StartScrean.unity
+    guid: 8c95f54f93d4d7843ae11bc7f0c92c71
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/Level 1.unity
+    guid: 8c817009fff3bb4468925198b8eb901f
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/Level 2.unity
+    guid: 3cbd2e6a96ac31b42b54f0c9377a62df
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/Level 3.unity
+    guid: 85d8e5662cfeffc4587cb7b91123989e
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/Level 4.unity
+    guid: a06f0398cd9aa954dbc840123cabd17d
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/Level 5.unity
+    guid: d44c509c0a8fee54dbc5cd79976703d3
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/Level 6.unity
+    guid: 3fbfc0f51a28f434fa04c0c0678c7337
+  - enabled: 1
+    path: Assets/Scenes/Mira Levels/SandBox.unity
+    guid: 7b08ef012089906488656c67226b7aa6
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 93ebfcf294e704b4e811184834e36a4e, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 2610faf09fa7137418fee746f2982b3f, type: 2}
