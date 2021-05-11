@@ -8,8 +8,8 @@ using DG.Tweening;
 public class LibraryScript : MonoBehaviour
 {
     bool libraryShown = true;
-    static Vector2 showPos = new Vector2(5, 0);
-    static Vector2 hidePos = new Vector2(3.72f, 0);
+    public Vector2 showPos;
+    public Vector2 hidePos;
     public RectTransform mRect, showHideButtonRect;
 
     
@@ -30,12 +30,12 @@ public class LibraryScript : MonoBehaviour
         if (libraryShown)
         {
             mRect.DOAnchorPos(hidePos, 0.25f);
-            showHideButtonRect.DORotate(new Vector3(0, 0, 0), 0.25f);
+            showHideButtonRect.DORotate(new Vector3(0, 0, 0), 0.5f);
         }
         else
         {
             mRect.DOAnchorPos(showPos, 0.25f);
-            showHideButtonRect.DORotate(new Vector3(0, 0, 180), 0.25f);
+            showHideButtonRect.DORotate(new Vector3(0, 0, 180), 0.5f);
         }
         libraryShown = !libraryShown;
     }

@@ -1,23 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LibObjectScript : MonoBehaviour
 {
     public bool isDraggable = true;
     public bool isDragged = false;
-    Plane mouseProjPlane;
+    
+    public UIController.SliderAction slider1Action;
+    public UIController.SliderAction slider2Action;
+    private Plane mouseProjPlane;
     private Camera mainCamera;
     float mouseRayDistance;
     Vector3 mousePos;
-
-
+    private double _lastTapTime;
+    private CameraScript _cameraScript;
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
         mouseProjPlane = new Plane(Vector3.back, transform.position);
+        _lastTapTime = Time.timeAsDouble;
+        _cameraScript = mainCamera.gameObject.GetComponent<CameraScript>();
     }
 
     // Update is called once per frame
@@ -39,7 +46,34 @@ public class LibObjectScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (isDraggable && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
+        {
+            double currTapTime = Time.timeAsDouble;
+            if (currTapTime - _lastTapTime < 0.2) // double tap
+            {
+                if (!_cameraScript.zoomedIn)
+                {
+                    _cameraScript.ZoomAtInstrument(transform.position, slider1Action, slider2Action);
+                    isDraggable = false;
+                }
+                else
+                {
+                    _cameraScript.ZoomOut();
+                    isDraggable = true;
+                }
+            }
+            else if (isDraggable)
+            {
+                StartCoroutine(dragDelay());
+            }
+            _lastTapTime = currTapTime;
+        }
+    }
+
+    IEnumerator dragDelay()
+    {
+        yield return new WaitForSeconds(0.25f);
+        if (isDraggable)
         {
             isDragged = true;
         }

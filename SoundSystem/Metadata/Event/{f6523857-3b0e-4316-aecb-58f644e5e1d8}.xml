@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.00.00">
+<objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{f6523857-3b0e-4316-aecb-58f644e5e1d8}">
 		<property name="name">
 			<value>Low_5</value>
@@ -44,6 +44,9 @@
 		</relationship>
 	</object>
 	<object class="MasterTrack" id="{95716962-84c8-4a81-a02d-470a7232d58a}">
+		<property name="uiTrackHeight">
+			<value>28</value>
+		</property>
 		<relationship name="mixerGroup">
 			<destination>{f8b0f57a-3838-41d9-b877-18d906a8cb29}</destination>
 		</relationship>
@@ -60,8 +63,15 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{0829dc24-f55d-46c1-8032-839f6fe9e707}" />
-	<object class="MarkerTrack" id="{c86bc604-f036-430b-9546-e93db62258e7}" />
+	<object class="MarkerTrack" id="{c86bc604-f036-430b-9546-e93db62258e7}">
+		<property name="uiTrackHeight">
+			<value>100</value>
+		</property>
+	</object>
 	<object class="GroupTrack" id="{cc90fa89-b2d5-4cb7-a940-95ef1b3371e2}">
+		<property name="uiTrackHeight">
+			<value>100</value>
+		</property>
 		<relationship name="automationTracks">
 			<destination>{843cda5a-2535-4b39-b782-44e05cf7b808}</destination>
 			<destination>{ff4aa727-3cd0-4a61-b960-7a528440ed4c}</destination>
@@ -104,11 +114,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{f68fea75-298b-4155-a32b-14d5de1d1b8a}" />
 	<object class="AutomationTrack" id="{843cda5a-2535-4b39-b782-44e05cf7b808}">
+		<property name="uiTrackHeight">
+			<value>100</value>
+		</property>
 		<relationship name="automator">
 			<destination>{5c156870-1367-447c-b39b-aeebec580828}</destination>
 		</relationship>
 	</object>
 	<object class="AutomationTrack" id="{ff4aa727-3cd0-4a61-b960-7a528440ed4c}">
+		<property name="uiTrackHeight">
+			<value>100</value>
+		</property>
 		<relationship name="automator">
 			<destination>{ff8f1754-7def-4d31-a847-d9fbea664dc5}</destination>
 		</relationship>

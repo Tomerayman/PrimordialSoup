@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class SequenceScript : MonoBehaviour
 {
@@ -22,11 +24,16 @@ public class SequenceScript : MonoBehaviour
     public Material offMtl;
     public Transform dialTransform;
 
-
+    private MeshRenderer _meshRenderer;
+    private float _minDispAmount;
+    private float _currDispAmount;
+    private static readonly int amountID = Shader.PropertyToID("_Amount");
 
     void Start()
     {
         _mTransform = GetComponent<Transform>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _minDispAmount = _meshRenderer.material.GetFloat(amountID);
         _ratioChanged = false;
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         // StartCoroutine(test());
@@ -35,6 +42,9 @@ public class SequenceScript : MonoBehaviour
         CreateBulbs();
         StartCoroutine(SequenceSoundEmit());
         RandomizeBulbs();
+        LibObjectScript libScript = GetComponent<LibObjectScript>();
+        libScript.slider1Action = ChangeRatio;
+        libScript.slider2Action = ChangeRandom;
     }
 
     private void ResetBulbs()
@@ -82,18 +92,24 @@ public class SequenceScript : MonoBehaviour
     
     // Update is called once per frame
     void Update()
-        {
-            // dialTransform.Rotate(new Vector3(0, 0, 90 * Time.deltaTime));
+    {
+        _currDispAmount = Mathf.Lerp(_currDispAmount, _minDispAmount, Time.deltaTime);
+        _meshRenderer.material.SetFloat(amountID, _currDispAmount);
             if (_ratioChanged)
             {
                 _ratioChanged = false;
                 ChangeBulbs();
             }
-        }
+    }
 
     public void PlaySound(bool effect)
     {
-        soundManager.sounds.Add((sound, effect));
+        _currDispAmount = 0.3f;
+        SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
+        soundData.sound = sound;
+        soundData.customPlayback = false;
+        // more sound definitions (effects..)
+        soundManager.sounds.Add(soundData);
     }
     
     IEnumerator SequenceSoundEmit()
@@ -103,7 +119,6 @@ public class SequenceScript : MonoBehaviour
         {
             if (isPlaying)
             {
-                Debug.Log(i);
                 dialTransform.Rotate(new Vector3(0f, 0f, -(360f / bulbsNum)));
                 if (_litBulbs.Contains(i))
                 {
@@ -125,9 +140,13 @@ public class SequenceScript : MonoBehaviour
         _ratioChanged = true;
     }
 
+    public void ChangeRandom(float newValue)
+    {
+        Debug.Log("random " + newValue);
+    }
+
     public void ChangeBulbs()
     {
-        Debug.Log("got here " + litRatio);
         int bulbsToLight = Mathf.RoundToInt(litRatio * bulbsNum) - _litBulbs.Count;
         if (bulbsToLight > 0) // need to add bulbs
         {
@@ -151,14 +170,6 @@ public class SequenceScript : MonoBehaviour
         }
         
     }
-
-    // IEnumerator test()
-    // {
-    //     while (true)
-    //     {
-    //         playSound(false);
-    //         yield return new WaitForSeconds(1f);
-    //     }
-    // }
+    
 
 }
