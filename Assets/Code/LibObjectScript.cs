@@ -8,7 +8,7 @@ public class LibObjectScript : MonoBehaviour
 {
     public bool isDraggable = true;
     public bool isDragged = false;
-    
+    public string instrumentTag;
     public UIController.SliderAction slider1Action;
     public UIController.SliderAction slider2Action;
     private Plane mouseProjPlane;
@@ -17,6 +17,7 @@ public class LibObjectScript : MonoBehaviour
     Vector3 mousePos;
     private double _lastTapTime;
     private CameraScript _cameraScript;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,7 @@ public class LibObjectScript : MonoBehaviour
             {
                 if (!_cameraScript.zoomedIn)
                 {
-                    _cameraScript.ZoomAtInstrument(transform.position, slider1Action, slider2Action);
+                    _cameraScript.ZoomAtInstrument(transform.position, slider1Action, slider2Action, instrumentTag);
                     isDraggable = false;
                 }
                 else

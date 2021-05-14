@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Displace2_mtl
-  m_Shader: {fileID: -6465566751694194690, guid: 82827ad959e917048b57fba50a6163dd, type: 3}
+  m_Name: GrainTest_MTL
+  m_Shader: {fileID: -6465566751694194690, guid: c2e7b0632a4a781469f48a65f81f4f9a, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -76,8 +76,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_8172BA24: 0.5
     - _AlphaClip: 0
-    - _Amount: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -99,19 +99,19 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.2
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_a7e8cd3a204e4ced83ebb4105885b7c9: {r: 0.37505355, g: 0, b: 0.5943396, a: 1}
+    - Color_8d656d56105740faaf3ba64cfe11996b: {r: 1, g: 0, b: 0, a: 0}
+    - Color_d86d6a23e1d44d2d80306c4bc31a3d99: {r: 0.1526079, g: 0, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3633334741263643942
+--- !u!114 &3199384625961312215
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

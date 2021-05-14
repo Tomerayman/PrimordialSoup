@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,13 +23,46 @@ public class UIController : MonoBehaviour
         
     }
 
+    /**
+     * chord:
+     *  - slider1: 3 modes
+     *  - slider2: 2 modes
+     *
+     * sample:
+     *  - slider1: float
+     *  - slider2: float
+     *
+     * sequencer:
+     *  - slider1: float
+     *  - slider2: float
+     */
+    
 
-    public void ShowObjectView(SliderAction slider1, SliderAction slider2)
+    public void ShowObjectView(SliderAction slider1, SliderAction slider2, string instrumentTag)
     {
         StartCoroutine(FadeObjectUI(1, true));
         objectSlider1.onValueChanged.AddListener(new UnityAction<float>(slider1));
         objectSlider2.onValueChanged.AddListener(new UnityAction<float>(slider2));
-        
+        switch (instrumentTag)
+        {
+
+            case "Chord":
+                objectSlider1.wholeNumbers = true;
+                objectSlider1.minValue = 1;
+                objectSlider1.maxValue = 3;
+                objectSlider2.wholeNumbers = true;
+                objectSlider2.minValue = 0;
+                objectSlider2.maxValue = 1;
+                break;
+            default:
+                objectSlider1.wholeNumbers = false;
+                objectSlider1.minValue = 0;
+                objectSlider1.maxValue = 1;
+                objectSlider2.wholeNumbers = false;
+                objectSlider2.minValue = 0;
+                objectSlider2.maxValue = 1;
+                break;
+        }
     }
     
     public void HideObjectView()

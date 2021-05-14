@@ -26,17 +26,17 @@ public class CameraScript : MonoBehaviour
         
     }
 
-    public void ZoomAtInstrument(Vector3 pos, UIController.SliderAction slider1, UIController.SliderAction slider2)
+    public void ZoomAtInstrument(Vector3 pos, UIController.SliderAction slider1, UIController.SliderAction slider2, string instrumentTag)
     {
-        ZoomAtInstrument(pos, defaultInstrumentSize, slider1, slider2);
+        ZoomAtInstrument(pos, defaultInstrumentSize, slider1, slider2, instrumentTag);
     }
 
-    public void ZoomAtInstrument(Vector3 pos, float size, UIController.SliderAction slider1, UIController.SliderAction slider2)
+    void ZoomAtInstrument(Vector3 pos, float size, UIController.SliderAction slider1, UIController.SliderAction slider2, string instrumentTag)
     {
         zoomedIn = true;
         Vector3 newPos = new Vector3(pos.x, pos.y, -10);
         StartCoroutine(InterpolateCamera(newPos, size, duration));
-        uiController.ShowObjectView(slider1, slider2);
+        uiController.ShowObjectView(slider1, slider2, instrumentTag);
     }
 
     public void ZoomOut()
