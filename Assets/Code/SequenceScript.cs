@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
@@ -10,41 +11,25 @@ public class SequenceScript : MonoBehaviour
     public SoundSynchronizer soundManager;
     [FMODUnity.EventRef]
     public string sound;
-    // public GameObject bulbPrefab;
     public int bulbsNum;
-    // public float radius;
     public bool isPlaying;
     public float litRatio;
     private float randomRatio;
     public List<MeshRenderer> bulbs;
     private List<int> _offBulbs;
     private List<int> _litBulbs;
-    // private Transform _mTransform;
     private bool _ratioChanged;
-    // public Material onMtl;
-    // public Material offMtl;
-
-    // private MeshRenderer _meshRenderer;
-    // private float _minDispAmount;
-    // private float _currDispAmount;
-    // private static readonly int amountID = Shader.PropertyToID("_Amount");
+    private UIController _uiController;
 
     void Start()
     {
-        // _mTransform = GetComponent<Transform>();
-        // _meshRenderer = GetComponent<MeshRenderer>();
-        // _minDispAmount = _meshRenderer.material.GetFloat(amountID);
         _ratioChanged = false;
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
-        // StartCoroutine(test());
-        // bulbs = new List<MeshRenderer>();
         ResetBulbs();
-        // CreateBulbs();
         StartCoroutine(SequenceSoundEmit());
         RandomizeBulbs();
         LibObjectScript libScript = GetComponent<LibObjectScript>();
-        libScript.slider1Action = ChangeRatio;
-        libScript.slider2Action = ChangeRandom;
+        _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
 
     private void ResetBulbs()
@@ -81,12 +66,10 @@ public class SequenceScript : MonoBehaviour
         }
         for (int i = 0; i < _litBulbs.Count; i++)
         {
-            // _bulbs[_litBulbs[i]].material = onMtl;
             bulbs[_litBulbs[i]].enabled = true;
         }
         for (int i = 0; i < _offBulbs.Count; i++)
         {
-            // _bulbs[_offBulbs[i]].material = offMtl;
             bulbs[_litBulbs[i]].enabled = false;
         }
         
@@ -202,6 +185,16 @@ public class SequenceScript : MonoBehaviour
             }
         }
     }
-    
+
+    public void SetSequencerUI()
+    {
+        _uiController.HideAllElements();
+        _uiController.objectSlider1.gameObject.SetActive(true);
+        _uiController.objectSlider1.value = litRatio;
+        _uiController.objectSlider1.onValueChanged.AddListener(ChangeRatio);
+        _uiController.objectSlider2.gameObject.SetActive(true);
+        _uiController.objectSlider2.value = randomRatio;
+        _uiController.objectSlider2.onValueChanged.AddListener(ChangeRandom);
+    }
 
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,8 +10,6 @@ public class LibObjectScript : MonoBehaviour
     public bool isDraggable = true;
     public bool isDragged = false;
     public string instrumentTag;
-    public UIController.SliderAction slider1Action;
-    public UIController.SliderAction slider2Action;
     private Plane mouseProjPlane;
     private Camera mainCamera;
     float mouseRayDistance;
@@ -57,9 +56,7 @@ public class LibObjectScript : MonoBehaviour
             {
                 if (!_cameraScript.zoomedIn)
                 {
-                    _cameraScript.ZoomAtInstrument(transform.position, slider1Action, slider2Action, instrumentTag);
-                    soloDisplay(false);
-                    isDraggable = false;
+                    ZoomInAction();
                 }
                 else
                 {
@@ -76,6 +73,25 @@ public class LibObjectScript : MonoBehaviour
         }
     }
 
+    void ZoomInAction()
+    {
+        _cameraScript.ZoomAtInstrument(transform.position);
+        soloDisplay(false);
+        isDraggable = false;
+        switch (instrumentTag)
+        {
+            case "Sample":
+                GetComponent<SampleScript>().SetSampleUI();
+                break;
+            case "Chord":
+                GetComponent<ChordScript>().SetChordUI();
+                break;
+            case "Sequencer":
+                GetComponent<SequenceScript>().SetSequencerUI();
+                break;
+        }
+    }
+
     IEnumerator dragDelay()
     {
         yield return new WaitForSeconds(0.25f);
@@ -88,10 +104,7 @@ public class LibObjectScript : MonoBehaviour
     private void OnMouseUp()
     {
         isDragged = false;
-        if (instrumentTag == "Filter")
-        {
-            
-        }
+    
     }
     
     private void soloDisplay(bool reverse)

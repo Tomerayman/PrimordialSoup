@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SampleScript : MonoBehaviour
 {
-    private Transform _mTransform;
     public SoundSynchronizer soundManager;
     [FMODUnity.EventRef]
     public string sound;
@@ -19,18 +18,16 @@ public class SampleScript : MonoBehaviour
     private int soundStartTime;
     private int soundEndTime;
     private int soundLengthInMilliSec;
+    private UIController _uiController;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        _mTransform = GetComponent<Transform>();
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _minDispAmount = _meshRenderer.material.GetFloat(amountID);
         LibObjectScript libScript = GetComponent<LibObjectScript>();
-        libScript.slider1Action = SetSoundStart;
-        libScript.slider2Action = SetSoundEnd;
-        
         FMOD.Studio.EventInstance tempEvent = FMODUnity.RuntimeManager.CreateInstance(sound);
         FMOD.Studio.EventDescription description;
         tempEvent.getDescription(out description);
@@ -38,6 +35,7 @@ public class SampleScript : MonoBehaviour
         soundStartTime = 0;
         soundEndTime = soundLengthInMilliSec;
         StartCoroutine(SampleSoundEmit());
+        _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -92,5 +90,16 @@ public class SampleScript : MonoBehaviour
         {
             soundEndTime = soundStartTime;
         }
+    }
+    
+    public void SetSampleUI()
+    {
+        _uiController.HideAllElements();
+        _uiController.objectSlider1.gameObject.SetActive(true);
+        _uiController.objectSlider1.value = (float) soundStartTime / soundLengthInMilliSec;
+        _uiController.objectSlider1.onValueChanged.AddListener(SetSoundStart);
+        _uiController.objectSlider2.gameObject.SetActive(true);
+        _uiController.objectSlider2.value = (float) soundEndTime / soundLengthInMilliSec;
+        _uiController.objectSlider2.onValueChanged.AddListener(SetSoundEnd);
     }
 }
