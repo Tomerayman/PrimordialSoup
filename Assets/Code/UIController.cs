@@ -16,7 +16,8 @@ public class UIController : MonoBehaviour
     private Slider objectSlider1;
     [SerializeField]
     private Slider objectSlider2;
-    
+    public float val1;
+    public float val2;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +52,14 @@ public class UIController : MonoBehaviour
                 objectSlider1.minValue = 1;
                 objectSlider1.maxValue = 3;
                 objectSlider2.wholeNumbers = true;
+                objectSlider2.minValue = 0;
+                objectSlider2.maxValue = 1;
+                break;
+            case "Sequencer":
+                objectSlider1.wholeNumbers = false;
+                objectSlider1.minValue = 0;
+                objectSlider1.maxValue = 1;
+                objectSlider2.wholeNumbers = false;
                 objectSlider2.minValue = 0;
                 objectSlider2.maxValue = 1;
                 break;

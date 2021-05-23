@@ -20,6 +20,7 @@ public class ChordScript : MonoBehaviour
     public bool isPlaying = true;
     public float minTimeBetweenNotes;
     public float maxTimeBetweenNotes;
+    private int _chordIdx = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -41,7 +42,7 @@ public class ChordScript : MonoBehaviour
 
     public void SetRandom(float newValue)
     {
-        
+        isRandom = (Math.Abs(newValue - 1) < 0.1f);
     }
 
     public void SetChordGroup(float newValue)
@@ -63,7 +64,15 @@ public class ChordScript : MonoBehaviour
     public void PlaySound(bool effect)
     {
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
-        soundData.sound = sounds[Random.Range(0, 4)];
+        if (isRandom)
+        {
+            soundData.sound = sounds[Random.Range(0, 4)];    
+        }
+        else
+        {
+            soundData.sound = sounds[_chordIdx];
+            _chordIdx = (_chordIdx == 4) ? 0 : _chordIdx + 1;
+        }
         soundData.customPlayback = false;
         // more sound definitions (effects..)
         soundManager.sounds.Add(soundData);

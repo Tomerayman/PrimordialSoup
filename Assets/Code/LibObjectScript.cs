@@ -17,6 +17,8 @@ public class LibObjectScript : MonoBehaviour
     Vector3 mousePos;
     private double _lastTapTime;
     private CameraScript _cameraScript;
+    private Transform activeInstruments;
+    private Vector3 pushBackVector = new Vector3(0, 0, 20);
     
 
     // Start is called before the first frame update
@@ -26,6 +28,7 @@ public class LibObjectScript : MonoBehaviour
         mouseProjPlane = new Plane(Vector3.back, transform.position);
         _lastTapTime = Time.timeAsDouble;
         _cameraScript = mainCamera.gameObject.GetComponent<CameraScript>();
+        activeInstruments = GameObject.Find("ActiveInstruments").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -55,15 +58,17 @@ public class LibObjectScript : MonoBehaviour
                 if (!_cameraScript.zoomedIn)
                 {
                     _cameraScript.ZoomAtInstrument(transform.position, slider1Action, slider2Action, instrumentTag);
+                    soloDisplay(false);
                     isDraggable = false;
                 }
                 else
                 {
                     _cameraScript.ZoomOut();
+                    soloDisplay(true);
                     isDraggable = true;
                 }
             }
-            else if (isDraggable)
+            else if (!_cameraScript.zoomedIn && isDraggable)
             {
                 StartCoroutine(dragDelay());
             }
@@ -83,6 +88,22 @@ public class LibObjectScript : MonoBehaviour
     private void OnMouseUp()
     {
         isDragged = false;
+        if (instrumentTag == "Filter")
+        {
+            
+        }
+    }
+    
+    private void soloDisplay(bool reverse)
+    {
+        int reverseFactor = (reverse) ? -1 : 1;
+        foreach (Transform instrumentTransform in activeInstruments)
+        {
+            if (! ReferenceEquals(instrumentTransform, transform))
+            {
+                instrumentTransform.position += reverseFactor * pushBackVector;
+            }
+        }
     }
 }
 
