@@ -528,21 +528,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleInstrument
       objectReference: {fileID: 0}
+    - target: {fileID: 4493903247753208105, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3095135686670225363, guid: b7741653dec81fe409e98398398cf5c4, type: 3}
+    - target: {fileID: 6175419760228032283, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e6fa8069da77ea4b9602e35e1d6bd7e, type: 2}
     - target: {fileID: 8665104917845378369, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8665104917845378369, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8665104917845378369, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8665104917845378369, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8665104917845378369, guid: 93483abb89e782f4e9a1eab6d188168f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2435,6 +2443,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1048322855}
     m_Modifications:
+    - target: {fileID: 2250541687485498156, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250541687485498156, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250541687485498156, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250541687828963831, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250541687828963831, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250541687828963831, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5015259436163301662, guid: 8606f4d8a36fb1d42af96a289805daca, type: 3}
       propertyPath: m_Name
       value: 'patternSequencer '
