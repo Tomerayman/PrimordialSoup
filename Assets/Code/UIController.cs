@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     public Slider objectSlider1;
     public Slider objectSlider2;
     public Button binaryButton;
+    public Button onOffButton;
     public List<Button> trinaryButtons;
     public Sprite onButtonSprite;
     public Sprite offButtonSprite;
@@ -80,6 +81,7 @@ public class UIController : MonoBehaviour
         StartCoroutine(FadeObjectUI(0, false));
         objectSlider1.onValueChanged.RemoveAllListeners();
         objectSlider2.onValueChanged.RemoveAllListeners();
+        onOffButton.onClick.RemoveAllListeners();
         binaryButton.onClick.RemoveAllListeners();
         foreach (Button b in trinaryButtons)
         {
@@ -106,6 +108,7 @@ public class UIController : MonoBehaviour
         objectSlider1.gameObject.SetActive(false);
         objectSlider2.gameObject.SetActive(false);
         binaryButton.gameObject.SetActive(false);
+        onOffButton.gameObject.SetActive(false);
         foreach (Button b in trinaryButtons)
         {
             b.gameObject.SetActive(false);

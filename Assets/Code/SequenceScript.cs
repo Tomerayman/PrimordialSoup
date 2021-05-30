@@ -195,6 +195,17 @@ public class SequenceScript : MonoBehaviour
         _uiController.objectSlider2.gameObject.SetActive(true);
         _uiController.objectSlider2.value = randomRatio;
         _uiController.objectSlider2.onValueChanged.AddListener(ChangeRandom);
+        _uiController.onOffButton.gameObject.SetActive(true);
+        _uiController.onOffButton.onClick.AddListener(SetPlaying);
+        _uiController.onOffButton.image.sprite =
+            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+    }
+
+    public void SetPlaying()
+    {
+        isPlaying = !isPlaying;
+        _uiController.onOffButton.image.sprite =
+            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
 
 }

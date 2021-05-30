@@ -101,5 +101,16 @@ public class SampleScript : MonoBehaviour
         _uiController.objectSlider2.gameObject.SetActive(true);
         _uiController.objectSlider2.value = (float) soundEndTime / soundLengthInMilliSec;
         _uiController.objectSlider2.onValueChanged.AddListener(SetSoundEnd);
+        _uiController.onOffButton.gameObject.SetActive(true);
+        _uiController.onOffButton.onClick.AddListener(SetPlaying);
+        _uiController.onOffButton.image.sprite =
+            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+    }
+
+    public void SetPlaying()
+    {
+        isPlaying = !isPlaying;
+        _uiController.onOffButton.image.sprite =
+            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
 }
