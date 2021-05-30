@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BG_mtl
-  m_Shader: {fileID: -6465566751694194690, guid: 32f88be6129169c4389ae4f0227f2b71, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e15724ca29fe3154d822a14b16a21f25, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -76,7 +76,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Amount: 0.1
+    - Vector1_100a35ca8ff9440e90e51ca28dff3693: 0
+    - Vector1_8172BA24: 1
     - Vector1_c5a2564f8c2845c0ac839679985987f8: 1
+    - Vector1_dbcf75dbd65b473b90a5d69ec1dd06b9: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -99,12 +103,16 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 0.2
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - Color_115ba21b41694961ad8e31a99a35b037: {r: 0.00917922, g: 0.0039215684, b: 0.02745098, a: 1}
+    - Color_374849ec54cd4f4f8c37e8f6f06a1e2a: {r: 0, g: 0, b: 0, a: 0}
+    - Color_8d656d56105740faaf3ba64cfe11996b: {r: 1, g: 1, b: 1, a: 0}
+    - Color_d86d6a23e1d44d2d80306c4bc31a3d99: {r: 1, g: 1, b: 1, a: 0.4980392}
     - Vector2_9f924fc2dfbb4e07b843ffa31cfba98d: {r: 0.0005, g: 0.0005, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
