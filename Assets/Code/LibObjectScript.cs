@@ -18,12 +18,17 @@ public class LibObjectScript : MonoBehaviour
     private CameraScript _cameraScript;
     private Transform activeInstruments;
     private Vector3 pushBackVector = new Vector3(0, 0, 20);
-    
-
+    private float initialDistance;
+    private Vector3 initialScale;
+    private Transform mTransform;
+    private static float speed = 0.3f;
+    private static float posFloatRange = 0.1f;
+    private static float rotFloatRange = 2;
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
+        mTransform = GetComponent<Transform>();
         mouseProjPlane = new Plane(Vector3.back, transform.position);
         _lastTapTime = Time.timeAsDouble;
         _cameraScript = mainCamera.gameObject.GetComponent<CameraScript>();
@@ -36,6 +41,13 @@ public class LibObjectScript : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         mouseProjPlane.Raycast(ray, out mouseRayDistance);
         mousePos = ray.GetPoint(mouseRayDistance);
+        // floating movements:
+        var position = mTransform.position;
+        float lerpPoint = Time.time * speed + 10*position.x + 10*position.y; 
+        position += Vector3.forward * (Time.deltaTime * Mathf.Sin(lerpPoint) * posFloatRange);
+        mTransform.position = position;
+        transform.Rotate(Vector3.up * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
+        transform.Rotate(Vector3.left * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
         if (isDragged)
         {
             //var position = transform.position;
@@ -44,6 +56,35 @@ public class LibObjectScript : MonoBehaviour
             //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             transform.position = mousePos;
+        }
+        if (Input.touchCount == 2) // detecting pinch action
+        {
+            var touchZero = Input.GetTouch(0);
+            var touchOne = Input.GetTouch(1);
+            // if the pinch is now ending:
+            if (touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
+                touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
+            {
+                return;
+            }
+            // if pinch just began: 
+            if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+            {
+                initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                initialScale = transform.localScale;
+            }
+            else // we are mid-pinch:
+            {
+                var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                if (Mathf.Approximately(initialDistance, 0)) // if pinch is very small / accidental
+                {
+                    return;
+                }
+
+                var factor = currentDistance / initialDistance;
+                transform.localScale = initialScale * factor;
+            }
+            
         }
     }
 
@@ -118,6 +159,8 @@ public class LibObjectScript : MonoBehaviour
             }
         }
     }
+    
+    
 }
 
 

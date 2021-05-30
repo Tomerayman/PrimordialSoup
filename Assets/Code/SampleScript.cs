@@ -49,13 +49,11 @@ public class SampleScript : MonoBehaviour
     {
         _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
+        
         soundData.sound = sound;
         soundData.customPlayback = (soundStartTime > 3 || soundEndTime < soundLengthInMilliSec - 3);
-        soundData.startTime = soundStartTime;
-        soundData.endTime = soundEndTime;
-        // Debug.Log("custom: " + soundData.customPlayback + ", start: " + soundData.startTime + ", end: " +
-        //       soundData.endTime);
-        // more sound definitions (effects..)
+        // soundData.startTime = soundStartTime;
+        // soundData.endTime = soundEndTime;
         soundManager.sounds.Add(soundData);
     }
 
@@ -113,4 +111,10 @@ public class SampleScript : MonoBehaviour
         _uiController.onOffButton.image.sprite =
             (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
+    
+    // private IEnumerator soundEndEnforcer(float delay)
+    // {
+    //     yield return new WaitForSeconds(delay);
+    //     soundMaker.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    // }
 }

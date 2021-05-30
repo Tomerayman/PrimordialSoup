@@ -13,8 +13,6 @@ public class SoundSynchronizer : MonoBehaviour
         public float effect2;
         public float effect3;
         public bool customPlayback;
-        public int startTime;
-        public int endTime;
     }
     
     FMOD.Studio.EventInstance soundMaker;
@@ -47,12 +45,6 @@ public class SoundSynchronizer : MonoBehaviour
             for (int i = 0; i < sounds.Count; i++)
             {
                 soundMaker = FMODUnity.RuntimeManager.CreateInstance(sounds[i].sound);
-                if (sounds[i].customPlayback)
-                {
-                    soundMaker.setTimelinePosition(sounds[i].startTime);
-                    float delayInSeconds = (sounds[i].endTime - sounds[i].startTime) / 1000f;
-                    StartCoroutine(soundEndEnforcer(delayInSeconds));
-                }
                 // soundMaker.setVolume(SettingsMenu.golbalVolume);
                 // float effectVal = (sounds[i].Item2) ? 1f : 0f;
                 // soundMaker.setParameterByName("Effect1", effectVal);
@@ -61,12 +53,6 @@ public class SoundSynchronizer : MonoBehaviour
             }
             yield return new WaitForSeconds(0.125f);
         }
-    }
-    
-    private IEnumerator soundEndEnforcer(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        soundMaker.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
 }
