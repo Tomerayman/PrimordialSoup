@@ -54,5 +54,6 @@ public class SoundSynchronizer : MonoBehaviour
             yield return new WaitForSeconds(0.125f);
         }
     }
+    
 
 }

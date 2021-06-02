@@ -123,17 +123,17 @@ public class ChordScript : MonoBehaviour
         _uiController.trinaryButtons[0].onClick.AddListener(delegate { SetChordGroup(1); });
         _uiController.trinaryButtons[1].onClick.AddListener(delegate { SetChordGroup(2); });
         _uiController.trinaryButtons[2].onClick.AddListener(delegate { SetChordGroup(3); });
-        _uiController.onOffButton.gameObject.SetActive(true);
-        _uiController.onOffButton.onClick.AddListener(SetPlaying);
-        _uiController.onOffButton.image.sprite =
-            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+        // _uiController.onOffButton.gameObject.SetActive(true);
+        // _uiController.onOffButton.onClick.AddListener(SetPlaying);
+        // _uiController.onOffButton.image.sprite =
+        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
 
     public void SetPlaying()
     {
         isPlaying = !isPlaying;
-        _uiController.onOffButton.image.sprite =
-            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+        // _uiController.onOffButton.image.sprite =
+        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
     
     

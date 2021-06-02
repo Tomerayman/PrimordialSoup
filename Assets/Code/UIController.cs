@@ -15,10 +15,11 @@ public class UIController : MonoBehaviour
     public Slider objectSlider1;
     public Slider objectSlider2;
     public Button binaryButton;
-    public Button onOffButton;
+    // public Button onOffButton;
     public List<Button> trinaryButtons;
     public Sprite onButtonSprite;
     public Sprite offButtonSprite;
+    [SerializeField] private CubeScript cubeScript;
     
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,10 @@ public class UIController : MonoBehaviour
 
     public void ShowObjectView()
     {
+        if (cubeScript.GetIsOpen())
+        {
+            cubeScript.CloseLibrary();
+        }
         StartCoroutine(FadeObjectUI(1, true));
         // objectSlider1.onValueChanged.AddListener(new UnityAction<float>(slider1));
         // objectSlider2.onValueChanged.AddListener(new UnityAction<float>(slider2));
@@ -81,7 +86,7 @@ public class UIController : MonoBehaviour
         StartCoroutine(FadeObjectUI(0, false));
         objectSlider1.onValueChanged.RemoveAllListeners();
         objectSlider2.onValueChanged.RemoveAllListeners();
-        onOffButton.onClick.RemoveAllListeners();
+        // onOffButton.onClick.RemoveAllListeners();
         binaryButton.onClick.RemoveAllListeners();
         foreach (Button b in trinaryButtons)
         {
@@ -108,7 +113,7 @@ public class UIController : MonoBehaviour
         objectSlider1.gameObject.SetActive(false);
         objectSlider2.gameObject.SetActive(false);
         binaryButton.gameObject.SetActive(false);
-        onOffButton.gameObject.SetActive(false);
+        // onOffButton.gameObject.SetActive(false);
         foreach (Button b in trinaryButtons)
         {
             b.gameObject.SetActive(false);

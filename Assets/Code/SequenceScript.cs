@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 public class SequenceScript : MonoBehaviour
@@ -20,6 +18,7 @@ public class SequenceScript : MonoBehaviour
     private List<int> _litBulbs;
     private bool _ratioChanged;
     private UIController _uiController;
+    [SerializeField] private GameObject nestedSample;
 
     void Start()
     {
@@ -178,7 +177,6 @@ public class SequenceScript : MonoBehaviour
                 _litBulbs.Add(_offBulbs[offIdx]);
                 bulbs[_offBulbs[offIdx]].enabled = true;
                 _offBulbs.RemoveAt(offIdx);
-                
                 _offBulbs.Add(_litBulbs[litIdx]);
                 bulbs[_litBulbs[litIdx]].enabled = false;
                 _litBulbs.RemoveAt(litIdx);
@@ -195,17 +193,68 @@ public class SequenceScript : MonoBehaviour
         _uiController.objectSlider2.gameObject.SetActive(true);
         _uiController.objectSlider2.value = randomRatio;
         _uiController.objectSlider2.onValueChanged.AddListener(ChangeRandom);
-        _uiController.onOffButton.gameObject.SetActive(true);
-        _uiController.onOffButton.onClick.AddListener(SetPlaying);
-        _uiController.onOffButton.image.sprite =
-            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+        // _uiController.onOffButton.gameObject.SetActive(true);
+        // _uiController.onOffButton.onClick.AddListener(SetPlaying);
+        // _uiController.onOffButton.image.sprite =
+        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sample") &&
+            !GetComponent<LibObjectScript>().getIsDragged() &&
+            other.GetComponent<LibObjectScript>().getIsDragged())
+        {
+            StartCoroutine(WaitForSampleRelease(other.gameObject));
+        }
+    }
+
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.collider.CompareTag("Sample") &&
+    //         !GetComponent<LibObjectScript>().getIsDragged() &&
+    //         other.collider.GetComponent<LibObjectScript>().getIsDragged())
+    //     {
+    //         StartCoroutine(WaitForSampleRelease(other.gameObject));
+    //     }
+    // }
+
+    IEnumerator WaitForSampleRelease(GameObject sampleObject)
+    {
+        yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
+        if (Vector3.Distance(sampleObject.transform.position, transform.position) <
+            GetComponent<SphereCollider>().radius * transform.localScale.x)
+        {
+            nestSample(sampleObject);
+        }
+    }
+    
+    
+
+    private void nestSample(GameObject sampleObject)
+    {
+        Destroy(nestedSample);
+        nestedSample = sampleObject;
+        SampleScript sampleScript = nestedSample.GetComponent<SampleScript>();
+        sound = sampleScript.sound;
+        Material sampleMtl = nestedSample.GetComponent<Renderer>().material;
+        foreach (var bulb in bulbs)
+        {
+            bulb.material = sampleMtl;
+        }
+
+        nestedSample.transform.parent = transform;
+        nestedSample.transform.localPosition = Vector3.zero;
+        nestedSample.transform.localScale = nestedSample.transform.localScale / 2; 
+        nestedSample.GetComponent<LibObjectScript>().isDraggable = false;
+        nestedSample.GetComponent<Collider>().enabled = false;
     }
 
     public void SetPlaying()
     {
         isPlaying = !isPlaying;
-        _uiController.onOffButton.image.sprite =
-            (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+        // _uiController.onOffButton.image.sprite =
+        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
 
 }

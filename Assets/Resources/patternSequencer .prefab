@@ -2591,6 +2591,7 @@ GameObject:
   - component: {fileID: 2250541687200332407}
   - component: {fileID: 2250541687200332400}
   - component: {fileID: 5015259436163301663}
+  - component: {fileID: 6670505735430321009}
   m_Layer: 0
   m_Name: 'patternSequencer '
   m_TagString: Untagged
@@ -2607,7 +2608,7 @@ Transform:
   m_GameObject: {fileID: 5015259436163301662}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 1.33, y: 2.71, z: -3.18}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children:
   - {fileID: 5285165697344512498}
   - {fileID: 5285165697311094980}
@@ -2628,7 +2629,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5015259436163301662}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 47.815784
@@ -2646,7 +2647,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDraggable: 1
-  isDragged: 0
   instrumentTag: Sequencer
 --- !u!114 &5015259436163301663
 MonoBehaviour:
@@ -2682,7 +2682,23 @@ MonoBehaviour:
   - {fileID: 2250541688477818769}
   - {fileID: 2250541688324582076}
   - {fileID: 2250541687265293242}
-  dialTransform: {fileID: 0}
+  nestedSample: {fileID: 5285165697382719852}
+--- !u!54 &6670505735430321009
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5015259436163301662}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5285165697241519946
 GameObject:
   m_ObjectHideFlags: 0

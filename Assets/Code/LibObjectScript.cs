@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 
 public class LibObjectScript : MonoBehaviour
 {
     public bool isDraggable = true;
-    public bool isDragged = false;
+    private bool isDragged = false;
+    private bool isShrinking = false;
     public string instrumentTag;
     private Plane mouseProjPlane;
     private Camera mainCamera;
@@ -21,9 +23,12 @@ public class LibObjectScript : MonoBehaviour
     private float initialDistance;
     private Vector3 initialScale;
     private Transform mTransform;
+    private Transform menuCubeTransform;
     private static float speed = 0.3f;
     private static float posFloatRange = 0.1f;
     private static float rotFloatRange = 2;
+    private static float shrinkageAreaThreshold = 1;
+    private static float disposalAreaThreshold = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +38,8 @@ public class LibObjectScript : MonoBehaviour
         _lastTapTime = Time.timeAsDouble;
         _cameraScript = mainCamera.gameObject.GetComponent<CameraScript>();
         activeInstruments = GameObject.Find("ActiveInstruments").GetComponent<Transform>();
+        mTransform.parent = activeInstruments;
+        menuCubeTransform = GameObject.Find("Menu Cube").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -42,20 +49,23 @@ public class LibObjectScript : MonoBehaviour
         mouseProjPlane.Raycast(ray, out mouseRayDistance);
         mousePos = ray.GetPoint(mouseRayDistance);
         // floating movements:
-        var position = mTransform.position;
-        float lerpPoint = Time.time * speed + 10*position.x + 10*position.y; 
-        position += Vector3.forward * (Time.deltaTime * Mathf.Sin(lerpPoint) * posFloatRange);
-        mTransform.position = position;
-        transform.Rotate(Vector3.up * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
-        transform.Rotate(Vector3.left * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
+        if(isDraggable) {FloatBehaviour();}
         if (isDragged)
         {
-            //var position = transform.position;
-            ////position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //Debug.Log(Input.mousePosition);
-            //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-            transform.position = mousePos;
+            if (Input.GetMouseButton(0))
+            {
+                transform.position = mousePos;
+            }
+            else
+            {
+                isDragged = false;
+            }
+            // handling library disposing:
+            if (!isShrinking && Vector3.Distance(transform.position, menuCubeTransform.position) < shrinkageAreaThreshold)
+            {
+                isShrinking = true;
+                StartCoroutine(ShrinkAreaBehaviour());
+            }
         }
         if (Input.touchCount == 2) // detecting pinch action
         {
@@ -84,8 +94,42 @@ public class LibObjectScript : MonoBehaviour
                 var factor = currentDistance / initialDistance;
                 transform.localScale = initialScale * factor;
             }
+        }
+    }
+
+    public bool getIsDragged()
+    {
+        return isDragged;
+    }
+
+    private void FloatBehaviour()
+    {
+        var position = mTransform.position;
+        float lerpPoint = Time.time * speed + 10*position.x + 10*position.y; 
+        position += Vector3.forward * (Time.deltaTime * Mathf.Sin(lerpPoint) * posFloatRange);
+        mTransform.position = position;
+        transform.Rotate(Vector3.up * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
+        transform.Rotate(Vector3.left * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
+    }
+    
+    IEnumerator ShrinkAreaBehaviour()
+    {
+        var distanceToCube = Vector3.Distance(mTransform.position, menuCubeTransform.position);
+        Vector3 originalScale = mTransform.localScale;
+        while (isDragged && distanceToCube < shrinkageAreaThreshold)
+        {
+            if (distanceToCube < disposalAreaThreshold)
+            {
+                disposeObject();
+                break;
+            }
+            mTransform.localScale = originalScale * (distanceToCube / shrinkageAreaThreshold);
+            yield return new WaitForEndOfFrame();
+            distanceToCube = Vector3.Distance(mTransform.position, menuCubeTransform.position);
             
         }
+        mTransform.localScale = originalScale;
+        isShrinking = false;
     }
 
     private void OnMouseOver()
@@ -93,7 +137,7 @@ public class LibObjectScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             double currTapTime = Time.timeAsDouble;
-            if (currTapTime - _lastTapTime < 0.2) // double tap
+            if (currTapTime - _lastTapTime < 0.25) // double tap
             {
                 if (!_cameraScript.zoomedIn)
                 {
@@ -106,7 +150,7 @@ public class LibObjectScript : MonoBehaviour
                     isDraggable = true;
                 }
             }
-            else if (!_cameraScript.zoomedIn && isDraggable)
+            else if (!_cameraScript.zoomedIn)
             {
                 StartCoroutine(dragDelay());
             }
@@ -114,6 +158,12 @@ public class LibObjectScript : MonoBehaviour
         }
     }
 
+    public void disposeObject()
+    {
+        // later - pooling.
+        GameObject.Destroy(this.gameObject);
+    }
+    
     void ZoomInAction()
     {
         _cameraScript.ZoomAtInstrument(transform.position);
@@ -148,14 +198,17 @@ public class LibObjectScript : MonoBehaviour
     
     }
     
-    private void soloDisplay(bool reverse)
+    private void soloDisplay(bool isZoomingOut)
     {
-        int reverseFactor = (reverse) ? -1 : 1;
+        // int reverseFactor = (reverse) ? -1 : 1;
         foreach (Transform instrumentTransform in activeInstruments)
         {
             if (! ReferenceEquals(instrumentTransform, transform))
             {
-                instrumentTransform.position += reverseFactor * pushBackVector;
+                // instrumentTransform.position += reverseFactor * pushBackVector;
+                Renderer[] rs = instrumentTransform.GetComponentsInChildren<Renderer>();
+                foreach(Renderer r in rs)
+                    r.enabled = isZoomingOut;
             }
         }
     }
