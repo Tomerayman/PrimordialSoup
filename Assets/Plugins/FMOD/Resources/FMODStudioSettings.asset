@@ -209,6 +209,8 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - Atmos
+  - Chords
   - Drums
   - Notes
   BanksToLoad: []

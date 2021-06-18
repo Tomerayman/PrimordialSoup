@@ -5,8 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Effect
-  - bank
   - Sample
+  - Sequencer
+  - Loop
+  - Chord
+  - Border
   layers:
   - Default
   - TransparentFX

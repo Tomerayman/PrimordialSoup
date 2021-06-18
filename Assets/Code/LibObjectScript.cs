@@ -11,6 +11,7 @@ public class LibObjectScript : MonoBehaviour
     public bool isDraggable = true;
     private bool isDragged = false;
     private bool isShrinking = false;
+    private bool isPinched = false;
     public string instrumentTag;
     private Plane mouseProjPlane;
     private Camera mainCamera;
@@ -72,18 +73,19 @@ public class LibObjectScript : MonoBehaviour
             var touchZero = Input.GetTouch(0);
             var touchOne = Input.GetTouch(1);
             // if the pinch is now ending:
-            if (touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
-                touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
+            if (isPinched && (touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
+                touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled))
             {
+                isPinched = false;
                 return;
             }
             // if pinch just began: 
-            if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+            if ((touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began) && checkPinch(touchZero, touchOne))
             {
                 initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
                 initialScale = transform.localScale;
             }
-            else // we are mid-pinch:
+            else if (isPinched) // we are mid-pinch:
             {
                 var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
                 if (Mathf.Approximately(initialDistance, 0)) // if pinch is very small / accidental
@@ -97,6 +99,22 @@ public class LibObjectScript : MonoBehaviour
         }
     }
 
+    private bool checkPinch(Touch pointZero, Touch pointOne)
+    {
+        Collider selfCollider = GetComponent<Collider>(); 
+        RaycastHit hit;
+        if (Physics.Raycast(mainCamera.ScreenPointToRay(pointZero.position), out hit, 50) && ReferenceEquals(hit.collider, selfCollider))
+        {
+            if (Physics.Raycast(mainCamera.ScreenPointToRay(pointOne.position), out hit, 50) &&
+                ReferenceEquals(hit.collider, selfCollider))
+            {
+                isPinched = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool getIsDragged()
     {
         return isDragged;
@@ -106,8 +124,8 @@ public class LibObjectScript : MonoBehaviour
     {
         var position = mTransform.position;
         float lerpPoint = Time.time * speed + 10*position.x + 10*position.y; 
-        position += Vector3.forward * (Time.deltaTime * Mathf.Sin(lerpPoint) * posFloatRange);
-        mTransform.position = position;
+        // position += Vector3.forward * (Time.deltaTime * Mathf.Sin(lerpPoint) * posFloatRange);
+        // mTransform.position = position;
         transform.Rotate(Vector3.up * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
         transform.Rotate(Vector3.left * (Time.deltaTime * rotFloatRange * Mathf.Sin(lerpPoint)));
     }
@@ -180,6 +198,9 @@ public class LibObjectScript : MonoBehaviour
             case "Sequencer":
                 GetComponent<SequenceScript>().SetSequencerUI();
                 break;
+            case "Loop":
+                GetComponent<LoopScript>().SetSequencerUI();
+                break;
         }
     }
 
@@ -211,9 +232,27 @@ public class LibObjectScript : MonoBehaviour
                     r.enabled = isZoomingOut;
             }
         }
+
+        if (isZoomingOut)
+        {
+            foreach (Transform instrumentTransform in activeInstruments)
+            {
+                if (instrumentTransform.CompareTag("Sequencer"))
+                {
+                    instrumentTransform.GetComponent<SequenceScript>().DerenderOffBulbs();
+                }
+
+            }
+        }
     }
-    
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Border"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{e6435ffb-114e-4197-8594-565591861353}">
+		<property name="name">
+			<value>Send to Effect</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5be4864b-38ab-457d-b6be-37d189e4875f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d6a84fc0-07bb-4cfd-b5b3-6b712e935f76}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d6a84fc0-07bb-4cfd-b5b3-6b712e935f76}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

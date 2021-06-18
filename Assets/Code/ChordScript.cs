@@ -16,7 +16,7 @@ public class ChordScript : MonoBehaviour
     [FMODUnity.EventRef]
     public List<string> chords3;
 
-    private List<string> sounds;
+    public List<string> sounds;
     private bool isRandom = false;
     public bool isPlaying = true;
     public float minTimeBetweenNotes;

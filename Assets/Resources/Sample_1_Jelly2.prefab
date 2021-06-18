@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
-  sound: event:/Low_1
+  sound: event:/Jelly/Notes/Jelly A
   isPlaying: 1
   minTimeBetweenNotes: 2
   maxTimeBetweenNotes: 3

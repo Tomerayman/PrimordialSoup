@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class SoundSynchronizer : MonoBehaviour
@@ -16,9 +17,8 @@ public class SoundSynchronizer : MonoBehaviour
     }
     
     FMOD.Studio.EventInstance soundMaker;
-
-    // Start is called before the first frame update
     public List<SoundData> sounds;
+    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -37,21 +37,25 @@ public class SoundSynchronizer : MonoBehaviour
         
     }
 
-
+    public void SimplePlay(SoundData soundData)
+    {
+        soundMaker = FMODUnity.RuntimeManager.CreateInstance(soundData.sound);
+        // soundMaker.setVolume(SettingsMenu.golbalVolume);
+        // float effectVal = (sounds[i].Item2) ? 1f : 0f;
+        // soundMaker.setParameterByName("Effect1", effectVal);
+        soundMaker.start();
+    }
+    
     IEnumerator syncEmitter()
     {
         while (true)
         {
             for (int i = 0; i < sounds.Count; i++)
             {
-                soundMaker = FMODUnity.RuntimeManager.CreateInstance(sounds[i].sound);
-                // soundMaker.setVolume(SettingsMenu.golbalVolume);
-                // float effectVal = (sounds[i].Item2) ? 1f : 0f;
-                // soundMaker.setParameterByName("Effect1", effectVal);
-                soundMaker.start();
+                SimplePlay(sounds[i]);
                 sounds.Remove(sounds[i]);
             }
-            yield return new WaitForSeconds(0.125f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     

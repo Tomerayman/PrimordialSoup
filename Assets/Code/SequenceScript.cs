@@ -19,15 +19,17 @@ public class SequenceScript : MonoBehaviour
     private bool _ratioChanged;
     private UIController _uiController;
     [SerializeField] private GameObject nestedSample;
+    [SerializeField] private float ringRotationSpeed;
+    [SerializeField] private Transform _ringTransform;
 
     void Start()
     {
         _ratioChanged = false;
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
+        randomRatio = 0;
         ResetBulbs();
         StartCoroutine(SequenceSoundEmit());
         RandomizeBulbs();
-        LibObjectScript libScript = GetComponent<LibObjectScript>();
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
 
@@ -78,13 +80,12 @@ public class SequenceScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // _currDispAmount = Mathf.Lerp(_currDispAmount, _minDispAmount, Time.deltaTime);
-        // _meshRenderer.material.SetFloat(amountID, _currDispAmount);
-            if (_ratioChanged)
-            {
-                _ratioChanged = false;
-                ChangeBulbs();
-            }
+        _ringTransform.Rotate(Vector3.up * (ringRotationSpeed * Time.deltaTime));
+        if (_ratioChanged && !Input.GetMouseButton(0))
+        {
+            _ratioChanged = false;
+            ChangeBulbs();
+        }
     }
 
     public void PlaySound(bool effect)
@@ -94,7 +95,9 @@ public class SequenceScript : MonoBehaviour
         soundData.sound = sound;
         soundData.customPlayback = false;
         // more sound definitions (effects..)
-        soundManager.sounds.Add(soundData);
+        
+        // soundManager.sounds.Add(soundData);
+        soundManager.SimplePlay(soundData);
     }
     
     IEnumerator SequenceSoundEmit()
@@ -140,14 +143,14 @@ public class SequenceScript : MonoBehaviour
 
     public void ChangeBulbs()
     {
-        int bulbsToLight = Mathf.RoundToInt(litRatio * bulbsNum) - _litBulbs.Count;
+        int neededBulbs = Mathf.RoundToInt(litRatio * bulbsNum);
+        int bulbsToLight = neededBulbs - _litBulbs.Count;
         if (bulbsToLight > 0) // need to add bulbs
         {
             for (int i = 0; i < bulbsToLight; i++)
             {
                 int r = Random.Range(0, _offBulbs.Count);
                 _litBulbs.Add(_offBulbs[r]);
-                // _bulbs[_offBulbs[r]].material = onMtl;
                 bulbs[_offBulbs[r]].enabled = true;
                 _offBulbs.RemoveAt(r);
             }
@@ -158,7 +161,6 @@ public class SequenceScript : MonoBehaviour
             {
                 int r = Random.Range(0, _litBulbs.Count);
                 _offBulbs.Add(_litBulbs[r]);
-                // _bulbs[_litBulbs[r]].material = offMtl;
                 bulbs[_litBulbs[r]].enabled = false;
                 _litBulbs.RemoveAt(r);
             }
@@ -208,17 +210,7 @@ public class SequenceScript : MonoBehaviour
             StartCoroutine(WaitForSampleRelease(other.gameObject));
         }
     }
-
-    // private void OnCollisionEnter(Collision other)
-    // {
-    //     if (other.collider.CompareTag("Sample") &&
-    //         !GetComponent<LibObjectScript>().getIsDragged() &&
-    //         other.collider.GetComponent<LibObjectScript>().getIsDragged())
-    //     {
-    //         StartCoroutine(WaitForSampleRelease(other.gameObject));
-    //     }
-    // }
-
+    
     IEnumerator WaitForSampleRelease(GameObject sampleObject)
     {
         yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
@@ -258,4 +250,11 @@ public class SequenceScript : MonoBehaviour
         //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
 
+    public void DerenderOffBulbs()
+    {
+        foreach (var bulbIdx in _offBulbs)
+        {
+            bulbs[bulbIdx].enabled = false;
+        }
+    }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{da5beddf-23cc-4048-b465-d0574debc949}">
+		<property name="assetPath">
+			<value>Cave atmos no drops.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>43.135458333333332</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{803568f7-1554-4556-8983-f2e9d5ee3fb4}</destination>
+		</relationship>
+	</object>
+</objects>

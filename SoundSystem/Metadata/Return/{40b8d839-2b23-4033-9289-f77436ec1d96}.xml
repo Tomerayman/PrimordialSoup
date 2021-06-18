@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerReturn" id="{40b8d839-2b23-4033-9289-f77436ec1d96}">
+		<property name="volume">
+			<value>-80</value>
+		</property>
+		<property name="name">
+			<value>Tremolo +Dealy</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{06ac0b74-60df-45e4-9bec-8efec57fd2fe}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{4906c97e-945c-438c-b2fb-84be28300d93}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{33e1136c-487b-4e0e-874d-fc319a676b0f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{06ac0b74-60df-45e4-9bec-8efec57fd2fe}">
+		<relationship name="effects">
+			<destination>{25a0bec3-5d0c-4382-87a5-c98b95df2221}</destination>
+			<destination>{7c9f89b5-26ea-48aa-94ef-0586eac2ac3f}</destination>
+			<destination>{ce553e7f-c31e-41dc-91b6-4f724b60583d}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{4906c97e-945c-438c-b2fb-84be28300d93}" />
+	<object class="TremoloEffect" id="{25a0bec3-5d0c-4382-87a5-c98b95df2221}">
+		<property name="frequency">
+			<value>4.20000029</value>
+		</property>
+		<property name="depth">
+			<value>0.599999964</value>
+		</property>
+		<property name="shape">
+			<value>0.284999996</value>
+		</property>
+		<property name="duty">
+			<value>0.229999989</value>
+		</property>
+		<property name="square">
+			<value>0.294999987</value>
+		</property>
+		<property name="phase">
+			<value>0.214999989</value>
+		</property>
+	</object>
+	<object class="DelayEffect" id="{7c9f89b5-26ea-48aa-94ef-0586eac2ac3f}" />
+	<object class="MixerBusFader" id="{ce553e7f-c31e-41dc-91b6-4f724b60583d}" />
+</objects>

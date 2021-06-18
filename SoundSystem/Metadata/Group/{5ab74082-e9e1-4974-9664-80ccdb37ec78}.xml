@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{5ab74082-e9e1-4974-9664-80ccdb37ec78}">
+		<property name="name">
+			<value>Jelly Bus</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{3715e6ee-08d3-4eb0-86fa-ceea19fa6034}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{29428059-acce-4cf9-aa58-dfcaeb63a707}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{33e1136c-487b-4e0e-874d-fc319a676b0f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{3715e6ee-08d3-4eb0-86fa-ceea19fa6034}">
+		<relationship name="effects">
+			<destination>{73a0ac16-b7dc-4fc5-82d1-4d5eb89f5775}</destination>
+			<destination>{6587b366-54ae-4ba0-9b98-aa630af3463b}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{29428059-acce-4cf9-aa58-dfcaeb63a707}" />
+	<object class="MixerBusFader" id="{73a0ac16-b7dc-4fc5-82d1-4d5eb89f5775}" />
+	<object class="MixerSend" id="{6587b366-54ae-4ba0-9b98-aa630af3463b}">
+		<property name="level">
+			<value>2.5</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="automators">
+			<destination>{d620c846-8361-4413-8aeb-529df9ea3197}</destination>
+		</relationship>
+		<relationship name="mixerReturn">
+			<destination>{40b8d839-2b23-4033-9289-f77436ec1d96}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{d620c846-8361-4413-8aeb-529df9ea3197}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>level</value>
+		</property>
+	</object>
+</objects>

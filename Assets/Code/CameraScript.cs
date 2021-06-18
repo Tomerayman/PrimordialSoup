@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class CameraScript : MonoBehaviour
 {
@@ -12,12 +13,19 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private float duration;
     public bool zoomedIn = false;
     private UIController uiController;
-    
-    // Start is called before the first frame update
+    private EventSystem eventSystem;
+
+        // Start is called before the first frame update
     void Start()
     {
         _camera = GetComponent<Camera>();
         uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
+        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        int defaultValue = EventSystem.current.pixelDragThreshold;		
+        EventSystem.current.pixelDragThreshold = 
+            Mathf.Max(
+                defaultValue , 
+                (int) (defaultValue * Screen.dpi / 160f));
     }
 
     // Update is called once per frame

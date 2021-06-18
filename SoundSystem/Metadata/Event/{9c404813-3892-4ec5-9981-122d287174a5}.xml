@@ -8,7 +8,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{c4e727cc-9f6f-4114-a24f-5a917c865fb9}</destination>
+			<destination>{f4889bab-e86f-499b-9264-2e3a0a19fd8b}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{8c8845f4-449e-4e9a-88aa-1e78a151fa51}</destination>
@@ -44,9 +44,6 @@
 		</relationship>
 	</object>
 	<object class="MasterTrack" id="{7046b505-37f6-4c4a-9b56-7b313101e815}">
-		<property name="uiTrackHeight">
-			<value>28</value>
-		</property>
 		<relationship name="mixerGroup">
 			<destination>{9e651193-2d92-4419-99d1-8e308f0602ad}</destination>
 		</relationship>
@@ -63,15 +60,8 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{4397886f-2647-424a-b440-54df2fdcebbd}" />
-	<object class="MarkerTrack" id="{dbc25c0a-d998-4c52-8223-3c29eebd7b55}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
-	</object>
+	<object class="MarkerTrack" id="{dbc25c0a-d998-4c52-8223-3c29eebd7b55}" />
 	<object class="GroupTrack" id="{9c71d396-48e7-4837-a0de-81bfc442842f}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
 		<relationship name="automationTracks">
 			<destination>{885f8306-09ca-403d-bded-2ee119fab45e}</destination>
 			<destination>{69b5c99e-9963-475b-b70e-a21af91a22ad}</destination>
@@ -114,17 +104,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{fe0a1913-8083-424d-9ec4-9805c9a3533c}" />
 	<object class="AutomationTrack" id="{885f8306-09ca-403d-bded-2ee119fab45e}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
 		<relationship name="automator">
 			<destination>{495a492a-6fef-49f5-ad59-c00e5c52accf}</destination>
 		</relationship>
 	</object>
 	<object class="AutomationTrack" id="{69b5c99e-9963-475b-b70e-a21af91a22ad}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
 		<relationship name="automator">
 			<destination>{dff18ed4-f060-4688-8588-0113ca251768}</destination>
 		</relationship>
