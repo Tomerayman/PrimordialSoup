@@ -24,14 +24,15 @@ public class ChordScript : MonoBehaviour
     private int _chordIdx = 0;
     private int _currSet = 1;
     private UIController _uiController;
+    private LibObjectScript libScript;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         _mTransform = GetComponent<Transform>();
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
-        LibObjectScript libScript = GetComponent<LibObjectScript>();
+        libScript = GetComponent<LibObjectScript>();
         // libScript.slider1Action = SetChordGroup;
         // libScript.slider2Action = SetRandom;
         sounds = chords1;
@@ -87,6 +88,7 @@ public class ChordScript : MonoBehaviour
             soundData.sound = sounds[_chordIdx];
             _chordIdx = (_chordIdx == 4) ? 0 : _chordIdx + 1;
         }
+        soundData.volume = libScript.GetVolumeFromScale();
         soundData.customPlayback = false;
         // more sound definitions (effects..)
         soundManager.sounds.Add(soundData);

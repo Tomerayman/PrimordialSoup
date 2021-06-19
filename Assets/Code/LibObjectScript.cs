@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
@@ -9,18 +10,20 @@ using Debug = UnityEngine.Debug;
 public class LibObjectScript : MonoBehaviour
 {
     public bool isDraggable = true;
+    public string instrumentTag;
+    public float maxScaleRatio;
+    public float minScaleRatio;
+    public float currScaleRatio;
     private bool isDragged = false;
     private bool isShrinking = false;
     private bool isPinched = false;
-    public string instrumentTag;
     private Plane mouseProjPlane;
     private Camera mainCamera;
-    float mouseRayDistance;
-    Vector3 mousePos;
+    private float mouseRayDistance;
+    private Vector3 mousePos;
     private double _lastTapTime;
     private CameraScript _cameraScript;
     private Transform activeInstruments;
-    private Vector3 pushBackVector = new Vector3(0, 0, 20);
     private float initialDistance;
     private Vector3 initialScale;
     private Transform mTransform;
@@ -41,6 +44,7 @@ public class LibObjectScript : MonoBehaviour
         activeInstruments = GameObject.Find("ActiveInstruments").GetComponent<Transform>();
         mTransform.parent = activeInstruments;
         menuCubeTransform = GameObject.Find("Menu Cube").GetComponent<Transform>();
+        currScaleRatio = 1f;
     }
 
     // Update is called once per frame
@@ -94,7 +98,12 @@ public class LibObjectScript : MonoBehaviour
                 }
 
                 var factor = currentDistance / initialDistance;
-                transform.localScale = initialScale * factor;
+                if (factor > maxScaleRatio)
+                    factor = maxScaleRatio;
+                else if (factor < minScaleRatio)
+                    factor = minScaleRatio;
+                currScaleRatio = factor;
+                transform.localScale = initialScale * currScaleRatio;
             }
         }
     }
@@ -252,6 +261,14 @@ public class LibObjectScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public float GetVolumeFromScale()
+    {
+        float volume = 0.5f + 0.25f * (Mathf.Min(1, Mathf.Max((currScaleRatio - minScaleRatio) / (1 - minScaleRatio), 0)) +
+                                       Mathf.Max((currScaleRatio - 1) / (maxScaleRatio - 1), 0)); 
+        Debug.Log(volume);
+        return volume;
     }
 }
 

@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPONGE sat
+  m_Shader: {fileID: -6465566751694194690, guid: 704038e61439d384795fba21ce1197c9, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2DLOD_2543d1acad4c4ebcbf96d7a1b37be931_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4a9d4a40829d42f4793add90cdef0d84, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_bb6544a8327a4027a2931d7cb88a4e0d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 5997e74703b81484b911e621f691c1e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_beb9535147e94e669730caeb3712cd0c_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 5997e74703b81484b911e621f691c1e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_c1c4d26ad252424badc1ad962a21af8d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 1cdc5b506b1a4a33a53c30669ced1f51, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_100a35ca8ff9440e90e51ca28dff3693: 0
+    - Vector1_8172BA24: 1
+    - Vector1_dbcf75dbd65b473b90a5d69ec1dd06b9: 0
+    - _Amount: 0.1
+    - _Speed: 0.1
+    m_Colors:
+    - Color_374849ec54cd4f4f8c37e8f6f06a1e2a: {r: 0.27627268, g: 0.69531286, b: 0.7830189, a: 0}
+    - Color_8d656d56105740faaf3ba64cfe11996b: {r: 0.6320754, g: 0.30053395, b: 0.35991448, a: 0}
+    - Color_d86d6a23e1d44d2d80306c4bc31a3d99: {r: 0.9811321, g: 0.64236385, b: 0.6699463, a: 1}
+    - Vector4_40f7203b698f4093a93e29b3362b9605: {r: -1.8, g: 0.25, b: 0.47, a: 0.24}
+  m_BuildTextureStacks: []

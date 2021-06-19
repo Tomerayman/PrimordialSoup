@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2777328138549909097}
+  - component: {fileID: 2777328138549909098}
   - component: {fileID: 2777328138549909099}
   - component: {fileID: 2777328138549909096}
-  - component: {fileID: 7622949617515389332}
   m_Layer: 0
   m_Name: Chord_1_Jelly
-  m_TagString: Chord
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,6 +38,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 90}
+--- !u!60 &2777328138549909098
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777328138549909092}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4380386, y: 0.10829609}
+      - {x: -0.65077573, y: -0.36075068}
+      - {x: -0.57750565, y: -0.53174734}
+      - {x: -0.12402719, y: -0.9210093}
+      - {x: 0.0402959, y: -1.3501573}
+      - {x: 1.5661147, y: -1.356461}
+      - {x: 2.773466, y: -0.101287544}
+      - {x: 2.569923, y: 0.23039442}
+      - {x: 0.75317615, y: 0.255564}
 --- !u!114 &2777328138549909099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,40 +100,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   chords1:
-  - event:/Old Stuff/High_1
-  - event:/Old Stuff/High_2
-  - event:/Old Stuff/High_3
-  - event:/Old Stuff/High_5
-  - event:/Old Stuff/High_7
+  - event:/High_1
+  - event:/High_2
+  - event:/High_3
+  - event:/High_4
+  - event:/High_5
   chords2:
-  - event:/Old Stuff/Mid_1
-  - event:/Old Stuff/Mid_2
-  - event:/Old Stuff/Mid_3
-  - event:/Old Stuff/Mid_5
-  - event:/Old Stuff/Mid_7
+  - event:/Mid_1
+  - event:/Mid_2
+  - event:/Mid_3
+  - event:/Mid_4
+  - event:/Mid_5
   chords3:
-  - event:/Old Stuff/Low_1
-  - event:/Old Stuff/Low_2
-  - event:/Old Stuff/Low_3
-  - event:/Old Stuff/Low_5
-  - event:/Old Stuff/Low_7
-  sounds: []
+  - event:/Low_1
+  - event:/Low_2
+  - event:/Low_3
+  - event:/Low_4
+  - event:/Low_5
   isPlaying: 1
   minTimeBetweenNotes: 1
   maxTimeBetweenNotes: 2
---- !u!65 &7622949617515389332
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2777328138549909092}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.400607, y: 1.4884197, z: 0.6293687}
-  m_Center: {x: 1.02, y: -0.53, z: 0}
 --- !u!1001 &853260084808800328
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -61,20 +61,6 @@ public class CubeScript : MonoBehaviour
                         }
                     }
                 }
-                // Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
-                // RaycastHit raycastHit;
-                // if (Physics.Raycast(raycast, out raycastHit))
-                // {
-                //     foreach ((Collider, TileScript) tile in tiles)
-                //     {
-                //         if (ReferenceEquals(tile.Item1, raycastHit.collider)) // clicked on tile
-                //         {
-                //             isDraggingTile = true;
-                //             StartCoroutine(dragTile(tile.Item1.gameObject));
-                //             break;
-                //         }
-                //     }
-                // }
             }
         }
     }
@@ -146,7 +132,8 @@ public class CubeScript : MonoBehaviour
             tileIcon.rectTransform.position = Input.mousePosition;
             yield return new WaitForEndOfFrame();
         }
-        if (Vector3.Distance(startPos, Input.mousePosition) < 115) // dropped back
+        if (Vector3.Distance(startPos, Input.mousePosition) < 115 || 
+            Vector3.Distance(Camera.main.WorldToScreenPoint(transform.position), Input.mousePosition) < 115) // dropped back. 115 is avg screen radius of tile.
         {
             // returned
         }
@@ -159,6 +146,8 @@ public class CubeScript : MonoBehaviour
             newInstrument.transform.position = ray.GetPoint(distance);
             CloseLibrary();    
         }
+
+        isDraggingTile = false;
         tileIcon.rectTransform.position = startPos;
     }
 }

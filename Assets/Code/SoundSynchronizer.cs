@@ -10,6 +10,7 @@ public class SoundSynchronizer : MonoBehaviour
     public struct SoundData
     {
         public string sound;
+        public float volume;
         public float effect1;
         public float effect2;
         public float effect3;
@@ -43,6 +44,7 @@ public class SoundSynchronizer : MonoBehaviour
         // soundMaker.setVolume(SettingsMenu.golbalVolume);
         // float effectVal = (sounds[i].Item2) ? 1f : 0f;
         // soundMaker.setParameterByName("Effect1", effectVal);
+        soundMaker.setVolume(soundData.volume);
         soundMaker.start();
     }
     

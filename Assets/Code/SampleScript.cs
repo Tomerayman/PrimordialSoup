@@ -19,7 +19,7 @@ public class SampleScript : MonoBehaviour
     private int soundEndTime;
     private int soundLengthInMilliSec;
     private UIController _uiController;
-
+    private LibObjectScript libScript;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class SampleScript : MonoBehaviour
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _minDispAmount = _meshRenderer.material.GetFloat(amountID);
-        LibObjectScript libScript = GetComponent<LibObjectScript>();
+        libScript = GetComponent<LibObjectScript>();
         FMOD.Studio.EventInstance tempEvent = FMODUnity.RuntimeManager.CreateInstance(sound);
         FMOD.Studio.EventDescription description;
         tempEvent.getDescription(out description);
@@ -50,6 +50,7 @@ public class SampleScript : MonoBehaviour
         _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
+        soundData.volume = libScript.GetVolumeFromScale();
         soundData.customPlayback = (soundStartTime > 3 || soundEndTime < soundLengthInMilliSec - 3);
         // soundData.startTime = soundStartTime;
         // soundData.endTime = soundEndTime;

@@ -1773,6 +1773,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDraggable: 1
   instrumentTag: Loop
+  maxScaleRatio: 1.5
+  minScaleRatio: 0.6
+  currScaleRatio: 1
 --- !u!114 &1767650532792603158
 MonoBehaviour:
   m_ObjectHideFlags: 0

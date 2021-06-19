@@ -14,14 +14,16 @@ public class LoopScript : MonoBehaviour
     [SerializeField] private int linksNum;
     [SerializeField] private float rotationSpeed;
     private List<Transform> linkCandidatesForFilling;
+    private LibObjectScript libScript;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
         linkCandidatesForFilling = new List<Transform>();
+        libScript = GetComponent<LibObjectScript>();
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class LoopScript : MonoBehaviour
         // _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
+        soundData.volume = libScript.GetVolumeFromScale();
         soundData.customPlayback = false;
         // more sound definitions (effects..)
         

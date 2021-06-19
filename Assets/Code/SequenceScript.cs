@@ -18,6 +18,7 @@ public class SequenceScript : MonoBehaviour
     private List<int> _litBulbs;
     private bool _ratioChanged;
     private UIController _uiController;
+    private LibObjectScript libScript;
     [SerializeField] private GameObject nestedSample;
     [SerializeField] private float ringRotationSpeed;
     [SerializeField] private Transform _ringTransform;
@@ -31,6 +32,7 @@ public class SequenceScript : MonoBehaviour
         StartCoroutine(SequenceSoundEmit());
         RandomizeBulbs();
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
+        libScript = GetComponent<LibObjectScript>();
     }
 
     private void ResetBulbs()
@@ -42,18 +44,6 @@ public class SequenceScript : MonoBehaviour
             _offBulbs.Add(i);
         }
     }
-    
-    // void CreateBulbs()
-    // {
-    //     float increment = 2 * Mathf.PI / bulbsNum;
-    //     
-    //     for (int i = 0; i < bulbsNum; i++)
-    //     {
-    //         _bulbs.Add(Instantiate(bulbPrefab).GetComponent<MeshRenderer>());
-    //         _bulbs[i].transform.parent = _mTransform;
-    //         _bulbs[i].transform.localPosition = new Vector3(radius * Mathf.Sin(i * increment), radius * Mathf.Cos(i * increment), 0f);
-    //     }
-    // }
     
     private void RandomizeBulbs()
     {
@@ -93,6 +83,7 @@ public class SequenceScript : MonoBehaviour
         // _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
+        soundData.volume = libScript.GetVolumeFromScale();
         soundData.customPlayback = false;
         // more sound definitions (effects..)
         
