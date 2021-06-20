@@ -112,7 +112,7 @@ public class SequenceScript : MonoBehaviour
                     i = 0;
                     ChangeByRandomRatio();
                 }
-                yield return new WaitForSeconds(4f / bulbsNum);
+                yield return new WaitForSeconds(6f / bulbsNum);
             }
             else
             {
@@ -220,6 +220,7 @@ public class SequenceScript : MonoBehaviour
         Destroy(nestedSample);
         nestedSample = sampleObject;
         SampleScript sampleScript = nestedSample.GetComponent<SampleScript>();
+        sampleScript.isPlaying = false;
         sound = sampleScript.sound;
         Material sampleMtl = nestedSample.GetComponent<Renderer>().material;
         foreach (var bulb in bulbs)

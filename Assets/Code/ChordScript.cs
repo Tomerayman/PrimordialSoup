@@ -17,6 +17,7 @@ public class ChordScript : MonoBehaviour
     public List<string> chords3;
 
     public List<string> sounds;
+    public string chordLabel;
     private bool isRandom = false;
     public bool isPlaying = true;
     public float minTimeBetweenNotes;
@@ -136,6 +137,14 @@ public class ChordScript : MonoBehaviour
         isPlaying = !isPlaying;
         // _uiController.onOffButton.image.sprite =
         //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sample") || other.CompareTag("Chord"))
+        {
+            soundManager.EvaluteEvent(gameObject, other.gameObject);
+        }
     }
     
     

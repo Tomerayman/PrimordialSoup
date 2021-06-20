@@ -1789,17 +1789,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
-  isPlaying: 0
+  isPlaying: 1
   isFilling: 0
   cycleDuration: 4
   links:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5898772252235753933}
+  - {fileID: 439519442545544388}
+  - {fileID: 6385994855325385}
+  - {fileID: 527983987990151841}
+  - {fileID: 8546781275864668549}
+  - {fileID: 4116349308493845036}
+  - {fileID: 1484464320763281608}
+  - {fileID: 8098012114412205326}
   linksNum: 8
   rotationSpeed: 4

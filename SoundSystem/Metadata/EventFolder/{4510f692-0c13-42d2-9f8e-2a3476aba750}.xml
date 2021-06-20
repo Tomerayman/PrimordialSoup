@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EventFolder" id="{4510f692-0c13-42d2-9f8e-2a3476aba750}">
+		<property name="name">
+			<value>Carbon Chords (Key)</value>
+		</property>
+		<relationship name="folder">
+			<destination>{87cc3f4a-cc7b-40ae-8f9b-9531a6d73cef}</destination>
+		</relationship>
+	</object>
+</objects>

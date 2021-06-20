@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2777328138549909097}
-  - component: {fileID: 2777328138549909098}
   - component: {fileID: 2777328138549909099}
   - component: {fileID: 2777328138549909096}
+  - component: {fileID: 8961232983567120501}
   m_Layer: 0
   m_Name: Chord_1_Jelly
   m_TagString: Untagged
@@ -38,40 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 90}
---- !u!60 &2777328138549909098
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2777328138549909092}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.4380386, y: 0.10829609}
-      - {x: -0.65077573, y: -0.36075068}
-      - {x: -0.57750565, y: -0.53174734}
-      - {x: -0.12402719, y: -0.9210093}
-      - {x: 0.0402959, y: -1.3501573}
-      - {x: 1.5661147, y: -1.356461}
-      - {x: 2.773466, y: -0.101287544}
-      - {x: 2.569923, y: 0.23039442}
-      - {x: 0.75317615, y: 0.255564}
 --- !u!114 &2777328138549909099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDraggable: 1
   instrumentTag: Chord
+  maxScaleRatio: 0
+  minScaleRatio: 0
+  currScaleRatio: 0
 --- !u!114 &2777328138549909096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,9 +86,24 @@ MonoBehaviour:
   - event:/Low_3
   - event:/Low_4
   - event:/Low_5
+  sounds: []
+  chordLabel: 
   isPlaying: 1
   minTimeBetweenNotes: 1
   maxTimeBetweenNotes: 2
+--- !u!65 &8961232983567120501
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777328138549909092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1185076, y: 1.6423141, z: 1}
+  m_Center: {x: 1.0163583, y: -0.4954392, z: 0.3}
 --- !u!1001 &853260084808800328
 PrefabInstance:
   m_ObjectHideFlags: 0

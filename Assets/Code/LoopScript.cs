@@ -24,6 +24,7 @@ public class LoopScript : MonoBehaviour
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
         linkCandidatesForFilling = new List<Transform>();
         libScript = GetComponent<LibObjectScript>();
+        StartCoroutine(SequenceSoundEmit());
     }
 
     // Update is called once per frame

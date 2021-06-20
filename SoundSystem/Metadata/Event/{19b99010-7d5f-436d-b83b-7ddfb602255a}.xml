@@ -2,10 +2,10 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{19b99010-7d5f-436d-b83b-7ddfb602255a}">
 		<property name="name">
-			<value>Jelly A</value>
+			<value>Jelly Am7</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{0d23f775-0913-4662-88cf-a4a2ad80cc46}</destination>
@@ -98,7 +98,7 @@
 	</object>
 	<object class="MultiSound" id="{6114959b-cf19-4dbf-b137-c628b4ca98fe}">
 		<relationship name="sounds">
-			<destination>{2320027e-4faa-4d7c-bd9f-ffbd5e6ea227}</destination>
+			<destination>{7dcbca0d-79c1-44bb-a8a1-aa58f07cac4c}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{17ba840e-cf69-4ba7-9059-3e1f28100da9}">
@@ -127,9 +127,9 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{94f2882f-8e1a-4dc5-ab35-40ea6cd85920}" />
-	<object class="SingleSound" id="{2320027e-4faa-4d7c-bd9f-ffbd5e6ea227}">
+	<object class="SingleSound" id="{7dcbca0d-79c1-44bb-a8a1-aa58f07cac4c}">
 		<relationship name="audioFile">
-			<destination>{a1fde9e9-1e8d-45a0-a392-dd3ab44eab1f}</destination>
+			<destination>{90be7e14-162c-443f-a0bc-63ca37bcfd53}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{68881695-8f34-45c4-a404-0995f4d462c0}" />

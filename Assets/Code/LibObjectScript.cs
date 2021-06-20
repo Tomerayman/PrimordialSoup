@@ -29,7 +29,7 @@ public class LibObjectScript : MonoBehaviour
     private Transform mTransform;
     private Transform menuCubeTransform;
     private static float speed = 0.3f;
-    private static float posFloatRange = 0.1f;
+    // private static float posFloatRange = 0.1f;
     private static float rotFloatRange = 2;
     private static float shrinkageAreaThreshold = 1;
     private static float disposalAreaThreshold = 0.5f;
@@ -106,6 +106,11 @@ public class LibObjectScript : MonoBehaviour
                 transform.localScale = initialScale * currScaleRatio;
             }
         }
+    }
+
+    public void StopDrag()
+    {
+        isDragged = false;
     }
 
     private bool checkPinch(Touch pointZero, Touch pointOne)
@@ -267,7 +272,6 @@ public class LibObjectScript : MonoBehaviour
     {
         float volume = 0.5f + 0.25f * (Mathf.Min(1, Mathf.Max((currScaleRatio - minScaleRatio) / (1 - minScaleRatio), 0)) +
                                        Mathf.Max((currScaleRatio - 1) / (maxScaleRatio - 1), 0)); 
-        Debug.Log(volume);
         return volume;
     }
 }

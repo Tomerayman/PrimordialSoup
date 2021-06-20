@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{7e71e596-1cbd-4d7b-be3c-022e837ceac6}">
+		<property name="assetPath">
+			<value>Gm7 Chord Carbon.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.363666666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{803568f7-1554-4556-8983-f2e9d5ee3fb4}</destination>
+		</relationship>
+	</object>
+</objects>

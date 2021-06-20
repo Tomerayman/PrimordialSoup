@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{646b8016-b67f-4343-accd-e280fc34901c}">
+		<property name="assetPath">
+			<value>Am7 Chord Calcium.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.2727291666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{803568f7-1554-4556-8983-f2e9d5ee3fb4}</destination>
+		</relationship>
+	</object>
+</objects>

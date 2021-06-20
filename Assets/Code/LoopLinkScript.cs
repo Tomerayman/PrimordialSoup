@@ -114,13 +114,17 @@ public class LoopLinkScript : MonoBehaviour
         {
             isNestingChord = false;
             SampleScript sampleScript = nestedObject.GetComponent<SampleScript>();
+            sampleScript.isPlaying = false;
             sound = sampleScript.sound;
             nestedObject.transform.localScale = nestedObject.transform.localScale * nestedSampleScaleRatio; 
         }
         else if (sampleObject.CompareTag("Chord"))
         {
             isNestingChord = true;
-            nestedChordSounds = nestedObject.GetComponent<ChordScript>().sounds;
+            ChordScript nestedChordScript = nestedObject.GetComponent<ChordScript>();
+            nestedChordScript.isPlaying = false;
+            nestedChordSounds = nestedChordScript.sounds;
+            
             nestedObject.transform.localScale = nestedObject.transform.localScale * nestedChordScaleRatio; 
         }
         

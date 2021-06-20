@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EventFolder" id="{b5313ecc-abdb-4985-8aaf-acca293406d6}">
+		<property name="name">
+			<value>Calcium Chords (Key)</value>
+		</property>
+		<relationship name="folder">
+			<destination>{cae50c4c-b124-455f-ac00-b5c6cf24524c}</destination>
+		</relationship>
+	</object>
+</objects>

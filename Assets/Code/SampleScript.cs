@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SampleScript : MonoBehaviour
 {
     public SoundSynchronizer soundManager;
     [FMODUnity.EventRef]
     public string sound;
+    public string sampleLabel;
     private MeshRenderer _meshRenderer;
     private float _minDispAmount;
     private float _currDispAmount;
@@ -20,6 +23,9 @@ public class SampleScript : MonoBehaviour
     private int soundLengthInMilliSec;
     private UIController _uiController;
     private LibObjectScript libScript;
+    [SerializeField] MeshRenderer pulseRenderer;
+    private Material pulse;
+    private static readonly int pulseID = Shader.PropertyToID("_pulse");
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +40,8 @@ public class SampleScript : MonoBehaviour
         description.getLength(out soundLengthInMilliSec);
         soundStartTime = 0;
         soundEndTime = soundLengthInMilliSec;
+        pulse = pulseRenderer.material;
+        pulse.SetFloat(pulseID, 0);
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
@@ -55,6 +63,7 @@ public class SampleScript : MonoBehaviour
         // soundData.startTime = soundStartTime;
         // soundData.endTime = soundEndTime;
         soundManager.sounds.Add(soundData);
+        StartCoroutine(PulseCycle());
     }
 
     IEnumerator SampleSoundEmit()
@@ -99,22 +108,40 @@ public class SampleScript : MonoBehaviour
         _uiController.objectSlider2.gameObject.SetActive(true);
         _uiController.objectSlider2.value = (float) soundEndTime / soundLengthInMilliSec;
         _uiController.objectSlider2.onValueChanged.AddListener(SetSoundEnd);
-        // _uiController.onOffButton.gameObject.SetActive(true);
-        // _uiController.onOffButton.onClick.AddListener(SetPlaying);
-        // _uiController.onOffButton.image.sprite =
-        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sample") || other.CompareTag("Chord"))
+        {
+            soundManager.EvaluteEvent(gameObject, other.gameObject);
+        }
     }
 
     public void SetPlaying()
     {
         isPlaying = !isPlaying;
-        // _uiController.onOffButton.image.sprite =
-        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
-    
-    // private IEnumerator soundEndEnforcer(float delay)
-    // {
-    //     yield return new WaitForSeconds(delay);
-    //     soundMaker.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-    // }
+
+    IEnumerator PulseCycle()
+    {
+        float duration = 1f;
+        float time = 0;
+        while (time < duration / 5) 
+        {
+            pulse.SetFloat(pulseID, 5* time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitForSeconds((3 * duration) / 5);
+        time = 0;
+        while (time < duration / 5)
+        {
+            pulse.SetFloat(pulseID, 1 - 5* time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        pulse.SetFloat(pulseID, 0);
+    }
+
 }
