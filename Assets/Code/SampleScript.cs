@@ -11,9 +11,9 @@ public class SampleScript : MonoBehaviour
     public string sound;
     public string sampleLabel;
     private MeshRenderer _meshRenderer;
-    private float _minDispAmount;
-    private float _currDispAmount;
-    private static readonly int amountID = Shader.PropertyToID("_Amount");
+    // private float _minDispAmount;
+    // private float _currDispAmount;
+    // private static readonly int amountID = Shader.PropertyToID("_Amount");
 
     public bool isPlaying = true;
     public float minTimeBetweenNotes;
@@ -23,7 +23,6 @@ public class SampleScript : MonoBehaviour
     private int soundLengthInMilliSec;
     private UIController _uiController;
     private LibObjectScript libScript;
-    [SerializeField] MeshRenderer pulseRenderer;
     private Material pulse;
     private static readonly int pulseID = Shader.PropertyToID("_Alpha");
 
@@ -32,7 +31,7 @@ public class SampleScript : MonoBehaviour
     {
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         _meshRenderer = GetComponent<MeshRenderer>();
-        _minDispAmount = _meshRenderer.material.GetFloat(amountID);
+        // _minDispAmount = _meshRenderer.material.GetFloat(amountID);
         libScript = GetComponent<LibObjectScript>();
         FMOD.Studio.EventInstance tempEvent = FMODUnity.RuntimeManager.CreateInstance(sound);
         FMOD.Studio.EventDescription description;
@@ -40,22 +39,22 @@ public class SampleScript : MonoBehaviour
         description.getLength(out soundLengthInMilliSec);
         soundStartTime = 0;
         soundEndTime = soundLengthInMilliSec;
-        pulse = pulseRenderer.material;
+        pulse = transform.GetChild(0).GetComponent<MeshRenderer>().material;
         pulse.SetFloat(pulseID, 0);
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        _currDispAmount = Mathf.Lerp(_currDispAmount, _minDispAmount, Time.deltaTime);
-        _meshRenderer.material.SetFloat(amountID, _currDispAmount);
-    }
+    // void Update()
+    // {
+    //     _currDispAmount = Mathf.Lerp(_currDispAmount, _minDispAmount, Time.deltaTime);
+    //     _meshRenderer.material.SetFloat(amountID, _currDispAmount);
+    // }
     
     public void PlaySound(bool effect)
     {
-        _currDispAmount = 0.3f;
+        // _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
         soundData.volume = libScript.GetVolumeFromScale();

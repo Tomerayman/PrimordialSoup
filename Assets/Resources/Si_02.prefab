@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6340647613565884138}
   m_LocalRotation: {x: 0.6640908, y: -0.24286495, z: 0.24286495, w: 0.6640908}
-  m_LocalPosition: {x: -3.5797966, y: 1.009295, z: -0.85467196}
+  m_LocalPosition: {x: -3.5797966, y: 1.009295, z: -3}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 5881850510737787019}
@@ -198,7 +198,6 @@ MonoBehaviour:
   isPlaying: 1
   minTimeBetweenNotes: 2
   maxTimeBetweenNotes: 3
-  pulseRenderer: {fileID: 2592780201436044991}
 --- !u!114 &7807295368466305700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,9 +212,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDraggable: 1
   instrumentTag: Sample
-  maxScaleRatio: 0
-  minScaleRatio: 0
-  currScaleRatio: 0
+  maxScaleRatio: 1.5
+  minScaleRatio: 0.6
+  currScaleRatio: 1
 --- !u!54 &-4479552696075182129
 Rigidbody:
   m_ObjectHideFlags: 0

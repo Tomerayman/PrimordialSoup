@@ -26,7 +26,9 @@ public class ChordScript : MonoBehaviour
     private int _currSet = 1;
     private UIController _uiController;
     private LibObjectScript libScript;
-
+    [SerializeField] private Transform _container;
+    private List<Material> pulses;
+    private static readonly int pulseID = Shader.PropertyToID("_Alpha");
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,13 @@ public class ChordScript : MonoBehaviour
         // libScript.slider1Action = SetChordGroup;
         // libScript.slider2Action = SetRandom;
         sounds = chords1;
+        pulses = new List<Material>();
+        foreach (Transform child in _container)
+        {
+            Material mtl = child.GetChild(0).GetComponent<MeshRenderer>().material;
+            mtl.SetFloat(pulseID, 0);
+            pulses.Add(mtl);
+        }
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
@@ -82,11 +91,14 @@ public class ChordScript : MonoBehaviour
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         if (isRandom)
         {
-            soundData.sound = sounds[Random.Range(0, 4)];    
+            int idx = Random.Range(0, 4);
+            soundData.sound = sounds[idx];
+            StartCoroutine(PulseCycle(pulses[idx]));
         }
         else
         {
             soundData.sound = sounds[_chordIdx];
+            StartCoroutine(PulseCycle(pulses[_chordIdx]));
             _chordIdx = (_chordIdx == 4) ? 0 : _chordIdx + 1;
         }
         soundData.volume = libScript.GetVolumeFromScale();
@@ -147,5 +159,24 @@ public class ChordScript : MonoBehaviour
         }
     }
     
-    
+    IEnumerator PulseCycle(Material pulse)
+    {
+        float duration = 1f;
+        float time = 0;
+        while (time < duration / 5) 
+        {
+            pulse.SetFloat(pulseID, 5* time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitForSeconds((3 * duration) / 5);
+        time = 0;
+        while (time < duration / 5)
+        {
+            pulse.SetFloat(pulseID, 1 - 5* time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        pulse.SetFloat(pulseID, 0);
+    }
 }

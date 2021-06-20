@@ -212,6 +212,7 @@ MonoBehaviour:
   - Atmos
   - Chords
   - Drums
+  - Perc
   - Samples
   BanksToLoad: []
   LiveUpdatePort: 9264

@@ -52,9 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDraggable: 1
   instrumentTag: Chord
-  maxScaleRatio: 0
-  minScaleRatio: 0
-  currScaleRatio: 0
+  maxScaleRatio: 1.5
+  minScaleRatio: 0.6
+  currScaleRatio: 1
 --- !u!114 &2777328138549909096
 MonoBehaviour:
   m_ObjectHideFlags: 0
