@@ -2351,7 +2351,7 @@ GameObject:
   - component: {fileID: 6670505735430321009}
   m_Layer: 0
   m_Name: 'patternSequencer '
-  m_TagString: Untagged
+  m_TagString: Sequencer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

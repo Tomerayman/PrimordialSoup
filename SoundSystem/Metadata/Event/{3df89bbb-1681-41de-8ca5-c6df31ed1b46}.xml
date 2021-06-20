@@ -92,6 +92,7 @@
 		<property name="length">
 			<value>3.0000208333333331</value>
 		</property>
+		<property name="name" />
 		<relationship name="sounds">
 			<destination>{b9621fd6-7047-4d81-9e6f-ff2ccb4e5352}</destination>
 			<destination>{5fb7d19f-2ba0-45b2-bc10-38277a85f952}</destination>

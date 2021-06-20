@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: -4352676405230704290}
   m_Layer: 0
   m_Name: Ca_07
-  m_TagString: Untagged
+  m_TagString: Chord
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,23 +421,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   chords1:
-  - event:/High_1
-  - event:/High_2
-  - event:/High_3
-  - event:/High_4
-  - event:/High_5
-  chords2:
-  - event:/Mid_1
-  - event:/Mid_2
-  - event:/Mid_3
-  - event:/Mid_4
-  - event:/Mid_5
-  chords3:
-  - event:/Low_1
-  - event:/Low_2
-  - event:/Low_3
-  - event:/Low_4
-  - event:/Low_5
+  - event:/Calcium/Calcium Chords (Key)/CalciumChord2/1_D4
+  - event:/Calcium/Calcium Chords (Key)/CalciumChord2/2_F4
+  - event:/Calcium/Calcium Chords (Key)/CalciumChord2/3_G4
+  - event:/Calcium/Calcium Chords (Key)/CalciumChord2/4_A4
+  - event:/Calcium/Calcium Chords (Key)/CalciumChord2/5_C5
   sounds: []
   chordLabel: Si_07
   isPlaying: 1

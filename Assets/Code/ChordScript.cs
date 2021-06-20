@@ -12,9 +12,9 @@ public class ChordScript : MonoBehaviour
     [FMODUnity.EventRef]
     public List<string> chords1;
     [FMODUnity.EventRef]
-    public List<string> chords2;
-    [FMODUnity.EventRef]
-    public List<string> chords3;
+    // public List<string> chords2;
+    // [FMODUnity.EventRef]
+    // public List<string> chords3;
 
     public List<string> sounds;
     public string chordLabel;
@@ -69,21 +69,24 @@ public class ChordScript : MonoBehaviour
         {
             b.image.sprite = _uiController.offButtonSprite;
         }
-        if (Math.Abs(setVal - 1) < 0.1f)
-        {
-            sounds = chords1;
-            _uiController.trinaryButtons[0].image.sprite = _uiController.onButtonSprite;
-        }
-        else if (Math.Abs(setVal - 2) < 0.1f)
-        {
-            sounds = chords2;
-            _uiController.trinaryButtons[1].image.sprite = _uiController.onButtonSprite;
-        }
-        else
-        {
-            sounds = chords3;
-            _uiController.trinaryButtons[2].image.sprite = _uiController.onButtonSprite;
-        }
+        
+        sounds = chords1;
+        _uiController.trinaryButtons[0].image.sprite = _uiController.onButtonSprite;
+        // if (Math.Abs(setVal - 1) < 0.1f)
+        // {
+        //     sounds = chords1;
+        //     _uiController.trinaryButtons[0].image.sprite = _uiController.onButtonSprite;
+        // }
+        // else if (Math.Abs(setVal - 2) < 0.1f)
+        // {
+        //     sounds = chords2;
+        //     _uiController.trinaryButtons[1].image.sprite = _uiController.onButtonSprite;
+        // }
+        // else
+        // {
+        //     sounds = chords3;
+        //     _uiController.trinaryButtons[2].image.sprite = _uiController.onButtonSprite;
+        // }
     }
     
     public void PlaySound(bool effect)

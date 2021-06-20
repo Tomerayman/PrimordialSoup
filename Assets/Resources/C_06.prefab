@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 1281856176926746322}
   m_Layer: 0
   m_Name: C_06
-  m_TagString: Untagged
+  m_TagString: Chord
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -634,7 +634,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5286602225959151089}
   m_LocalRotation: {x: 0.30241075, y: 0.6391774, z: -0.30241075, w: 0.6391774}
-  m_LocalPosition: {x: -40, y: 38.6, z: -3}
+  m_LocalPosition: {x: -37.796, y: 38.6, z: -3}
   m_LocalScale: {x: 12, y: 12, z: 12}
   m_Children:
   - {fileID: 1594805406085929321}
@@ -701,23 +701,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   chords1:
-  - event:/High_1
-  - event:/High_2
-  - event:/High_3
-  - event:/High_4
-  - event:/High_5
-  chords2:
-  - event:/Mid_1
-  - event:/Mid_2
-  - event:/Mid_3
-  - event:/Mid_4
-  - event:/Mid_5
-  chords3:
-  - event:/Low_1
-  - event:/Low_2
-  - event:/Low_3
-  - event:/Low_4
-  - event:/Low_5
+  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord1/1_C4
+  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord1/2_D4
+  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord1/3_E4
+  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord1/4_G4
+  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord1/5_A4
   sounds: []
   chordLabel: C_06
   isPlaying: 1
