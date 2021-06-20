@@ -25,7 +25,7 @@ public class SampleScript : MonoBehaviour
     private LibObjectScript libScript;
     [SerializeField] MeshRenderer pulseRenderer;
     private Material pulse;
-    private static readonly int pulseID = Shader.PropertyToID("_pulse");
+    private static readonly int pulseID = Shader.PropertyToID("_Alpha");
 
     // Start is called before the first frame update
     void Start()
