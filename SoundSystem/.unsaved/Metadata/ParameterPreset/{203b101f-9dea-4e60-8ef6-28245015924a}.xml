@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{203b101f-9dea-4e60-8ef6-28245015924a}">
+		<property name="name">
+			<value>_uiController.effectButtons[effectNum].image.sprite =                _uiController.effectSpritesDict[instrumentEffectNames[effectNum]].Item1;</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5be4864b-38ab-457d-b6be-37d189e4875f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9772c344-c1da-4871-b433-cd29a2f1b74f}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9772c344-c1da-4871-b433-cd29a2f1b74f}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

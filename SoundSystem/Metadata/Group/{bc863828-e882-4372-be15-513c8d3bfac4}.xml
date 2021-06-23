@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{bc863828-e882-4372-be15-513c8d3bfac4}">
+		<property name="name">
+			<value>Jelly Chords</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{928fbaa5-49e3-4db4-b8ae-96842212817d}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{ccbbc8fa-5b45-4260-aeec-46025df07c11}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{5ab74082-e9e1-4974-9664-80ccdb37ec78}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{928fbaa5-49e3-4db4-b8ae-96842212817d}">
+		<relationship name="effects">
+			<destination>{94a64fd7-df95-4c92-bd21-5de13bc97487}</destination>
+			<destination>{a073704c-c110-4bd2-85a3-7628db1ec1f2}</destination>
+			<destination>{5954eef1-914d-4491-9d2a-1d639b276038}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{ccbbc8fa-5b45-4260-aeec-46025df07c11}" />
+	<object class="CompressorEffect" id="{94a64fd7-df95-4c92-bd21-5de13bc97487}">
+		<property name="threshold">
+			<value>-23</value>
+		</property>
+		<property name="ratio">
+			<value>2</value>
+		</property>
+		<property name="attackTime">
+			<value>4.4000001</value>
+		</property>
+		<property name="releaseTime">
+			<value>88</value>
+		</property>
+		<property name="gain">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{a073704c-c110-4bd2-85a3-7628db1ec1f2}" />
+	<object class="MixerSend" id="{5954eef1-914d-4491-9d2a-1d639b276038}">
+		<property name="level">
+			<value>-12</value>
+		</property>
+		<property name="inputFormat">
+			<value>0</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>
+		</relationship>
+	</object>
+</objects>

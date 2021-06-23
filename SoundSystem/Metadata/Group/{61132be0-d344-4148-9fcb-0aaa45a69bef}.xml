@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{61132be0-d344-4148-9fcb-0aaa45a69bef}">
+		<property name="name">
+			<value>Jelly Perc</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{8f73e618-c6ef-4d96-8c68-b5eb89c69af9}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{9600efb1-4df2-48e4-8361-4d14e3d41bd6}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{5ab74082-e9e1-4974-9664-80ccdb37ec78}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{8f73e618-c6ef-4d96-8c68-b5eb89c69af9}">
+		<relationship name="effects">
+			<destination>{2393baf3-b206-4798-ad40-11f598498892}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{9600efb1-4df2-48e4-8361-4d14e3d41bd6}" />
+	<object class="MixerBusFader" id="{2393baf3-b206-4798-ad40-11f598498892}" />
+</objects>

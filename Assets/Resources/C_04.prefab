@@ -231,3 +231,8 @@ MonoBehaviour:
   isPlaying: 1
   minTimeBetweenNotes: 2
   maxTimeBetweenNotes: 3
+  instrumentEffectNames:
+  - Send to Delay
+  - Send to Flanger
+  - Send to Tremolo
+  effectStatus: []

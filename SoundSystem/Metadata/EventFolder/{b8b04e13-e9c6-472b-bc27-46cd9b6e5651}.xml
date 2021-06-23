@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EventFolder" id="{b8b04e13-e9c6-472b-bc27-46cd9b6e5651}">
+		<property name="name">
+			<value>Dm Pentatonic Carbon</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4510f692-0c13-42d2-9f8e-2a3476aba750}</destination>
+		</relationship>
+	</object>
+</objects>

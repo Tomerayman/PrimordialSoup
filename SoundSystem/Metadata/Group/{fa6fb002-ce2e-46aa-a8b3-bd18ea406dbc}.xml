@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{fa6fb002-ce2e-46aa-a8b3-bd18ea406dbc}">
+		<property name="name">
+			<value>Calcium Bus</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{335e5599-116e-420c-aa78-8df9da298fb8}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{c10ae3e5-8f7f-42ae-b8d6-adca809b4fdb}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{33e1136c-487b-4e0e-874d-fc319a676b0f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{335e5599-116e-420c-aa78-8df9da298fb8}">
+		<relationship name="effects">
+			<destination>{42d60d8e-7931-4ec1-8b8c-e1b0469d54f7}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{c10ae3e5-8f7f-42ae-b8d6-adca809b4fdb}" />
+	<object class="MixerBusFader" id="{42d60d8e-7931-4ec1-8b8c-e1b0469d54f7}" />
+</objects>

@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 public class SequenceScript : MonoBehaviour
 {
     public SoundSynchronizer soundManager;
+    private SoundSynchronizer.SoundData nestedSoundData;
     [FMODUnity.EventRef]
-    public string sound;
+    public string defaultSound;
     public int bulbsNum;
     public bool isPlaying;
     public float litRatio;
@@ -28,6 +29,10 @@ public class SequenceScript : MonoBehaviour
         _ratioChanged = false;
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         randomRatio = 0;
+        nestedSoundData.sound = defaultSound;
+        nestedSoundData.volume = 0.75f;
+        nestedSoundData.effectNames = new List<string>(new[] {"Send to Chorus", "Send to Delay", "Send to Tremolo"});
+        nestedSoundData.effectVals = new List<float>(new[] {0f, 0f, 0f});
         ResetBulbs();
         StartCoroutine(SequenceSoundEmit());
         RandomizeBulbs();
@@ -81,14 +86,13 @@ public class SequenceScript : MonoBehaviour
     public void PlaySound(bool effect)
     {
         // _currDispAmount = 0.3f;
-        SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
-        soundData.sound = sound;
-        soundData.volume = libScript.GetVolumeFromScale();
-        soundData.customPlayback = false;
+        // SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
+        // soundData.sound = sound;
+        // soundData.volume = libScript.GetVolumeFromScale();
         // more sound definitions (effects..)
         
         // soundManager.sounds.Add(soundData);
-        soundManager.SimplePlay(soundData);
+        soundManager.SimplePlay(nestedSoundData);
     }
     
     IEnumerator SequenceSoundEmit()
@@ -213,15 +217,15 @@ public class SequenceScript : MonoBehaviour
         }
     }
     
-    
-
     private void nestSample(GameObject sampleObject)
     {
         Destroy(nestedSample);
         nestedSample = sampleObject;
         SampleScript sampleScript = nestedSample.GetComponent<SampleScript>();
         sampleScript.isPlaying = false;
-        sound = sampleScript.sound;
+        nestedSoundData.sound = sampleScript.sound;
+        nestedSoundData.effectVals = sampleScript.effectStatus;
+        nestedSoundData.volume = 0.75f;
         Material sampleMtl = nestedSample.GetComponent<Renderer>().material;
         foreach (var bulb in bulbs)
         {

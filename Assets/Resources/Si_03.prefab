@@ -198,6 +198,11 @@ MonoBehaviour:
   isPlaying: 1
   minTimeBetweenNotes: 2
   maxTimeBetweenNotes: 3
+  instrumentEffectNames:
+  - Send to Delay
+  - Send to Flanger
+  - Send to Tremolo
+  effectStatus: []
 --- !u!114 &1108962222097561455
 MonoBehaviour:
   m_ObjectHideFlags: 0

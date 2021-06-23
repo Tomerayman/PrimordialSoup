@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{b31a7516-6606-465a-a594-939073661435}">
+		<property name="name">
+			<value>Calcium Chords</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{e1590b2d-b558-4fd9-ba81-0f9dcbc25072}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{f25fc9c6-ed5a-4c7b-8f6d-b6779428d7ad}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{fa6fb002-ce2e-46aa-a8b3-bd18ea406dbc}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{e1590b2d-b558-4fd9-ba81-0f9dcbc25072}">
+		<relationship name="effects">
+			<destination>{2eb43c51-ebc0-40df-add9-be5978650cef}</destination>
+			<destination>{fe29110e-a635-41db-aff8-09de22e8c139}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{f25fc9c6-ed5a-4c7b-8f6d-b6779428d7ad}" />
+	<object class="MixerBusFader" id="{2eb43c51-ebc0-40df-add9-be5978650cef}" />
+	<object class="MixerSend" id="{fe29110e-a635-41db-aff8-09de22e8c139}">
+		<property name="level">
+			<value>-9</value>
+		</property>
+		<property name="inputFormat">
+			<value>0</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>
+		</relationship>
+	</object>
+</objects>

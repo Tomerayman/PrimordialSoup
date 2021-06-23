@@ -96,14 +96,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   chords1:
-  - event:/Calcium/Calcium Chords (Key)/CalciumChord1/1_C4
-  - event:/Calcium/Calcium Chords (Key)/CalciumChord1/2_D4
-  - event:/Calcium/Calcium Chords (Key)/CalciumChord1/3_E4
-  - event:/Calcium/Calcium Chords (Key)/CalciumChord1/4_G4
-  - event:/Calcium/Calcium Chords (Key)/CalciumChord1/5_A4
+  - event:/Calcium/Calcium Chords (Key)/C Pentatinic Calcium/C4 Cal
+  - event:/Calcium/Calcium Chords (Key)/C Pentatinic Calcium/D4 Cal 2
+  - event:/Calcium/Calcium Chords (Key)/C Pentatinic Calcium/E4 Cal
+  - event:/Calcium/Calcium Chords (Key)/C Pentatinic Calcium/G4 Cal 2
+  - event:/Calcium/Calcium Chords (Key)/C Pentatinic Calcium/A4 Cal 2
   sounds: []
   chordLabel: Ca_06
   isPlaying: 1
+  instrumentEffects:
+  - Send to Chorus
+  - Send to Delay
+  - Send to Tremolo
+  effectStatus: []
   minTimeBetweenNotes: 1
   maxTimeBetweenNotes: 2
   _container: {fileID: 5994422051303038188}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{9e121775-bbc0-4454-b30e-75d63272d6e3}">
+		<property name="name">
+			<value>Calcium Samples</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{a14125d5-7fa2-4bd6-b338-204a3611e75c}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{34edcc1e-b4c8-473e-b872-8f5d30858ace}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{fa6fb002-ce2e-46aa-a8b3-bd18ea406dbc}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{a14125d5-7fa2-4bd6-b338-204a3611e75c}">
+		<relationship name="effects">
+			<destination>{7d44a2df-45d9-4e5f-97a2-a8e216f841ac}</destination>
+			<destination>{8de487da-9f15-4343-8d44-79f0a7a4ff11}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{34edcc1e-b4c8-473e-b872-8f5d30858ace}" />
+	<object class="MixerBusFader" id="{7d44a2df-45d9-4e5f-97a2-a8e216f841ac}" />
+	<object class="MixerSend" id="{8de487da-9f15-4343-8d44-79f0a7a4ff11}">
+		<property name="level">
+			<value>-6</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>
+		</relationship>
+	</object>
+</objects>

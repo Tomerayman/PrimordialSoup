@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerReturn" id="{3b7e2448-5c11-46d5-a325-5cfa1c85da91}">
+		<property name="name">
+			<value>Chorus</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{6e8762ca-b260-4090-88ab-34deb16c0aca}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{e4181f52-7a49-43d9-95e6-25845a7f09ba}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{33e1136c-487b-4e0e-874d-fc319a676b0f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{6e8762ca-b260-4090-88ab-34deb16c0aca}">
+		<relationship name="effects">
+			<destination>{e80c9108-035f-4882-8f47-fd5f2649404a}</destination>
+			<destination>{ae3ff994-1e0f-4477-a781-4b030d26dcdc}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{e4181f52-7a49-43d9-95e6-25845a7f09ba}" />
+	<object class="ChorusEffect" id="{e80c9108-035f-4882-8f47-fd5f2649404a}">
+		<property name="rate">
+			<value>4.5</value>
+		</property>
+		<property name="depth">
+			<value>75</value>
+		</property>
+		<property name="mix">
+			<value>50</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{ae3ff994-1e0f-4477-a781-4b030d26dcdc}" />
+</objects>

@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class ChordScript : MonoBehaviour
 {
-    private Transform _mTransform;
     public SoundSynchronizer soundManager;
     [FMODUnity.EventRef]
     public List<string> chords1;
@@ -20,6 +19,9 @@ public class ChordScript : MonoBehaviour
     public string chordLabel;
     private bool isRandom = false;
     public bool isPlaying = true;
+    [SerializeField] private List<string> instrumentEffects;
+    public List<float> effectStatus; // list of bool values for effect status.
+
     public float minTimeBetweenNotes;
     public float maxTimeBetweenNotes;
     private int _chordIdx = 0;
@@ -33,7 +35,6 @@ public class ChordScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _mTransform = GetComponent<Transform>();
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         libScript = GetComponent<LibObjectScript>();
         // libScript.slider1Action = SetChordGroup;
@@ -46,6 +47,7 @@ public class ChordScript : MonoBehaviour
             mtl.SetFloat(pulseID, 0);
             pulses.Add(mtl);
         }
+        effectStatus = new List<float>(new[] {0f, 0f, 0f});
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
@@ -63,33 +65,8 @@ public class ChordScript : MonoBehaviour
         isRandom = !isRandom;
     }
 
-    public void SetChordGroup(int setVal)
-    {
-        foreach (var b in _uiController.trinaryButtons)
-        {
-            b.image.sprite = _uiController.offButtonSprite;
-        }
-        
-        sounds = chords1;
-        _uiController.trinaryButtons[0].image.sprite = _uiController.onButtonSprite;
-        // if (Math.Abs(setVal - 1) < 0.1f)
-        // {
-        //     sounds = chords1;
-        //     _uiController.trinaryButtons[0].image.sprite = _uiController.onButtonSprite;
-        // }
-        // else if (Math.Abs(setVal - 2) < 0.1f)
-        // {
-        //     sounds = chords2;
-        //     _uiController.trinaryButtons[1].image.sprite = _uiController.onButtonSprite;
-        // }
-        // else
-        // {
-        //     sounds = chords3;
-        //     _uiController.trinaryButtons[2].image.sprite = _uiController.onButtonSprite;
-        // }
-    }
-    
-    public void PlaySound(bool effect)
+   
+    public void PlaySound()
     {
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         if (isRandom)
@@ -104,8 +81,9 @@ public class ChordScript : MonoBehaviour
             StartCoroutine(PulseCycle(pulses[_chordIdx]));
             _chordIdx = (_chordIdx == 4) ? 0 : _chordIdx + 1;
         }
+        soundData.effectNames = instrumentEffects;
+        soundData.effectVals = effectStatus;
         soundData.volume = libScript.GetVolumeFromScale();
-        soundData.customPlayback = false;
         // more sound definitions (effects..)
         soundManager.sounds.Add(soundData);
     }
@@ -117,7 +95,7 @@ public class ChordScript : MonoBehaviour
         {
             if (isPlaying)
             {
-                PlaySound(false);
+                PlaySound();
             }
             delay = Random.Range(minTimeBetweenNotes, maxTimeBetweenNotes);
             yield return new WaitForSeconds(delay);
@@ -132,19 +110,24 @@ public class ChordScript : MonoBehaviour
         _uiController.binaryButton.image.sprite =
             (isRandom) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
 
-        for (int i = 0; i < _uiController.trinaryButtons.Count; i++)
+        // for (int i = 0; i < _uiController.trinaryButtons.Count; i++)
+        // {
+        //     _uiController.trinaryButtons[i].gameObject.SetActive(true);
+        //     _uiController.trinaryButtons[i].image.sprite =
+        //         (i + 1 == _currSet) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+        // }
+        // _uiController.trinaryButtons[0].onClick.AddListener(delegate { SetChordGroup(1); });
+        // _uiController.trinaryButtons[1].onClick.AddListener(delegate { SetChordGroup(2); });
+        // _uiController.trinaryButtons[2].onClick.AddListener(delegate { SetChordGroup(3); });
+        for (int i = 0; i < 3; i++)
         {
-            _uiController.trinaryButtons[i].gameObject.SetActive(true);
-            _uiController.trinaryButtons[i].image.sprite =
-                (i + 1 == _currSet) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
+            _uiController.effectButtons[i].gameObject.SetActive(true);
+            var i1 = i;
+            _uiController.effectButtons[i].onClick.AddListener(delegate { SetEffect(i1); });
+            _uiController.effectButtons[i].image.sprite = (Math.Abs(effectStatus[i] - 1f) < 0.1f)
+                ? _uiController.effectSpritesDict[instrumentEffects[i]].Item1
+                : _uiController.effectSpritesDict[instrumentEffects[i]].Item2;
         }
-        _uiController.trinaryButtons[0].onClick.AddListener(delegate { SetChordGroup(1); });
-        _uiController.trinaryButtons[1].onClick.AddListener(delegate { SetChordGroup(2); });
-        _uiController.trinaryButtons[2].onClick.AddListener(delegate { SetChordGroup(3); });
-        // _uiController.onOffButton.gameObject.SetActive(true);
-        // _uiController.onOffButton.onClick.AddListener(SetPlaying);
-        // _uiController.onOffButton.image.sprite =
-        //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
 
     public void SetPlaying()
@@ -181,5 +164,22 @@ public class ChordScript : MonoBehaviour
             yield return null;
         }
         pulse.SetFloat(pulseID, 0);
+    }
+    
+    public void SetEffect(int effectNum)
+    {
+        if (effectStatus[effectNum] < 0.5f) // effect is off
+        {
+            effectStatus[effectNum] = 1;
+            // switch button sprite to "on":
+            _uiController.effectButtons[effectNum].image.sprite =
+                _uiController.effectSpritesDict[instrumentEffects[effectNum]].Item1;
+        }
+        else
+        {
+            effectStatus[effectNum] = 0;
+            _uiController.effectButtons[effectNum].image.sprite =
+                _uiController.effectSpritesDict[instrumentEffects[effectNum]].Item2;
+        }
     }
 }

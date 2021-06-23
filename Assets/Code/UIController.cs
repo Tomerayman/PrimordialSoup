@@ -10,21 +10,36 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
 
+    [Serializable]
+    public struct NamedSprite {
+        public string effectName;
+        public Sprite onSprite;
+        public Sprite offSprite;
+    }
+    [SerializeField] private NamedSprite[] effectNamedSprites;
+    public Dictionary<string, (Sprite, Sprite)> effectSpritesDict;
+    
     public delegate void SliderAction(float f);
     public CanvasGroup objectViewGroup;
     public Slider objectSlider1;
     public Slider objectSlider2;
+    public List<Button> effectButtons;
     public Button binaryButton;
     // public Button onOffButton;
-    public List<Button> trinaryButtons;
     public Sprite onButtonSprite;
     public Sprite offButtonSprite;
     [SerializeField] private CubeScript cubeScript;
     
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        effectSpritesDict = new Dictionary<string, (Sprite, Sprite)>();
+        foreach (NamedSprite ns in effectNamedSprites)
+        {
+            effectSpritesDict[ns.effectName] = (ns.onSprite, ns.offSprite);
+        }
     }
 
     /**
@@ -88,7 +103,8 @@ public class UIController : MonoBehaviour
         objectSlider2.onValueChanged.RemoveAllListeners();
         // onOffButton.onClick.RemoveAllListeners();
         binaryButton.onClick.RemoveAllListeners();
-        foreach (Button b in trinaryButtons)
+
+        foreach (Button b in effectButtons)
         {
             b.onClick.RemoveAllListeners();
         }
@@ -114,7 +130,7 @@ public class UIController : MonoBehaviour
         objectSlider2.gameObject.SetActive(false);
         binaryButton.gameObject.SetActive(false);
         // onOffButton.gameObject.SetActive(false);
-        foreach (Button b in trinaryButtons)
+        foreach (Button b in effectButtons)
         {
             b.gameObject.SetActive(false);
         }

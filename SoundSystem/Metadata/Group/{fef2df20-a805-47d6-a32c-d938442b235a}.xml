@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{fef2df20-a805-47d6-a32c-d938442b235a}">
+		<property name="name">
+			<value>Jelly Samples</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{2bcdf547-e7c3-434b-8ab6-078088e506bc}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{6752cd1d-86e3-4974-8d3a-499f5521a69c}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{5ab74082-e9e1-4974-9664-80ccdb37ec78}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{2bcdf547-e7c3-434b-8ab6-078088e506bc}">
+		<relationship name="effects">
+			<destination>{21bbd925-b5d8-4e55-87fc-8773c11ecaf0}</destination>
+			<destination>{c4d3cfac-a125-40d9-ac10-0d3cf8dcd2e0}</destination>
+			<destination>{2f2c63e1-a83a-4eff-afbe-b8f9dae37b11}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{6752cd1d-86e3-4974-8d3a-499f5521a69c}" />
+	<object class="CompressorEffect" id="{21bbd925-b5d8-4e55-87fc-8773c11ecaf0}">
+		<property name="threshold">
+			<value>-22</value>
+		</property>
+		<property name="attackTime">
+			<value>9.80000019</value>
+		</property>
+		<property name="gain">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{c4d3cfac-a125-40d9-ac10-0d3cf8dcd2e0}" />
+	<object class="MixerSend" id="{2f2c63e1-a83a-4eff-afbe-b8f9dae37b11}">
+		<property name="level">
+			<value>-6</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>
+		</relationship>
+	</object>
+</objects>

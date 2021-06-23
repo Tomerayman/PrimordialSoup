@@ -11,10 +11,8 @@ public class SoundSynchronizer : MonoBehaviour
     {
         public string sound;
         public float volume;
-        public float effect1;
-        public float effect2;
-        public float effect3;
-        public bool customPlayback;
+        public List<string> effectNames;
+        public List<float> effectVals;
     }
 
     public delegate void ComboFunction(GameObject a, GameObject b);
@@ -29,6 +27,7 @@ public class SoundSynchronizer : MonoBehaviour
             comboFunction = function;
         }
     }
+
     
     
     FMOD.Studio.EventInstance soundMaker;
@@ -68,6 +67,10 @@ public class SoundSynchronizer : MonoBehaviour
         // soundMaker.setVolume(SettingsMenu.golbalVolume);
         // float effectVal = (sounds[i].Item2) ? 1f : 0f;
         // soundMaker.setParameterByName("Effect1", effectVal);
+        for (int i = 0; i < 3; i++)
+        {
+            soundMaker.setParameterByName(soundData.effectNames[i], soundData.effectVals[i]);
+        }
         soundMaker.setVolume(soundData.volume);
         soundMaker.start();
     }

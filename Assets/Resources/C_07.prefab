@@ -293,14 +293,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   chords1:
-  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord2/1_D4
-  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord2/2_F4
-  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord2/3_G4
-  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord2/4_A4
-  - event:/Carbon Metal/Carbon Chords (Key)/CarbonChord2/5_C4
+  - event:/Carbon Metal/Carbon Chords (Key)/Dm Pentatonic Carbon/D4 Carbon
+  - event:/Carbon Metal/Carbon Chords (Key)/Dm Pentatonic Carbon/F4 Carbon
+  - event:/Carbon Metal/Carbon Chords (Key)/Dm Pentatonic Carbon/G4 Carbon
+  - event:/Carbon Metal/Carbon Chords (Key)/Dm Pentatonic Carbon/A4 Carbon
+  - event:/Carbon Metal/Carbon Chords (Key)/Dm Pentatonic Carbon/C5 Carbon
   sounds: []
   chordLabel: C_07
   isPlaying: 1
+  instrumentEffects:
+  - Send to Chorus
+  - Send to Delay
+  - Send to Tremolo
+  effectStatus: []
   minTimeBetweenNotes: 1
   maxTimeBetweenNotes: 2
   _container: {fileID: 9036863781845365493}

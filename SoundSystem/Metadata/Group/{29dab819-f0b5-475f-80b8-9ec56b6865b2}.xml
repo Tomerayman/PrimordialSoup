@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{29dab819-f0b5-475f-80b8-9ec56b6865b2}">
+		<property name="name">
+			<value>Carbon Perc</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{5f119467-55c0-4541-be7e-0d22b154342b}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{a992d28f-223b-481c-9fb7-a8d23ce5df4a}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{22ff274f-c92c-4503-8e5c-1fd11d7a1aef}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{5f119467-55c0-4541-be7e-0d22b154342b}">
+		<relationship name="effects">
+			<destination>{b512b39c-2e03-49be-a381-6b7b1a47e4ce}</destination>
+			<destination>{632b4983-1a4b-452c-8981-f0cad5cb649b}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{a992d28f-223b-481c-9fb7-a8d23ce5df4a}" />
+	<object class="MixerBusFader" id="{b512b39c-2e03-49be-a381-6b7b1a47e4ce}" />
+	<object class="MixerSend" id="{632b4983-1a4b-452c-8981-f0cad5cb649b}">
+		<property name="level">
+			<value>-1.5</value>
+		</property>
+		<property name="inputFormat">
+			<value>0</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -183,14 +183,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   chords1:
-  - event:/Jelly/Jelly Chords (Key)/JellyChord1/1_C4
-  - event:/Jelly/Jelly Chords (Key)/JellyChord1/2_D4
-  - event:/Jelly/Jelly Chords (Key)/JellyChord1/3_E4
-  - event:/Jelly/Jelly Chords (Key)/JellyChord1/4_G4
-  - event:/Jelly/Jelly Chords (Key)/JellyChord1/5_A4
+  - event:/Jelly/Jelly Chords (Key)/C Pentatonic Jelly/C4 Jelly
+  - event:/Jelly/Jelly Chords (Key)/C Pentatonic Jelly/D4 Jelly 2
+  - event:/Jelly/Jelly Chords (Key)/C Pentatonic Jelly/E4 Jelly
+  - event:/Jelly/Jelly Chords (Key)/C Pentatonic Jelly/G4 Jelly 2
+  - event:/Jelly/Jelly Chords (Key)/C Pentatonic Jelly/A4 Jelly 2
   sounds: []
   chordLabel: Si_06
   isPlaying: 1
+  instrumentEffects:
+  - Send to Delay
+  - Send to Flanger
+  - Send to Tremolo
+  effectStatus: []
   minTimeBetweenNotes: 1
   maxTimeBetweenNotes: 2
   _container: {fileID: 1312771867470280146}

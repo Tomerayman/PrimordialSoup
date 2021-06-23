@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SampleScript : MonoBehaviour
@@ -26,6 +27,10 @@ public class SampleScript : MonoBehaviour
     private Material pulse;
     private static readonly int pulseID = Shader.PropertyToID("_Alpha");
 
+    [SerializeField]
+    private List<string> instrumentEffectNames; // list of parameter names of effects.
+    public List<float> effectStatus; // list of bool values for effect status.
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,8 @@ public class SampleScript : MonoBehaviour
         soundEndTime = soundLengthInMilliSec;
         pulse = transform.GetChild(0).GetComponent<MeshRenderer>().material;
         pulse.SetFloat(pulseID, 0);
+        effectStatus = new List<float>(new[] {0f, 0f, 0f});
+        
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
@@ -52,13 +59,14 @@ public class SampleScript : MonoBehaviour
     //     _meshRenderer.material.SetFloat(amountID, _currDispAmount);
     // }
     
-    public void PlaySound(bool effect)
+    public void PlaySound()
     {
         // _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
+        soundData.effectNames = instrumentEffectNames;
+        soundData.effectVals = effectStatus;
         soundData.volume = libScript.GetVolumeFromScale();
-        soundData.customPlayback = (soundStartTime > 3 || soundEndTime < soundLengthInMilliSec - 3);
         // soundData.startTime = soundStartTime;
         // soundData.endTime = soundEndTime;
         soundManager.sounds.Add(soundData);
@@ -72,41 +80,33 @@ public class SampleScript : MonoBehaviour
         {
             if (isPlaying)
             {
-                PlaySound(false);
+                PlaySound();
             }
             delay = Random.Range(minTimeBetweenNotes, maxTimeBetweenNotes);
             yield return new WaitForSeconds(delay);
         }
     }
 
-    public void SetSoundStart(float newValue)
-    {
-        soundStartTime = Mathf.RoundToInt(newValue * soundLengthInMilliSec);
-        
-        if (soundStartTime > soundEndTime)
-        {
-            soundStartTime = soundEndTime;
-        }
-    }
-    
-    public void SetSoundEnd(float newValue)
-    {
-        soundEndTime = Mathf.RoundToInt(newValue * soundLengthInMilliSec);
-        if (soundStartTime > soundEndTime)
-        {
-            soundEndTime = soundStartTime;
-        }
-    }
-    
+   
     public void SetSampleUI()
     {
         _uiController.HideAllElements();
-        _uiController.objectSlider1.gameObject.SetActive(true);
-        _uiController.objectSlider1.value = (float) soundStartTime / soundLengthInMilliSec;
-        _uiController.objectSlider1.onValueChanged.AddListener(SetSoundStart);
-        _uiController.objectSlider2.gameObject.SetActive(true);
-        _uiController.objectSlider2.value = (float) soundEndTime / soundLengthInMilliSec;
-        _uiController.objectSlider2.onValueChanged.AddListener(SetSoundEnd);
+        // _uiController.objectSlider1.gameObject.SetActive(true);
+        // _uiController.objectSlider1.value = (float) soundStartTime / soundLengthInMilliSec;
+        // _uiController.objectSlider1.onValueChanged.AddListener(SetSoundStart);
+        // _uiController.objectSlider2.gameObject.SetActive(true);
+        // _uiController.objectSlider2.value = (float) soundEndTime / soundLengthInMilliSec;
+        // _uiController.objectSlider2.onValueChanged.AddListener(SetSoundEnd);
+        for (int i = 0; i < 3; i++)
+        {
+            _uiController.effectButtons[i].gameObject.SetActive(true);
+            var i1 = i;
+            _uiController.effectButtons[i].onClick.AddListener(delegate { SetEffect(i1); });
+            _uiController.effectButtons[i].image.sprite = (Math.Abs(effectStatus[i] - 1f) < 0.1f)
+                ? _uiController.effectSpritesDict[instrumentEffectNames[i]].Item1
+                : _uiController.effectSpritesDict[instrumentEffectNames[i]].Item2;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -143,4 +143,23 @@ public class SampleScript : MonoBehaviour
         pulse.SetFloat(pulseID, 0);
     }
 
+    public void SetEffect(int effectNum)
+    {
+        if (effectStatus[effectNum] < 0.5f) // effect is off
+        {
+            effectStatus[effectNum] = 1;
+            // switch button sprite to "on":
+            _uiController.effectButtons[effectNum].image.sprite =
+                _uiController.effectSpritesDict[instrumentEffectNames[effectNum]].Item1;
+        }
+        else
+        {
+            effectStatus[effectNum] = 0;
+            _uiController.effectButtons[effectNum].image.sprite =
+                _uiController.effectSpritesDict[instrumentEffectNames[effectNum]].Item2;
+        }
+    }
 }
+    
+    
+

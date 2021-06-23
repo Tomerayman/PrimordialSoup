@@ -45,7 +45,6 @@ public class LoopScript : MonoBehaviour
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
         soundData.volume = libScript.GetVolumeFromScale();
-        soundData.customPlayback = false;
         // more sound definitions (effects..)
         
         // soundManager.sounds.Add(soundData);

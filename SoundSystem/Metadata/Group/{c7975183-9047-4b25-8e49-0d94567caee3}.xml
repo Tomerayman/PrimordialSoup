@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{c7975183-9047-4b25-8e49-0d94567caee3}">
+		<property name="name">
+			<value>Calcium Perc</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{b2cdc065-ff91-44c5-bf6f-80a085d09b9e}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{70269381-e6bf-4a02-a1aa-4a28ab3cfcd2}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{fa6fb002-ce2e-46aa-a8b3-bd18ea406dbc}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{b2cdc065-ff91-44c5-bf6f-80a085d09b9e}">
+		<relationship name="effects">
+			<destination>{4d699822-206f-419e-8f6d-ad526e972320}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{70269381-e6bf-4a02-a1aa-4a28ab3cfcd2}" />
+	<object class="MixerBusFader" id="{4d699822-206f-419e-8f6d-ad526e972320}" />
+</objects>

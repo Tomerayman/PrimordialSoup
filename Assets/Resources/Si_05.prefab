@@ -150,6 +150,11 @@ MonoBehaviour:
   isPlaying: 1
   minTimeBetweenNotes: 2
   maxTimeBetweenNotes: 3
+  instrumentEffectNames:
+  - Send to Chorus
+  - Send to Delay
+  - Send to Tremolo
+  effectStatus: []
 --- !u!1 &8272063134744218981
 GameObject:
   m_ObjectHideFlags: 0
