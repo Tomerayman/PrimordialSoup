@@ -12,16 +12,9 @@ public class SampleScript : MonoBehaviour
     public string sound;
     public string sampleLabel;
     private MeshRenderer _meshRenderer;
-    // private float _minDispAmount;
-    // private float _currDispAmount;
-    // private static readonly int amountID = Shader.PropertyToID("_Amount");
-
     public bool isPlaying = true;
     public float minTimeBetweenNotes;
     public float maxTimeBetweenNotes;
-    private int soundStartTime;
-    private int soundEndTime;
-    private int soundLengthInMilliSec;
     private UIController _uiController;
     private LibObjectScript libScript;
     private Material pulse;
@@ -30,47 +23,43 @@ public class SampleScript : MonoBehaviour
     [SerializeField]
     private List<string> instrumentEffectNames; // list of parameter names of effects.
     public List<float> effectStatus; // list of bool values for effect status.
+    public List<string> sampleModes;
+    private int currModeIdx;
+    private ParticleSystem nestedParticle;
     
     // Start is called before the first frame update
     void Start()
     {
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         _meshRenderer = GetComponent<MeshRenderer>();
-        // _minDispAmount = _meshRenderer.material.GetFloat(amountID);
         libScript = GetComponent<LibObjectScript>();
-        FMOD.Studio.EventInstance tempEvent = FMODUnity.RuntimeManager.CreateInstance(sound);
-        FMOD.Studio.EventDescription description;
-        tempEvent.getDescription(out description);
-        description.getLength(out soundLengthInMilliSec);
-        soundStartTime = 0;
-        soundEndTime = soundLengthInMilliSec;
         pulse = transform.GetChild(0).GetComponent<MeshRenderer>().material;
         pulse.SetFloat(pulseID, 0);
         effectStatus = new List<float>(new[] {0f, 0f, 0f});
-        
+        sampleModes = new List<string>(new[] {"none"}); 
+        sampleModes.AddRange(instrumentEffectNames);
+        currModeIdx = 0;
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     _currDispAmount = Mathf.Lerp(_currDispAmount, _minDispAmount, Time.deltaTime);
-    //     _meshRenderer.material.SetFloat(amountID, _currDispAmount);
-    // }
-    
+   
     public void PlaySound()
     {
-        // _currDispAmount = 0.3f;
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
         soundData.sound = sound;
         soundData.effectNames = instrumentEffectNames;
         soundData.effectVals = effectStatus;
         soundData.volume = libScript.GetVolumeFromScale();
-        // soundData.startTime = soundStartTime;
-        // soundData.endTime = soundEndTime;
         soundManager.sounds.Add(soundData);
-        StartCoroutine(PulseCycle());
+        if (currModeIdx == 0)
+        {
+            StartCoroutine(PulseCycle());
+        }
+        else
+        {
+            nestedParticle.Emit(1);
+        }
     }
 
     IEnumerator SampleSoundEmit()
@@ -87,16 +76,14 @@ public class SampleScript : MonoBehaviour
         }
     }
 
+    public List<string> GetEffectNames()
+    {
+        return instrumentEffectNames;
+    }
    
     public void SetSampleUI()
     {
         _uiController.HideAllElements();
-        // _uiController.objectSlider1.gameObject.SetActive(true);
-        // _uiController.objectSlider1.value = (float) soundStartTime / soundLengthInMilliSec;
-        // _uiController.objectSlider1.onValueChanged.AddListener(SetSoundStart);
-        // _uiController.objectSlider2.gameObject.SetActive(true);
-        // _uiController.objectSlider2.value = (float) soundEndTime / soundLengthInMilliSec;
-        // _uiController.objectSlider2.onValueChanged.AddListener(SetSoundEnd);
         for (int i = 0; i < 3; i++)
         {
             _uiController.effectButtons[i].gameObject.SetActive(true);
@@ -143,6 +130,8 @@ public class SampleScript : MonoBehaviour
         pulse.SetFloat(pulseID, 0);
     }
 
+
+
     public void SetEffect(int effectNum)
     {
         if (effectStatus[effectNum] < 0.5f) // effect is off
@@ -159,6 +148,30 @@ public class SampleScript : MonoBehaviour
                 _uiController.effectSpritesDict[instrumentEffectNames[effectNum]].Item2;
         }
     }
+
+    public void SwitchPulse()
+    {
+        currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
+        Destroy(nestedParticle);
+        if (currModeIdx == 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            nestedParticle = (Instantiate(Resources.Load(soundManager.parameterToObjectDict[sampleModes[currModeIdx]])) as GameObject).GetComponent<ParticleSystem>();
+            if (sampleModes[currModeIdx] == "Send to Delay") // echo filter
+            {
+                nestedParticle.GetComponent<ParticleSystemRenderer>().mesh = GetComponent<MeshFilter>().mesh;
+            }
+            Transform PSTransform = nestedParticle.transform;
+            PSTransform.parent = transform;
+            PSTransform.localScale = Vector3.one;
+            PSTransform.localPosition = Vector3.zero;
+        }
+    }
+    
+    
 }
     
     

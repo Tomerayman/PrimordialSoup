@@ -17,15 +17,17 @@ public class ChordScript : MonoBehaviour
 
     public List<string> sounds;
     public string chordLabel;
-    private bool isRandom = false;
+    private bool isRandom = true;
     public bool isPlaying = true;
     [SerializeField] private List<string> instrumentEffects;
     public List<float> effectStatus; // list of bool values for effect status.
-
+    public List<string> chordModes;
+    private int currModeIdx;
+    private ParticleSystem nestedParticle;
+    
     public float minTimeBetweenNotes;
     public float maxTimeBetweenNotes;
     private int _chordIdx = 0;
-    private int _currSet = 1;
     private UIController _uiController;
     private LibObjectScript libScript;
     [SerializeField] private Transform _container;
@@ -37,8 +39,6 @@ public class ChordScript : MonoBehaviour
     {
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         libScript = GetComponent<LibObjectScript>();
-        // libScript.slider1Action = SetChordGroup;
-        // libScript.slider2Action = SetRandom;
         sounds = chords1;
         pulses = new List<Material>();
         foreach (Transform child in _container)
@@ -48,16 +48,18 @@ public class ChordScript : MonoBehaviour
             pulses.Add(mtl);
         }
         effectStatus = new List<float>(new[] {0f, 0f, 0f});
+        chordModes = new List<string>(new[] {"none"}); 
+        chordModes.AddRange(instrumentEffects);
+        currModeIdx = 0;
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public List<string> GetEffectNames()
     {
-        
+        return instrumentEffects;
     }
-
+    
     public void SetRandom()
     {
         _uiController.binaryButton.image.sprite = (isRandom) ? _uiController.offButtonSprite : 
@@ -69,17 +71,27 @@ public class ChordScript : MonoBehaviour
     public void PlaySound()
     {
         SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
-        if (isRandom)
+        // if (isRandom)
+        // {
+        //     int idx = Random.Range(0, 4);
+        //     soundData.sound = sounds[idx];
+        //     StartCoroutine(PulseCycle(pulses[idx]));
+        // }
+        // else
+        // {
+        //     soundData.sound = sounds[_chordIdx];
+        //     StartCoroutine(PulseCycle(pulses[_chordIdx]));
+        //     _chordIdx = (_chordIdx == 4) ? 0 : _chordIdx + 1;
+        // }
+        int idx = Random.Range(0, 4);
+        soundData.sound = sounds[idx];
+        if (currModeIdx == 0)
         {
-            int idx = Random.Range(0, 4);
-            soundData.sound = sounds[idx];
             StartCoroutine(PulseCycle(pulses[idx]));
         }
         else
         {
-            soundData.sound = sounds[_chordIdx];
-            StartCoroutine(PulseCycle(pulses[_chordIdx]));
-            _chordIdx = (_chordIdx == 4) ? 0 : _chordIdx + 1;
+            nestedParticle.Emit(5);
         }
         soundData.effectNames = instrumentEffects;
         soundData.effectVals = effectStatus;
@@ -109,16 +121,6 @@ public class ChordScript : MonoBehaviour
         _uiController.binaryButton.onClick.AddListener(SetRandom);
         _uiController.binaryButton.image.sprite =
             (isRandom) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
-
-        // for (int i = 0; i < _uiController.trinaryButtons.Count; i++)
-        // {
-        //     _uiController.trinaryButtons[i].gameObject.SetActive(true);
-        //     _uiController.trinaryButtons[i].image.sprite =
-        //         (i + 1 == _currSet) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
-        // }
-        // _uiController.trinaryButtons[0].onClick.AddListener(delegate { SetChordGroup(1); });
-        // _uiController.trinaryButtons[1].onClick.AddListener(delegate { SetChordGroup(2); });
-        // _uiController.trinaryButtons[2].onClick.AddListener(delegate { SetChordGroup(3); });
         for (int i = 0; i < 3; i++)
         {
             _uiController.effectButtons[i].gameObject.SetActive(true);
@@ -180,6 +182,32 @@ public class ChordScript : MonoBehaviour
             effectStatus[effectNum] = 0;
             _uiController.effectButtons[effectNum].image.sprite =
                 _uiController.effectSpritesDict[instrumentEffects[effectNum]].Item2;
+        }
+    }
+    
+    public void SwitchPulse()
+    {
+        currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
+        Destroy(nestedParticle);
+        if (currModeIdx == 0)
+        {
+            foreach (Material mtl in pulses)
+            {
+                // transform.GetChild(0).gameObject.SetActive(true);
+                mtl.SetFloat(pulseID, 0);
+            }
+        }
+        else
+        {
+            nestedParticle = (Instantiate(Resources.Load(soundManager.parameterToObjectDict[chordModes[currModeIdx]])) as GameObject).GetComponent<ParticleSystem>();
+            Transform PSTransform = nestedParticle.transform;
+            if (chordModes[currModeIdx] == "Send to Delay") // echo filter
+            {
+                nestedParticle.GetComponent<ParticleSystemRenderer>().mesh = _container.GetChild(0).GetComponent<MeshFilter>().mesh;
+            }
+            PSTransform.parent = transform;
+            PSTransform.localScale = Vector3.one;
+            PSTransform.localPosition = Vector3.zero;
         }
     }
 }

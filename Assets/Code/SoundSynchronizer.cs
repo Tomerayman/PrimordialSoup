@@ -35,6 +35,7 @@ public class SoundSynchronizer : MonoBehaviour
     public HashSet<(GameObject, GameObject)> currEvents;
     public HashSet<EventData> scriptedEvents;
     [SerializeField] private ParticleSystem comboExplosion;
+    public Dictionary<string, string> parameterToObjectDict;
     
     // Start is called before the first frame update
 
@@ -53,6 +54,13 @@ public class SoundSynchronizer : MonoBehaviour
                 new EventData(new string[]{"Si_01", "Si_02"}, PopcornJellyFishCombo)
             }
         );
+        parameterToObjectDict = new Dictionary<string, string>()
+        {
+            {"Send to Chorus", "filters/ChorusParticle"},
+            {"Send to Delay", "filters/EchoParticle"},
+            {"Send to Flanger", "filters/FlangerParticle"},
+            {"Send to Tremolo", "filters/TremoloParticle"}
+        };
     }
 
     // Update is called once per frame

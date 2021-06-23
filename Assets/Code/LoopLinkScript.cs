@@ -10,7 +10,7 @@ public class LoopLinkScript : MonoBehaviour
     
     public bool isEmpty = true;
     public bool isNestingChord = false;
-    public string sound;
+    public SoundSynchronizer.SoundData soundData;
     public List<string> nestedChordSounds;
     private LibObjectScript parentLibScript;
     private LoopScript parentLoopScript;
@@ -23,6 +23,7 @@ public class LoopLinkScript : MonoBehaviour
     
     void Start()
     {
+        soundData = new SoundSynchronizer.SoundData();
         filledRenderer = GetComponent<MeshRenderer>();
         TurnLinkEmpty();
         parentLibScript = transform.parent.GetComponent<LibObjectScript>();
@@ -47,15 +48,20 @@ public class LoopLinkScript : MonoBehaviour
         
     }
 
-    public string GiveSound()
+    public SoundSynchronizer.SoundData GiveSound()
     {
         if (!isNestingChord)
         {
-            return sound;
+            return soundData;
         }
         // currently randomizing over sounds
         int i = Random.Range(0, nestedChordSounds.Count);
-        return nestedChordSounds[i];
+        SoundSynchronizer.SoundData currSound = new SoundSynchronizer.SoundData();
+        currSound.sound = nestedChordSounds[i];
+        currSound.volume = soundData.volume;
+        currSound.effectNames = soundData.effectNames;
+        currSound.effectVals = soundData.effectVals;
+        return currSound;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -115,7 +121,10 @@ public class LoopLinkScript : MonoBehaviour
             isNestingChord = false;
             SampleScript sampleScript = nestedObject.GetComponent<SampleScript>();
             sampleScript.isPlaying = false;
-            sound = sampleScript.sound;
+            soundData.sound = sampleScript.sound;
+            soundData.effectNames = sampleScript.GetEffectNames();
+            soundData.effectVals = sampleScript.effectStatus;
+            soundData.volume = 0.75f;
             nestedObject.transform.localScale = nestedObject.transform.localScale * nestedSampleScaleRatio; 
         }
         else if (sampleObject.CompareTag("Chord"))
@@ -124,7 +133,9 @@ public class LoopLinkScript : MonoBehaviour
             ChordScript nestedChordScript = nestedObject.GetComponent<ChordScript>();
             nestedChordScript.isPlaying = false;
             nestedChordSounds = nestedChordScript.sounds;
-            
+            soundData.effectNames = nestedChordScript.GetEffectNames();
+            soundData.effectVals = nestedChordScript.effectStatus;
+            soundData.volume = 0.75f;
             nestedObject.transform.localScale = nestedObject.transform.localScale * nestedChordScaleRatio; 
         }
         

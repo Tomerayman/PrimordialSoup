@@ -39,11 +39,11 @@ public class LoopScript : MonoBehaviour
         }
     }
     
-    public void PlaySound(bool effect, string sound)
+    public void PlaySound(SoundSynchronizer.SoundData soundData)
     {
         // _currDispAmount = 0.3f;
-        SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
-        soundData.sound = sound;
+        // SoundSynchronizer.SoundData soundData = new SoundSynchronizer.SoundData();
+        // soundData.sound = sound;
         soundData.volume = libScript.GetVolumeFromScale();
         // more sound definitions (effects..)
         
@@ -60,7 +60,7 @@ public class LoopScript : MonoBehaviour
             {
                 if (!links[i].isEmpty)
                 {
-                    PlaySound(false, links[i].GiveSound());
+                    PlaySound(links[i].GiveSound());
                 }
 
                 if (i < linksNum - 1)

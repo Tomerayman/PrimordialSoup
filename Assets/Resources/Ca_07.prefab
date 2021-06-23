@@ -436,7 +436,7 @@ MonoBehaviour:
   effectStatus: []
   minTimeBetweenNotes: 1
   maxTimeBetweenNotes: 2
-  _container: {fileID: 952045162545513818, guid: 2bda71bf59f4d7f459388def94ee7a9c, type: 3}
+  _container: {fileID: 3360618469139357974}
 --- !u!1 &4673185746881446798
 GameObject:
   m_ObjectHideFlags: 0

@@ -169,20 +169,21 @@ public class LibObjectScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             double currTapTime = Time.timeAsDouble;
-            if (currTapTime - _lastTapTime < 0.25) // double tap
-            {
-                if (!_cameraScript.zoomedIn)
-                {
-                    ZoomInAction();
-                }
-                else
-                {
-                    _cameraScript.ZoomOut();
-                    soloDisplay(true);
-                    isDraggable = true;
-                }
-            }
-            else if (!_cameraScript.zoomedIn)
+            // if (currTapTime - _lastTapTime < 0.25) // double tap for edit mode
+            // {
+            //     if (!_cameraScript.zoomedIn)
+            //     {
+            //         ZoomInAction();
+            //     }
+            //     else
+            //     {
+            //         _cameraScript.ZoomOut();
+            //         soloDisplay(true);
+            //         isDraggable = true;
+            //     }
+            // }
+            
+            if (!_cameraScript.zoomedIn)
             {
                 StartCoroutine(dragDelay());
             }
@@ -221,7 +222,18 @@ public class LibObjectScript : MonoBehaviour
     IEnumerator dragDelay()
     {
         yield return new WaitForSeconds(0.25f);
-        if (isDraggable)
+        if (!Input.GetMouseButton(0))
+        {
+            if (instrumentTag == "Sample") // single tap
+            {
+                GetComponent<SampleScript>().SwitchPulse();
+            }
+            if (instrumentTag == "Chord") // single tap
+            {
+                GetComponent<ChordScript>().SwitchPulse();
+            }
+        }
+        else if (isDraggable)
         {
             isDragged = true;
         }
