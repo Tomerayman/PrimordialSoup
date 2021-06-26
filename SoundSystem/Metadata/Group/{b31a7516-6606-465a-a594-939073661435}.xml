@@ -16,21 +16,38 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{e1590b2d-b558-4fd9-ba81-0f9dcbc25072}">
 		<relationship name="effects">
+			<destination>{9d05c84b-1255-48e5-8cd3-c53e3c82d1b7}</destination>
 			<destination>{2eb43c51-ebc0-40df-add9-be5978650cef}</destination>
 			<destination>{fe29110e-a635-41db-aff8-09de22e8c139}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f25fc9c6-ed5a-4c7b-8f6d-b6779428d7ad}" />
+	<object class="PannerEffect" id="{9d05c84b-1255-48e5-8cd3-c53e3c82d1b7}">
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{85af3171-94ae-49f5-a724-4cfc16bf42cd}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{2eb43c51-ebc0-40df-add9-be5978650cef}" />
 	<object class="MixerSend" id="{fe29110e-a635-41db-aff8-09de22e8c139}">
 		<property name="level">
 			<value>-9</value>
 		</property>
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>
 		</relationship>
+	</object>
+	<object class="LFOModulator" id="{85af3171-94ae-49f5-a724-4cfc16bf42cd}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>stereoPan</value>
+		</property>
+		<property name="depth">
+			<value>45</value>
+		</property>
 	</object>
 </objects>

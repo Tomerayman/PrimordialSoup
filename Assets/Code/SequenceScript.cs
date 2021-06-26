@@ -66,7 +66,7 @@ public class SequenceScript : MonoBehaviour
         }
         for (int i = 0; i < _offBulbs.Count; i++)
         {
-            bulbs[_litBulbs[i]].enabled = false;
+            bulbs[_offBulbs[i]].enabled = false;
         }
         
     }
@@ -219,6 +219,10 @@ public class SequenceScript : MonoBehaviour
     
     private void nestSample(GameObject sampleObject)
     {
+        if (!isPlaying)
+        {
+            isPlaying = true;
+        }
         Destroy(nestedSample);
         nestedSample = sampleObject;
         SampleScript sampleScript = nestedSample.GetComponent<SampleScript>();

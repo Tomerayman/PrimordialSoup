@@ -27,13 +27,13 @@
 			<value>-25</value>
 		</property>
 		<property name="ratio">
-			<value>4</value>
+			<value>3</value>
 		</property>
 		<property name="attackTime">
-			<value>0.100000001</value>
+			<value>14</value>
 		</property>
 		<property name="releaseTime">
-			<value>400</value>
+			<value>600</value>
 		</property>
 		<property name="gain">
 			<value>2</value>
@@ -42,7 +42,7 @@
 	<object class="MixerBusFader" id="{1992f540-adb0-47ef-8553-71f983c1b969}" />
 	<object class="MixerSend" id="{1a0fe569-ffba-4b3f-80e1-51f7b0e622b0}">
 		<property name="level">
-			<value>-3</value>
+			<value>0</value>
 		</property>
 		<property name="inputFormat">
 			<value>0</value>

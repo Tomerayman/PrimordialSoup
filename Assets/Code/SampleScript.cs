@@ -96,13 +96,13 @@ public class SampleScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Sample") || other.CompareTag("Chord"))
-        {
-            soundManager.EvaluteEvent(gameObject, other.gameObject);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Sample") || other.CompareTag("Chord"))
+    //     {
+    //         soundManager.EvaluteEvent(gameObject, other.gameObject);
+    //     }
+    // }
 
     public void SetPlaying()
     {

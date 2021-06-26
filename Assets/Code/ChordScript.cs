@@ -139,13 +139,13 @@ public class ChordScript : MonoBehaviour
         //     (isPlaying) ? _uiController.onButtonSprite : _uiController.offButtonSprite;
     }
     
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Sample") || other.CompareTag("Chord"))
-        {
-            soundManager.EvaluteEvent(gameObject, other.gameObject);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Sample") || other.CompareTag("Chord"))
+    //     {
+    //         soundManager.EvaluteEvent(gameObject, other.gameObject);
+    //     }
+    // }
     
     IEnumerator PulseCycle(Material pulse)
     {

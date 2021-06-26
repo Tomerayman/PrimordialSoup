@@ -5,7 +5,7 @@
 			<value>Carbon Perc 2</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{9901ebe9-2857-4aa4-9ac9-5d3672d38451}</destination>
@@ -107,6 +107,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{218ca4e4-cbe6-4fb4-b5a1-c3d432a314c8}">
+		<property name="volume">
+			<value>-3</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{dff6e245-4069-4247-8ee0-411411d22647}</destination>
 		</relationship>
@@ -170,7 +173,9 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{dff6e245-4069-4247-8ee0-411411d22647}">
 		<relationship name="effects">
+			<destination>{17f637aa-cbfe-48bb-9eec-239c32875f9e}</destination>
 			<destination>{5a9bd58c-be0d-4fd8-8015-284eef614583}</destination>
+			<destination>{adb8161f-2a60-43e6-bc5c-551cc7991ce8}</destination>
 			<destination>{655f95cc-be20-4f9b-874c-f08b70830e2b}</destination>
 			<destination>{dda6ea22-aa3e-4a09-b631-854f4df21994}</destination>
 			<destination>{2552aff9-e7c4-4b43-ab69-9131fe4e9f8f}</destination>
@@ -194,24 +199,55 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9c946e1b-4011-4235-b16b-23a8312a74d1}" />
+	<object class="PannerEffect" id="{17f637aa-cbfe-48bb-9eec-239c32875f9e}">
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="CompressorEffect" id="{5a9bd58c-be0d-4fd8-8015-284eef614583}">
 		<property name="threshold">
-			<value>-22</value>
+			<value>-15</value>
+		</property>
+		<property name="ratio">
+			<value>4</value>
 		</property>
 		<property name="attackTime">
-			<value>0.75</value>
+			<value>1</value>
 		</property>
 		<property name="releaseTime">
-			<value>46</value>
+			<value>640</value>
 		</property>
 		<property name="gain">
-			<value>3</value>
+			<value>4</value>
+		</property>
+	</object>
+	<object class="MultibandEqEffect" id="{adb8161f-2a60-43e6-bc5c-551cc7991ce8}">
+		<property name="filterTypeA">
+			<value>5</value>
+		</property>
+		<property name="filterTypeC">
+			<value>11</value>
+		</property>
+		<property name="filterTypeD">
+			<value>8</value>
+		</property>
+		<property name="frequencyA">
+			<value>78</value>
+		</property>
+		<property name="frequencyC">
+			<value>1150</value>
+		</property>
+		<property name="frequencyD">
+			<value>5200</value>
+		</property>
+		<property name="gainD">
+			<value>3.5</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{655f95cc-be20-4f9b-874c-f08b70830e2b}" />
 	<object class="MixerSend" id="{dda6ea22-aa3e-4a09-b631-854f4df21994}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{ed417dee-e262-4f9c-bbce-5567bc37cb8f}</destination>
@@ -222,7 +258,7 @@
 	</object>
 	<object class="MixerSend" id="{2552aff9-e7c4-4b43-ab69-9131fe4e9f8f}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{cc688c90-cf62-4944-831d-670caa4ad211}</destination>
@@ -233,7 +269,7 @@
 	</object>
 	<object class="MixerSend" id="{30bc600d-6fe6-4815-8c67-01cc1838e19b}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{4b7a4052-7eaa-4d83-a241-119ed5562b9a}</destination>
@@ -244,7 +280,7 @@
 	</object>
 	<object class="MixerSend" id="{887790b9-49e3-4576-b65a-ae5f7004235c}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{6946a349-f6ab-433d-8155-f50ae3d61c8b}</destination>

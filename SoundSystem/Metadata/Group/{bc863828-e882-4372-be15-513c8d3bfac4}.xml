@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="MixerGroup" id="{bc863828-e882-4372-be15-513c8d3bfac4}">
+		<property name="volume">
+			<value>-4</value>
+		</property>
 		<property name="name">
 			<value>Jelly Chords</value>
 		</property>
@@ -42,7 +45,7 @@
 	<object class="MixerBusFader" id="{a073704c-c110-4bd2-85a3-7628db1ec1f2}" />
 	<object class="MixerSend" id="{5954eef1-914d-4491-9d2a-1d639b276038}">
 		<property name="level">
-			<value>-12</value>
+			<value>-9</value>
 		</property>
 		<property name="inputFormat">
 			<value>0</value>

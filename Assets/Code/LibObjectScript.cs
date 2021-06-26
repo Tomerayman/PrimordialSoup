@@ -45,6 +45,7 @@ public class LibObjectScript : MonoBehaviour
         mTransform.parent = activeInstruments;
         menuCubeTransform = GameObject.Find("Menu Cube").GetComponent<Transform>();
         currScaleRatio = 1f;
+        XPosAction();
     }
 
     // Update is called once per frame
@@ -61,9 +62,10 @@ public class LibObjectScript : MonoBehaviour
             {
                 transform.position = mousePos;
             }
-            else
+            else // drag stop
             {
                 isDragged = false;
+                XPosAction();
             }
             // handling library disposing:
             if (!isShrinking && Vector3.Distance(transform.position, menuCubeTransform.position) < shrinkageAreaThreshold)
@@ -242,7 +244,7 @@ public class LibObjectScript : MonoBehaviour
     private void OnMouseUp()
     {
         isDragged = false;
-    
+        XPosAction();
     }
     
     private void soloDisplay(bool isZoomingOut)
@@ -285,6 +287,30 @@ public class LibObjectScript : MonoBehaviour
         float volume = 0.5f + 0.25f * (Mathf.Min(1, Mathf.Max((currScaleRatio - minScaleRatio) / (1 - minScaleRatio), 0)) +
                                        Mathf.Max((currScaleRatio - 1) / (maxScaleRatio - 1), 0)); 
         return volume;
+    }
+
+    public void XPosAction()
+    {
+        switch (instrumentTag)
+        {
+            case "Sample":
+                // nothing
+                break;
+            case "Chord":
+                // nothing
+                break;
+            case "Sequencer":
+                GetComponent<SequenceScript>().ChangeRatio(XPosToVal(transform.position.x));
+                break;
+            case "Loop":
+                GetComponent<LoopScript>().ChangeSpeed(XPosToVal(transform.position.x));
+                break;
+        }
+    }
+
+    public static float XPosToVal(float x)
+    {
+        return (Mathf.Clamp(x, -6, 6) + 6f) / 12f;
     }
 }
 

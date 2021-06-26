@@ -5,7 +5,7 @@
 			<value>Jelly Perc 1</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{f32a7930-55fd-46c7-a766-895689ff2908}</destination>
@@ -155,13 +155,18 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{6d5782bd-286a-4a2b-b42f-736f55af4ec4}">
 		<relationship name="effects">
+			<destination>{3ae121d6-20cd-4e2a-947d-cfe885eddc4b}</destination>
 			<destination>{7ed113d3-d95b-4ab5-b135-c2a3a28da2dc}</destination>
 			<destination>{4510808a-9ea5-4b65-ae3b-61430df1b3cb}</destination>
 			<destination>{6ac81935-4534-4843-8fd2-74df8873983b}</destination>
 			<destination>{73a88a2a-c7e6-4af8-9111-d0d8b116b5d3}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{7a52b2d2-0840-40e5-abef-f41b399ed921}" />
+	<object class="MixerBusPanner" id="{7a52b2d2-0840-40e5-abef-f41b399ed921}">
+		<property name="stereoPan">
+			<value>50</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{10f3d625-88c8-434a-8852-e01c01693c63}" />
 	<object class="MixerBusEffectChain" id="{1bc61008-7871-48ca-bace-bbfaf475b51a}">
 		<relationship name="effects">
@@ -169,10 +174,18 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9efba85c-1490-40fd-8a23-12dcdc9fdb80}" />
+	<object class="PannerEffect" id="{3ae121d6-20cd-4e2a-947d-cfe885eddc4b}">
+		<property name="stereoPan">
+			<value>40</value>
+		</property>
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{7ed113d3-d95b-4ab5-b135-c2a3a28da2dc}" />
 	<object class="MixerSend" id="{4510808a-9ea5-4b65-ae3b-61430df1b3cb}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{486ea468-7740-4800-8d97-733feec9398e}</destination>
@@ -183,7 +196,7 @@
 	</object>
 	<object class="MixerSend" id="{6ac81935-4534-4843-8fd2-74df8873983b}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{db2ec839-7427-43c1-a304-24e2810373c5}</destination>
@@ -194,7 +207,7 @@
 	</object>
 	<object class="MixerSend" id="{73a88a2a-c7e6-4af8-9111-d0d8b116b5d3}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{ca1b999f-e99c-4cf4-ae77-7cb08ecf61df}</destination>

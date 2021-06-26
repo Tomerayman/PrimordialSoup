@@ -126,7 +126,8 @@ public class LoopScript : MonoBehaviour
 
     public void ChangeSpeed(float value)
     {
-        cycleDuration = 1 + (1 - value) * 7;
+        cycleDuration = 1 + (value) * 7;
+        rotationSpeed = 9 - cycleDuration;
     }
     
     public void SetSequencerUI()

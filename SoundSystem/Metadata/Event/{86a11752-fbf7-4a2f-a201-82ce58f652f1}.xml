@@ -5,7 +5,7 @@
 			<value>Calcium Perc 2</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{923ff0a4-1a7b-4e46-be47-570894dd8154}</destination>
@@ -157,6 +157,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{8bddb2e1-0a12-4337-a499-d521de9c00f0}">
 		<relationship name="effects">
+			<destination>{8ddb2b80-1416-4400-873b-61b2193ca143}</destination>
 			<destination>{0dc54fcd-f879-4754-bcc2-7456b42e9104}</destination>
 			<destination>{7c9f6408-4fe3-4d7f-84ac-8b88a7fa333e}</destination>
 			<destination>{6538108e-0cbf-4862-8392-5e9cca98399b}</destination>
@@ -187,10 +188,18 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{61a1422d-0b25-41dd-96e4-d441fef2e2f5}" />
+	<object class="PannerEffect" id="{8ddb2b80-1416-4400-873b-61b2193ca143}">
+		<property name="stereoPan">
+			<value>-40</value>
+		</property>
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{0dc54fcd-f879-4754-bcc2-7456b42e9104}" />
 	<object class="MixerSend" id="{7c9f6408-4fe3-4d7f-84ac-8b88a7fa333e}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{55c0f471-8a4f-4bb0-9705-db07a1f65f5f}</destination>
@@ -201,7 +210,7 @@
 	</object>
 	<object class="MixerSend" id="{6538108e-0cbf-4862-8392-5e9cca98399b}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{44e068a8-c85e-4b76-9406-6cceafdb00db}</destination>
@@ -212,7 +221,7 @@
 	</object>
 	<object class="MixerSend" id="{3c36f79b-c038-4b60-9844-ede81cfb86b3}">
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="automators">
 			<destination>{33b27762-ef91-4eaa-82c1-a369bf6d0a0d}</destination>
@@ -226,7 +235,7 @@
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{b8c03d8b-116b-426d-8b55-42c239aeab60}</destination>

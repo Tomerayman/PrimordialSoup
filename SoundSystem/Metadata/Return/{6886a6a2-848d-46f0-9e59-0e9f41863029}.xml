@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerReturn" id="{6886a6a2-848d-46f0-9e59-0e9f41863029}">
+		<property name="name">
+			<value>Distortion</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{10b11c50-8927-437a-86ab-9ff21b810493}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{1bb25ff3-a9dd-4f12-b7d8-5cfa06b06a2f}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{33e1136c-487b-4e0e-874d-fc319a676b0f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{10b11c50-8927-437a-86ab-9ff21b810493}">
+		<relationship name="effects">
+			<destination>{71ae9fa2-3795-41ce-8bce-2d16072ab423}</destination>
+			<destination>{e49da53e-7972-49ea-b0dd-e6bc1898a738}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{1bb25ff3-a9dd-4f12-b7d8-5cfa06b06a2f}" />
+	<object class="PitchShifterEffect" id="{71ae9fa2-3795-41ce-8bce-2d16072ab423}">
+		<property name="bypass">
+			<value>true</value>
+		</property>
+		<property name="pitch">
+			<value>2</value>
+		</property>
+		<property name="overlap">
+			<value>19.2000008</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{e49da53e-7972-49ea-b0dd-e6bc1898a738}" />
+</objects>

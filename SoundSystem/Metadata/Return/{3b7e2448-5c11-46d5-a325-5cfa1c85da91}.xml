@@ -23,13 +23,13 @@
 	<object class="MixerBusPanner" id="{e4181f52-7a49-43d9-95e6-25845a7f09ba}" />
 	<object class="ChorusEffect" id="{e80c9108-035f-4882-8f47-fd5f2649404a}">
 		<property name="rate">
-			<value>4.5</value>
+			<value>0.75</value>
 		</property>
 		<property name="depth">
-			<value>75</value>
+			<value>70</value>
 		</property>
 		<property name="mix">
-			<value>50</value>
+			<value>60</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{ae3ff994-1e0f-4477-a781-4b030d26dcdc}" />

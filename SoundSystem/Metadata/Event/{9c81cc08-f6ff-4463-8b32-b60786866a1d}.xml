@@ -158,6 +158,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{0efdc489-7b01-4652-ab87-4622dcd3eeb6}">
 		<relationship name="effects">
+			<destination>{6cdc97e0-0489-46d3-9ff7-0e1f56115717}</destination>
 			<destination>{3e25bea7-343b-4a39-a793-1e29dd957ceb}</destination>
 			<destination>{ca4ff8ae-2c15-47f3-9a41-b589243f0c9f}</destination>
 			<destination>{4287354b-f6dd-41a5-badb-47bd20b4ad3e}</destination>
@@ -168,10 +169,28 @@
 	<object class="MixerBusFader" id="{e55854f1-7b3a-412f-bcbc-9fce422682a1}" />
 	<object class="MixerBusEffectChain" id="{c31eb244-bf00-465a-9e18-f10da2e52964}">
 		<relationship name="effects">
+			<destination>{e469f23b-f60e-4a03-9956-06f030781790}</destination>
 			<destination>{844f15b6-e628-4bf4-848b-923d93c6e33d}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{837254f9-04eb-42cb-b8ce-5b3fa8e493c2}" />
+	<object class="CompressorEffect" id="{6cdc97e0-0489-46d3-9ff7-0e1f56115717}">
+		<property name="threshold">
+			<value>-17.6000004</value>
+		</property>
+		<property name="ratio">
+			<value>2</value>
+		</property>
+		<property name="attackTime">
+			<value>0.850000024</value>
+		</property>
+		<property name="releaseTime">
+			<value>10</value>
+		</property>
+		<property name="gain">
+			<value>3</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{3e25bea7-343b-4a39-a793-1e29dd957ceb}" />
 	<object class="MixerSend" id="{ca4ff8ae-2c15-47f3-9a41-b589243f0c9f}">
 		<property name="inputFormat">
@@ -205,6 +224,23 @@
 		<relationship name="mixerReturn">
 			<destination>{40b8d839-2b23-4033-9289-f77436ec1d96}</destination>
 		</relationship>
+	</object>
+	<object class="MultibandEqEffect" id="{e469f23b-f60e-4a03-9956-06f030781790}">
+		<property name="filterTypeA">
+			<value>4</value>
+		</property>
+		<property name="filterTypeB">
+			<value>9</value>
+		</property>
+		<property name="frequencyA">
+			<value>35</value>
+		</property>
+		<property name="frequencyB">
+			<value>85</value>
+		</property>
+		<property name="gainB">
+			<value>2.5</value>
+		</property>
 	</object>
 	<object class="MixerBusFader" id="{844f15b6-e628-4bf4-848b-923d93c6e33d}" />
 	<object class="Automator" id="{d4e7511c-a0ab-4481-b276-beebe4ab9e4c}">
