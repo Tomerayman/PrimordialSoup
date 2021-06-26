@@ -189,6 +189,10 @@ public class ChordScript : MonoBehaviour
     {
         currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
         Destroy(nestedParticle);
+        for (int i = 0; i < effectStatus.Count; i++)
+        {
+            effectStatus[i] = 0f;
+        }
         if (currModeIdx == 0)
         {
             foreach (Material mtl in pulses)
@@ -199,6 +203,7 @@ public class ChordScript : MonoBehaviour
         }
         else
         {
+            effectStatus[currModeIdx - 1] = 1f;
             nestedParticle = (Instantiate(Resources.Load(soundManager.parameterToObjectDict[chordModes[currModeIdx]])) as GameObject).GetComponent<ParticleSystem>();
             Transform PSTransform = nestedParticle.transform;
             if (chordModes[currModeIdx] == "Send to Delay") // echo filter

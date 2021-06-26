@@ -51,7 +51,6 @@ public class SampleScript : MonoBehaviour
         soundData.effectNames = instrumentEffectNames;
         soundData.effectVals = effectStatus;
         soundData.volume = libScript.GetVolumeFromScale();
-        soundManager.sounds.Add(soundData);
         if (currModeIdx == 0)
         {
             StartCoroutine(PulseCycle());
@@ -60,6 +59,7 @@ public class SampleScript : MonoBehaviour
         {
             nestedParticle.Emit(1);
         }
+        soundManager.sounds.Add(soundData);
     }
 
     IEnumerator SampleSoundEmit()
@@ -153,6 +153,10 @@ public class SampleScript : MonoBehaviour
     {
         currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
         Destroy(nestedParticle);
+        for (int i = 0; i < effectStatus.Count; i++)
+        {
+            effectStatus[i] = 0f;
+        }
         if (currModeIdx == 0)
         {
             transform.GetChild(0).gameObject.SetActive(true);
@@ -160,6 +164,7 @@ public class SampleScript : MonoBehaviour
         else
         {
             nestedParticle = (Instantiate(Resources.Load(soundManager.parameterToObjectDict[sampleModes[currModeIdx]])) as GameObject).GetComponent<ParticleSystem>();
+            effectStatus[currModeIdx - 1] = 1f;
             if (sampleModes[currModeIdx] == "Send to Delay") // echo filter
             {
                 nestedParticle.GetComponent<ParticleSystemRenderer>().mesh = GetComponent<MeshFilter>().mesh;
