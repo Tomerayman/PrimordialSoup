@@ -218,8 +218,8 @@ public class SequenceScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if ((other.CompareTag("Sample") || other.CompareTag("Chord")) &&
-            !GetComponent<LibObjectScript>().getIsDragged() &&
-            other.GetComponent<LibObjectScript>().getIsDragged())
+            !GetComponent<LibObjectScript>().getIsDragged())
+            // && other.GetComponent<LibObjectScript>().getIsDragged())
         {
             StartCoroutine(WaitForNestedRelease(other.gameObject));
         }

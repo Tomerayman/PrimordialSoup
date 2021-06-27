@@ -1189,10 +1189,54 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2839516190254157721, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 42.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839516190254157721, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 370.7171
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839516190254157721, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.000043586
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839516190254157721, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -42.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839516190254157721, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1273.2043
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800097235739237632, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 57.6686
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800097235739237632, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 353.6906
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800097235739237632, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800097235739237632, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -42.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800097235739237632, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 40.717575
+      objectReference: {fileID: 0}
     - target: {fileID: 8166053997330499335, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
       propertyPath: mCanvas
       value: 
       objectReference: {fileID: 326809052}
+    - target: {fileID: 8166053997330499335, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: libraryWidth
+      value: 690
+      objectReference: {fileID: 0}
     - target: {fileID: 8166053997330499335, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
       propertyPath: tileContainer
       value: 
