@@ -7,15 +7,19 @@ using UnityEngine.UI;
 
 public class CubeScript : MonoBehaviour
 {
-    [SerializeField] private Transform libTransform;
+    [SerializeField] private RectTransform libTransform;
+    private Vector3 openLibPos;
+    private Vector3 closeLibPos;
     [SerializeField] private CanvasGroup libCanvasGroup;
     private bool isOpen;
     private bool isMidClick;
     [SerializeField] private Transform tileContainer;
+    [SerializeField] private Transform bookmarkContainer;
     private List<(Image, TileScript)> tiles;
+    private List<Image> bookmarks;
     [SerializeField] private Image baseImage;
     public bool  isDraggingTile = false;
-    [SerializeField] private Canvas mCanvas;
+    private Canvas mCanvas;
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
     EventSystem m_EventSystem;
@@ -26,13 +30,20 @@ public class CubeScript : MonoBehaviour
     {
         isOpen = false;
         isMidClick = false;
-        libTransform.localScale = new Vector3(0, 0, 0);
-        libCanvasGroup.alpha = 0;
+        openLibPos = libTransform.position;
+        closeLibPos = openLibPos + new Vector3(-700, 0, 0);
+        libTransform.position = closeLibPos;
         tiles = new List<(Image, TileScript)>();
         foreach (Transform tile in tileContainer)
         {
             tiles.Add((tile.GetComponent<Image>(), tile.GetComponent<TileScript>()));
         }
+        bookmarks = new List<Image>();
+        foreach (Transform bookmark in bookmarkContainer)
+        {
+            bookmarks.Add(bookmark.GetComponent<Image>());
+        }
+        mCanvas = transform.GetChild(0).GetComponent<Canvas>();
         //Fetch the Raycaster from the GameObject (the Canvas)
         m_Raycaster = mCanvas.GetComponent<GraphicRaycaster>();
         //Fetch the Event System from the Scene
@@ -47,23 +58,37 @@ public class CubeScript : MonoBehaviour
             if (!isMidClick) // check if clicked on menu base
             {
                 List<RaycastResult> results = rayCastResults();
+                bool libraryClick = false;
                 foreach (var result in results)
                 {
                     if (ReferenceEquals(result.gameObject, baseImage.gameObject)) // click raycast hit menu base
                     {
-                        isMidClick = true;
-                        StartCoroutine(ClickDelay());
-                        if (isOpen)
-                        {
-                            CloseLibrary();
-                        }
-                        else
-                        {
-                            OpenLibrary();
-                        }
-
-                        return;
+                        libraryClick = true;
                     }
+                    else
+                    {
+                        foreach (Image bookmark in bookmarks)
+                            if (ReferenceEquals(result.gameObject, bookmark.gameObject))
+                            {
+                                libraryClick = true;
+                            }
+                    }
+                }
+
+                if (libraryClick)
+                {
+                    isMidClick = true;
+                    StartCoroutine(ClickDelay());
+                    if (isOpen)
+                    {
+                        CloseLibrary();
+                    }
+                    else
+                    {
+                        OpenLibrary();
+                    }
+
+                    return;
                 }
                 if (isOpen)
                 {
@@ -107,30 +132,29 @@ public class CubeScript : MonoBehaviour
     private void OpenLibrary()
     {
         isOpen = true;
-        StartCoroutine(EnlargeLibrary(1, 1, true));
+        StartCoroutine(EnlargeLibrary(openLibPos, true));
     }
     
     public void CloseLibrary()
     {
         isOpen = false;
-        StartCoroutine(EnlargeLibrary(0, 0, false));
+        StartCoroutine(EnlargeLibrary(closeLibPos, false));
         
     }
 
-    IEnumerator EnlargeLibrary(float newScale, float newAlpha, bool interactable)
+    IEnumerator EnlargeLibrary(Vector3 pos, bool interactable)
     {
         float time = 0;
         float duration = 0.5f;
-        Vector3 newScaleVect = new Vector3(newScale, newScale, newScale);
         while (time < duration)
         {
-            libTransform.localScale = Vector3.Lerp(libTransform.localScale, newScaleVect, time / duration);
-            libCanvasGroup.alpha = Mathf.Lerp(libCanvasGroup.alpha, newAlpha, time / duration);
+            libTransform.position = Vector3.Lerp(libTransform.position, pos, LinearToS(time / duration, 3));
+            // libCanvasGroup.alpha = Mathf.Lerp(libCanvasGroup.alpha, newAlpha, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
-        libTransform.localScale = newScaleVect;
-        libCanvasGroup.alpha = newAlpha;
+        libTransform.position = pos;
+        // libCanvasGroup.alpha = newAlpha;
         libCanvasGroup.interactable = interactable;
     }
 
@@ -159,5 +183,14 @@ public class CubeScript : MonoBehaviour
 
         isDraggingTile = false;
         tileIcon.rectTransform.position = startPos;
+    }
+    
+    static float LinearToS(float t, int slope)
+    {
+        if (t > 1 || t < 0)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+        return 1 / (1 + Mathf.Pow(t / (1 - t), -slope));
     }
 }

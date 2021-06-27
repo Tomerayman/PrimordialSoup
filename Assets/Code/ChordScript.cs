@@ -24,6 +24,7 @@ public class ChordScript : MonoBehaviour
     public List<string> chordModes;
     private int currModeIdx;
     private ParticleSystem nestedParticle;
+    private GameObject nestedParticleGO;
     
     public float minTimeBetweenNotes;
     public float maxTimeBetweenNotes;
@@ -189,7 +190,7 @@ public class ChordScript : MonoBehaviour
     public void SwitchPulse()
     {
         currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
-        Destroy(nestedParticle);
+        Destroy(nestedParticleGO);
         for (int i = 0; i < effectStatus.Count; i++)
         {
             effectStatus[i] = 0f;
@@ -205,7 +206,9 @@ public class ChordScript : MonoBehaviour
         else
         {
             effectStatus[currModeIdx - 1] = 1f;
-            nestedParticle = (Instantiate(Resources.Load(soundManager.parameterToObjectDict[chordModes[currModeIdx]])) as GameObject).GetComponent<ParticleSystem>();
+            nestedParticleGO =
+                Instantiate(Resources.Load(soundManager.parameterToObjectDict[chordModes[currModeIdx]])) as GameObject;
+            nestedParticle = nestedParticleGO.GetComponent<ParticleSystem>();
             Transform PSTransform = nestedParticle.transform;
             if (chordModes[currModeIdx] == "Send to Delay") // echo filter
             {

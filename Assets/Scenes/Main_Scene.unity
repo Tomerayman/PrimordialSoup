@@ -1164,9 +1164,34 @@ PrefabInstance:
     - target: {fileID: 8166053997330499335, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
       propertyPath: tileContainer
       value: 
-      objectReference: {fileID: 1231992120}
+      objectReference: {fileID: 743343493}
+    - target: {fileID: 8331451796871449807, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380788485915304274, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14.999878
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048522241754156196, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048522241914596533, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048522243028682897, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.000122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+--- !u!224 &743343493 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4675154777513810568, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
+  m_PrefabInstance: {fileID: 737538041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &775674924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,11 +1725,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &1231992120 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8331451796871449807, guid: ad22d9bd540bd1b4f83ad79515d3f7ef, type: 3}
-  m_PrefabInstance: {fileID: 737538041}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1260228692
 GameObject:
   m_ObjectHideFlags: 0
@@ -7448,11 +7468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1661631937213349770, guid: 85e21844f85da2f4488ed9d4caa4d513, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1661631937380343392, guid: 85e21844f85da2f4488ed9d4caa4d513, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e21844f85da2f4488ed9d4caa4d513, type: 3}

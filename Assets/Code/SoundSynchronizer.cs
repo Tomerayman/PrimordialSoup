@@ -48,12 +48,12 @@ public class SoundSynchronizer : MonoBehaviour
     {
         StartCoroutine(syncEmitter());
         //InvokeRepeating("soundSync", 0, 1 / 16);
-        currEvents = new HashSet<(GameObject, GameObject)>();
-        scriptedEvents = new HashSet<EventData>(new[]
-            { // scripted events defined here:
-                new EventData(new string[]{"Si_01", "Si_02"}, PopcornJellyFishCombo)
-            }
-        );
+        // currEvents = new HashSet<(GameObject, GameObject)>();
+        // scriptedEvents = new HashSet<EventData>(new[]
+        //     { // scripted events defined here:
+        //         new EventData(new string[]{"Si_01", "Si_02"}, PopcornJellyFishCombo)
+        //     }
+        // );
         parameterToObjectDict = new Dictionary<string, string>()
         {
             {"Send to Chorus", "filters/ChorusParticle"},
@@ -132,49 +132,39 @@ public class SoundSynchronizer : MonoBehaviour
         currEvents.Remove(eventToRemove);
     }
 
-    private void PopcornJellyFishCombo(GameObject popcorn, GameObject jellyfish)
-    {
-        StartCoroutine(ComboCR());
-        IEnumerator ComboCR()
-        {
-            float time = 0;
-            float duration = 2f;
-            Vector3 jellyStartPos = jellyfish.transform.position;
-            Vector3 popStartPos = popcorn.transform.position;
-            Vector3 endPos = (popStartPos + jellyStartPos) * 0.5f;
-            Vector3 jellyMidPos = (jellyStartPos + endPos) * 0.5f + Vector3.up;
-            Vector3 popMidPos = (popStartPos + endPos) * 0.5f - Vector3.up;
-            while (time < duration)
-            {
-                float st = LinearToS(time / duration, 2);
-                jellyfish.transform.position =
-                    BezierIntrp(jellyStartPos, jellyMidPos, endPos, st);
-                popcorn.transform.position =
-                    BezierIntrp(popStartPos, popMidPos, endPos, st);
-                popcorn.transform.localScale = Vector3.Lerp(popcorn.transform.localScale, Vector3.zero, st);
-                jellyfish.transform.localScale = Vector3.Lerp(jellyfish.transform.localScale, Vector3.zero, st);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            comboExplosion.gameObject.SetActive(true);
-            comboExplosion.transform.position = endPos;
-            comboExplosion.Play();
-            Destroy(jellyfish);
-            Destroy(popcorn);
-        }
-    }
+    // private void PopcornJellyFishCombo(GameObject popcorn, GameObject jellyfish)
+    // {
+    //     StartCoroutine(ComboCR());
+    //     IEnumerator ComboCR()
+    //     {
+    //         float time = 0;
+    //         float duration = 2f;
+    //         Vector3 jellyStartPos = jellyfish.transform.position;
+    //         Vector3 popStartPos = popcorn.transform.position;
+    //         Vector3 endPos = (popStartPos + jellyStartPos) * 0.5f;
+    //         Vector3 jellyMidPos = (jellyStartPos + endPos) * 0.5f + Vector3.up;
+    //         Vector3 popMidPos = (popStartPos + endPos) * 0.5f - Vector3.up;
+    //         while (time < duration)
+    //         {
+    //             float st = LinearToS(time / duration, 2);
+    //             jellyfish.transform.position =
+    //                 BezierIntrp(jellyStartPos, jellyMidPos, endPos, st);
+    //             popcorn.transform.position =
+    //                 BezierIntrp(popStartPos, popMidPos, endPos, st);
+    //             popcorn.transform.localScale = Vector3.Lerp(popcorn.transform.localScale, Vector3.zero, st);
+    //             jellyfish.transform.localScale = Vector3.Lerp(jellyfish.transform.localScale, Vector3.zero, st);
+    //             time += Time.deltaTime;
+    //             yield return null;
+    //         }
+    //         comboExplosion.gameObject.SetActive(true);
+    //         comboExplosion.transform.position = endPos;
+    //         comboExplosion.Play();
+    //         Destroy(jellyfish);
+    //         Destroy(popcorn);
+    //     }
+    // }
     
-    static float LinearToS(float t, int slope)
-    {
-        if (t > 1 || t < 0)
-        {
-            throw new ArgumentOutOfRangeException();
-        }
-        return 1 / (1 + Mathf.Pow(t / (1 - t), -slope));
-    }
-
-    
-    static Vector3 BezierIntrp(Vector3 startPos, Vector3 midPos, Vector3 endPos, float t)
+ static Vector3 BezierIntrp(Vector3 startPos, Vector3 midPos, Vector3 endPos, float t)
     {
         return (((1 - t) * (1 - t)) * startPos) + (((1 - t) * 2.0f) * t * midPos) + ((t * t) * endPos);
     }

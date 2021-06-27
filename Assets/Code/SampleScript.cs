@@ -26,6 +26,7 @@ public class SampleScript : MonoBehaviour
     public List<string> sampleModes;
     private int currModeIdx;
     private ParticleSystem nestedParticle;
+    private GameObject nestedParticleGO;
     
     // Start is called before the first frame update
     void Start()
@@ -152,7 +153,7 @@ public class SampleScript : MonoBehaviour
     public void SwitchPulse()
     {
         currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
-        Destroy(nestedParticle.gameObject);
+        Destroy(nestedParticleGO);
         for (int i = 0; i < effectStatus.Count; i++)
         {
             effectStatus[i] = 0f;
@@ -163,7 +164,9 @@ public class SampleScript : MonoBehaviour
         }
         else
         {
-            nestedParticle = (Instantiate(Resources.Load(soundManager.parameterToObjectDict[sampleModes[currModeIdx]])) as GameObject).GetComponent<ParticleSystem>();
+            nestedParticleGO =
+                Instantiate(Resources.Load(soundManager.parameterToObjectDict[sampleModes[currModeIdx]])) as GameObject;
+            nestedParticle = nestedParticleGO.GetComponent<ParticleSystem>();
             effectStatus[currModeIdx - 1] = 1f;
             if (sampleModes[currModeIdx] == "Send to Delay") // echo filter
             {
