@@ -704,7 +704,7 @@
     "m_Guid": {
         "m_GuidSerialized": "01600acc-8f5f-4a31-82ea-90fbcf1ed8ce"
     },
-    "m_Name": "alpha",
+    "m_Name": "Alpha",
     "m_DefaultReferenceName": "Vector1_122a8c0d45cf4412984346800c57e027",
     "m_OverrideReferenceName": "_Alpha",
     "m_GeneratePropertyBlock": true,

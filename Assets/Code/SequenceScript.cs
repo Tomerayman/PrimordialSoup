@@ -15,6 +15,9 @@ public class SequenceScript : MonoBehaviour
     public float litRatio;
     private float randomRatio;
     public List<MeshRenderer> bulbs;
+    [SerializeField] private Transform tanksContainer;
+    private List<Material> pulses;
+    private static readonly int pulseID = Shader.PropertyToID("_Alpha");
     private List<int> _offBulbs;
     private List<int> _litBulbs;
     private bool _ratioChanged;
@@ -34,8 +37,9 @@ public class SequenceScript : MonoBehaviour
         nestedSoundData.effectNames = new List<string>(new[] {"Send to Chorus", "Send to Delay", "Send to Tremolo"});
         nestedSoundData.effectVals = new List<float>(new[] {0f, 0f, 0f});
         ResetBulbs();
-        StartCoroutine(SequenceSoundEmit());
         RandomizeBulbs();
+        InitPulses();
+        StartCoroutine(SequenceSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
         libScript = GetComponent<LibObjectScript>();
     }
@@ -70,7 +74,17 @@ public class SequenceScript : MonoBehaviour
         }
         
     }
-    
+
+    private void InitPulses()
+    {
+        pulses = new List<Material>();
+        for (int i = 1; i <= bulbsNum; i++)
+        {
+            Material mtl = tanksContainer.Find("Tank" + i.ToString()).GetChild(0).GetComponent<MeshRenderer>().material;
+            mtl.SetFloat(pulseID, 0);
+            pulses.Add(mtl);
+        }
+    }
     
     // Update is called once per frame
     void Update()
@@ -104,6 +118,7 @@ public class SequenceScript : MonoBehaviour
             {
                 if (_litBulbs.Contains(i))
                 {
+                    StartCoroutine(PulseCycle(pulses[i]));
                     PlaySound(false);
                 }
 
@@ -256,5 +271,26 @@ public class SequenceScript : MonoBehaviour
         {
             bulbs[bulbIdx].enabled = false;
         }
+    }
+    
+    IEnumerator PulseCycle(Material pulse)
+    {
+        float duration = 1f;
+        float time = 0;
+        while (time < duration / 5) 
+        {
+            pulse.SetFloat(pulseID, 5* time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitForSeconds((3 * duration) / 5);
+        time = 0;
+        while (time < duration / 5)
+        {
+            pulse.SetFloat(pulseID, 1 - 5* time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        pulse.SetFloat(pulseID, 0);
     }
 }

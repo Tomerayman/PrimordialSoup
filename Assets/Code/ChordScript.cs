@@ -91,6 +91,7 @@ public class ChordScript : MonoBehaviour
         }
         else
         {
+            nestedParticle.transform.position = _container.GetChild(idx).position;
             nestedParticle.Emit(5);
         }
         soundData.effectNames = instrumentEffects;

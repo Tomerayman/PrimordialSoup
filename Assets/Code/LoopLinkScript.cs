@@ -125,7 +125,11 @@ public class LoopLinkScript : MonoBehaviour
             soundData.effectNames = sampleScript.GetEffectNames();
             soundData.effectVals = sampleScript.effectStatus;
             soundData.volume = 0.75f;
-            nestedObject.transform.localScale = nestedObject.transform.localScale * nestedSampleScaleRatio; 
+            nestedObject.transform.localScale = nestedObject.transform.localScale * nestedSampleScaleRatio;
+            foreach (Transform child in sampleObject.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
         }
         else if (sampleObject.CompareTag("Chord"))
         {

@@ -127,10 +127,10 @@ TextureImporter:
       name: fog2_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 35
-        width: 300
-        height: 350
+        x: 77
+        y: 252
+        width: 800
+        height: 900
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,10 +148,10 @@ TextureImporter:
       name: fog2_1
       rect:
         serializedVersion: 2
-        x: 317
-        y: 28
-        width: 300
-        height: 350
+        x: 1000
+        y: 223
+        width: 800
+        height: 900
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: fog2_2
       rect:
         serializedVersion: 2
-        x: 610
-        y: 42
-        width: 275
-        height: 350
+        x: 1920
+        y: 238
+        width: 772
+        height: 900
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

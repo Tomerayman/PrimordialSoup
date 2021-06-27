@@ -152,7 +152,7 @@ public class SampleScript : MonoBehaviour
     public void SwitchPulse()
     {
         currModeIdx = (currModeIdx == 3) ? 0 : currModeIdx + 1;
-        Destroy(nestedParticle);
+        Destroy(nestedParticle.gameObject);
         for (int i = 0; i < effectStatus.Count; i++)
         {
             effectStatus[i] = 0f;
