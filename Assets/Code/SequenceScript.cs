@@ -10,6 +10,8 @@ public class SequenceScript : MonoBehaviour
     private SoundSynchronizer.SoundData nestedSoundData;
     [FMODUnity.EventRef]
     public string defaultSound;
+    public bool isNestingChord = false;
+    public List<string> nestedChordSounds;
     public int bulbsNum;
     public bool isPlaying;
     public float litRatio;
@@ -22,8 +24,7 @@ public class SequenceScript : MonoBehaviour
     private List<int> _litBulbs;
     private bool _ratioChanged;
     private UIController _uiController;
-    private LibObjectScript libScript;
-    [SerializeField] private GameObject nestedSample;
+    [SerializeField] private GameObject nestedObject;
     [SerializeField] private float ringRotationSpeed;
     [SerializeField] private Transform _ringTransform;
 
@@ -34,14 +35,13 @@ public class SequenceScript : MonoBehaviour
         randomRatio = 0;
         nestedSoundData.sound = defaultSound;
         nestedSoundData.volume = 0.75f;
-        nestedSoundData.effectNames = new List<string>(new[] {"Send to Chorus", "Send to Delay", "Send to Tremolo"});
+        // nestedSoundData.effectNames = new List<string>(new[] {"Send to Chorus", "Send to Delay", "Send to Tremolo"});
         nestedSoundData.effectVals = new List<float>(new[] {0f, 0f, 0f});
         ResetBulbs();
         RandomizeBulbs();
         InitPulses();
         StartCoroutine(SequenceSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
-        libScript = GetComponent<LibObjectScript>();
     }
 
     private void ResetBulbs()
@@ -106,6 +106,10 @@ public class SequenceScript : MonoBehaviour
         // more sound definitions (effects..)
         
         // soundManager.sounds.Add(soundData);
+        if (isNestingChord)
+        {
+            nestedSoundData.sound = nestedChordSounds[Random.Range(0, 4)];
+        }
         soundManager.SimplePlay(nestedSoundData);
     }
     
@@ -213,49 +217,66 @@ public class SequenceScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Sample") &&
+        if ((other.CompareTag("Sample") || other.CompareTag("Chord")) &&
             !GetComponent<LibObjectScript>().getIsDragged() &&
             other.GetComponent<LibObjectScript>().getIsDragged())
         {
-            StartCoroutine(WaitForSampleRelease(other.gameObject));
+            StartCoroutine(WaitForNestedRelease(other.gameObject));
         }
     }
     
-    IEnumerator WaitForSampleRelease(GameObject sampleObject)
+    IEnumerator WaitForNestedRelease(GameObject sampleObject)
     {
         yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
         if (sampleObject != null &&
             Vector3.Distance(sampleObject.transform.position, transform.position) <
             GetComponent<SphereCollider>().radius * transform.localScale.x)
         {
-            nestSample(sampleObject);
+            nestObject(sampleObject);
         }
     }
     
-    private void nestSample(GameObject sampleObject)
+    private void nestObject(GameObject ObjectToNest)
     {
         if (!isPlaying)
         {
             isPlaying = true;
         }
-        Destroy(nestedSample);
-        nestedSample = sampleObject;
-        SampleScript sampleScript = nestedSample.GetComponent<SampleScript>();
-        sampleScript.isPlaying = false;
-        nestedSoundData.sound = sampleScript.sound;
-        nestedSoundData.effectVals = sampleScript.effectStatus;
-        nestedSoundData.volume = 0.75f;
-        Material sampleMtl = nestedSample.GetComponent<Renderer>().material;
+        Destroy(nestedObject);
+        Material newMtl;
+        nestedObject = ObjectToNest;
+        if (nestedObject.CompareTag("Sample"))
+        {
+            isNestingChord = false;
+            SampleScript sampleScript = nestedObject.GetComponent<SampleScript>();
+            sampleScript.isPlaying = false;
+            nestedSoundData.sound = sampleScript.sound;
+            nestedSoundData.effectNames = sampleScript.GetEffectNames();
+            nestedSoundData.effectVals = sampleScript.effectStatus;
+            nestedSoundData.volume = 0.75f;
+            newMtl = nestedObject.GetComponent<Renderer>().material;
+        }
+        else
+        {
+            isNestingChord = true;
+            ChordScript chordScript = nestedObject.GetComponent<ChordScript>();
+            chordScript.isPlaying = false;
+            nestedChordSounds = chordScript.sounds;
+            nestedSoundData.effectNames = chordScript.GetEffectNames();
+            nestedSoundData.effectVals = chordScript.effectStatus;
+            nestedSoundData.volume = 0.75f;
+            newMtl = chordScript._container.GetChild(0).GetComponent<Renderer>().material;
+
+        }
         foreach (var bulb in bulbs)
         {
-            bulb.material = sampleMtl;
+            bulb.material = newMtl;
         }
-
-        nestedSample.transform.parent = transform;
-        nestedSample.transform.localPosition = Vector3.zero;
-        nestedSample.transform.localScale = nestedSample.transform.localScale / 2; 
-        nestedSample.GetComponent<LibObjectScript>().isDraggable = false;
-        nestedSample.GetComponent<Collider>().enabled = false;
+        nestedObject.transform.parent = transform;
+        nestedObject.transform.localPosition = Vector3.zero;
+        nestedObject.transform.localScale = nestedObject.transform.localScale / 2; 
+        nestedObject.GetComponent<LibObjectScript>().isDraggable = false;
+        nestedObject.GetComponent<Collider>().enabled = false;
     }
 
     public void SetPlaying()
@@ -273,7 +294,7 @@ public class SequenceScript : MonoBehaviour
         }
     }
     
-    IEnumerator PulseCycle(Material pulse)
+    IEnumerator PulseCycle(Material pulse)    
     {
         float duration = 1f;
         float time = 0;

@@ -30,7 +30,7 @@ public class ChordScript : MonoBehaviour
     private int _chordIdx = 0;
     private UIController _uiController;
     private LibObjectScript libScript;
-    [SerializeField] private Transform _container;
+    public Transform _container;
     private List<Material> pulses;
     private static readonly int pulseID = Shader.PropertyToID("_Alpha");
 
