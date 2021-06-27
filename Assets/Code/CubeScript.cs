@@ -10,6 +10,7 @@ public class CubeScript : MonoBehaviour
     [SerializeField] private RectTransform libTransform;
     private Vector3 openLibPos;
     private Vector3 closeLibPos;
+    [SerializeField] private float libraryWidth;
     [SerializeField] private CanvasGroup libCanvasGroup;
     private bool isOpen;
     private bool isMidClick;
@@ -31,7 +32,7 @@ public class CubeScript : MonoBehaviour
         isOpen = false;
         isMidClick = false;
         openLibPos = libTransform.position;
-        closeLibPos = openLibPos + new Vector3(-700, 0, 0);
+        closeLibPos = openLibPos + new Vector3(-libraryWidth, 0, 0);
         libTransform.position = closeLibPos;
         tiles = new List<(Image, TileScript)>();
         foreach (Transform tile in tileContainer)
