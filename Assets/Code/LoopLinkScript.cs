@@ -67,8 +67,8 @@ public class LoopLinkScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if ((other.CompareTag("Sample") || other.CompareTag("Chord")) &&
-            !parentLibScript.getIsDragged() &&
-            other.GetComponent<LibObjectScript>().getIsDragged())
+            !parentLibScript.getIsDragged()) 
+            // && other.GetComponent<LibObjectScript>().getIsDragged())
         {
             // StartCoroutine(WaitForObjectRelease(other.gameObject));
             parentLoopScript.AddLinkCandidate(transform, other.transform);
@@ -78,8 +78,8 @@ public class LoopLinkScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if ((other.CompareTag("Sample") || other.CompareTag("Chord")) &&
-            !parentLibScript.getIsDragged() &&
-            other.GetComponent<LibObjectScript>().getIsDragged())
+            !parentLibScript.getIsDragged())
+            // && other.GetComponent<LibObjectScript>().getIsDragged())
         {
             parentLoopScript.RemoveLinkCandidate(transform);
         }
@@ -87,7 +87,7 @@ public class LoopLinkScript : MonoBehaviour
 
     // IEnumerator WaitForObjectRelease(GameObject sampleObject)
     // {
-    //     yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
+    //     yield return new WaitUntil(() => !Input.GetMouseButton(0));
     //     if (sampleObject != null &&
     //         Vector3.Distance(sampleObject.transform.position, transform.position) <
     //         GetComponent<CapsuleCollider>().height * transform.localScale.x)

@@ -45,7 +45,7 @@ public class LoopScript : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
-        if (isFilling && Input.GetMouseButtonUp(0))
+        if (isFilling && !Input.GetMouseButton(0))
         {
             isFilling = false;
             FillClosestLink();

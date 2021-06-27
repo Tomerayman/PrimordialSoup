@@ -227,7 +227,7 @@ public class SequenceScript : MonoBehaviour
     
     IEnumerator WaitForNestedRelease(GameObject sampleObject)
     {
-        yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
+        yield return new WaitUntil(() => !Input.GetMouseButton(0));
         if (sampleObject != null &&
             Vector3.Distance(sampleObject.transform.position, transform.position) <
             GetComponent<SphereCollider>().radius * transform.localScale.x)
