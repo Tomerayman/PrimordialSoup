@@ -46,7 +46,7 @@ Material:
     - _Amount: 0.1
     - _Speed: 0.1
     m_Colors:
-    - Color_374849ec54cd4f4f8c37e8f6f06a1e2a: {r: 0.42912066, g: 0.7924528, b: 0.6925364, a: 0}
-    - Color_8d656d56105740faaf3ba64cfe11996b: {r: 0.5566038, g: 0.28565326, b: 0.39617252, a: 1}
-    - Color_d86d6a23e1d44d2d80306c4bc31a3d99: {r: 0.5471698, g: 0.26532573, b: 0.31505853, a: 1}
+    - Color_374849ec54cd4f4f8c37e8f6f06a1e2a: {r: 0.42821288, g: 0.764151, b: 0.67384505, a: 0}
+    - Color_8d656d56105740faaf3ba64cfe11996b: {r: 0.3584906, g: 0.20089, b: 0.32512504, a: 1}
+    - Color_d86d6a23e1d44d2d80306c4bc31a3d99: {r: 0.6037736, g: 0.349733, b: 0.35678965, a: 1}
   m_BuildTextureStacks: []

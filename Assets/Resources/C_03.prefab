@@ -237,3 +237,4 @@ MonoBehaviour:
   - Send to Flanger
   - Send to Tremolo
   effectStatus: []
+  sampleModes: []
