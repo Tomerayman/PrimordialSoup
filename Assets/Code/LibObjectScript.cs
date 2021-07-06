@@ -294,7 +294,7 @@ public class LibObjectScript : MonoBehaviour
         switch (instrumentTag)
         {
             case "Sample":
-                // nothing
+                GetComponent<SampleScript>().ChangeRate(XPosToVal(transform.position.x));
                 break;
             case "Chord":
                 // nothing

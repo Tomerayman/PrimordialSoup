@@ -179,7 +179,7 @@ public class CubeScript : MonoBehaviour
             float distance;
             new Plane(Vector3.back, transform.position).Raycast(ray, out distance);
             newInstrument.transform.position = ray.GetPoint(distance);
-            CloseLibrary();    
+            // CloseLibrary();    
         }
 
         isDraggingTile = false;

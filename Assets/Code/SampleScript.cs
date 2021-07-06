@@ -27,6 +27,7 @@ public class SampleScript : MonoBehaviour
     private int currModeIdx;
     private ParticleSystem nestedParticle;
     private GameObject nestedParticleGO;
+    private float currPauseTime;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class SampleScript : MonoBehaviour
         currModeIdx = 0;
         StartCoroutine(SampleSoundEmit());
         _uiController = GameObject.Find("Game_UI").GetComponent<UIController>();
+        currPauseTime = 2;
     }
 
    
@@ -72,8 +74,8 @@ public class SampleScript : MonoBehaviour
             {
                 PlaySound();
             }
-            delay = Random.Range(minTimeBetweenNotes, maxTimeBetweenNotes);
-            yield return new WaitForSeconds(delay);
+            // delay = Random.Range(minTimeBetweenNotes, maxTimeBetweenNotes);
+            yield return new WaitForSeconds(currPauseTime);
         }
     }
 
@@ -178,8 +180,12 @@ public class SampleScript : MonoBehaviour
             PSTransform.localPosition = Vector3.zero;
         }
     }
-    
-    
+
+    public void ChangeRate(float val)
+    {
+        currPauseTime = 0.5f + (1 - val) * 3.5f;
+    }
+
 }
     
     
