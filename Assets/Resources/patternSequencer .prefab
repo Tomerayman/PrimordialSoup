@@ -3121,9 +3121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDraggable: 1
   instrumentTag: Sequencer
-  maxScaleRatio: 0
-  minScaleRatio: 0
-  currScaleRatio: 0
+  maxScaleRatio: 1.5
+  minScaleRatio: 0.6
+  currScaleRatio: 1
 --- !u!114 &5015259436163301663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3138,6 +3138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   defaultSound: event:/Calcium/Calcium Perc/Calcium Perc
+  isNestingChord: 0
+  nestedChordSounds: []
   bulbsNum: 16
   isPlaying: 0
   litRatio: 0.5
@@ -3159,7 +3161,7 @@ MonoBehaviour:
   - {fileID: 2250541688324582076}
   - {fileID: 2250541687265293242}
   tanksContainer: {fileID: 5285165697344512498}
-  nestedSample: {fileID: 0}
+  nestedObject: {fileID: 0}
   ringRotationSpeed: 2
   _ringTransform: {fileID: 6233572351226361730}
 --- !u!54 &6670505735430321009
