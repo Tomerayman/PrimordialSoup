@@ -104,6 +104,10 @@ public class LibObjectScript : MonoBehaviour
                     factor = maxScaleRatio;
                 else if (factor < minScaleRatio)
                     factor = minScaleRatio;
+                if ((currScaleRatio >= maxScaleRatio && factor > 1) || (currScaleRatio <= minScaleRatio && factor < 1))
+                {
+                    return;
+                }
                 currScaleRatio = factor;
                 transform.localScale = initialScale * currScaleRatio;
             }

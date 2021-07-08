@@ -24,13 +24,15 @@ public class SequenceScript : MonoBehaviour
     private List<int> _litBulbs;
     private bool _ratioChanged;
     private UIController _uiController;
+    private LibObjectScript libScript;
     [SerializeField] private GameObject nestedObject;
     [SerializeField] private float ringRotationSpeed;
     [SerializeField] private Transform _ringTransform;
 
     void Start()
     {
-        _ratioChanged = false;
+        libScript = GetComponent<LibObjectScript>();
+         _ratioChanged = false;
         soundManager = GameObject.Find("GameController").GetComponent<SoundSynchronizer>();
         randomRatio = 0;
         nestedSoundData.sound = defaultSound;
@@ -110,6 +112,7 @@ public class SequenceScript : MonoBehaviour
         {
             nestedSoundData.sound = nestedChordSounds[Random.Range(0, 4)];
         }
+        nestedSoundData.volume = libScript.GetVolumeFromScale();
         soundManager.SimplePlay(nestedSoundData);
     }
     
